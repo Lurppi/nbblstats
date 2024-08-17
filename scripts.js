@@ -1,119 +1,85 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Countdown Timer
-    const countdownDate = new Date("2024-10-13T13:00:00").getTime();
-    const countdownElement = document.getElementById("countdown");
+document.addEventListener('DOMContentLoaded', function() {
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
+    // Teams-Seite
+    const csvFilesTeams = {
+        totals: 'data/teams_totals.csv',
+        averages: 'data/teams_averages.csv',
+        shooting: 'data/teams_shooting.csv',
+        advanced: 'data/teams_advanced.csv',
+        fourFactors: 'data/teams_four_factors.csv'
+    };
 
-        if (distance < 0) {
-            countdownElement.innerHTML = "Saison gestartet!";
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        countdownElement.innerHTML = `${days} Tage ${hours} Stunden ${minutes} Minuten ${seconds} Sekunden`;
+    function loadCSV(filePath, callback) {
+        fetch(filePath)
+            .then(response => response.text())
+            .then(text => callback(parseCSV(text)))
+            .catch(error => console.error('Error loading CSV:', error));
     }
 
-    setInterval(updateCountdown, 1000);
+    function parseCSV(text) {
+        const rows = text.split('\n').map(row => row.split(','));
+        return rows.slice(1).map(row => ({
+            team: row[0],
+            division: row[1],
+            league: row[2],
+            stat1: row[3],
+            stat2: row[4],
+            stat3: row[5]
+        }));
+    }
 
-    // Menu Navigation
-    const dropdowns = document.querySelectorAll(".dropdown");
-
-    dropdowns.forEach(dropdown => {
-        const dropbtn = dropdown.querySelector(".dropbtn");
-        dropbtn.addEventListener("click", () => {
-            const content = dropdown.querySelector(".dropdown-content");
-            content.classList.toggle("show");
+    function populateTable(tableId, data) {
+        const table = document.getElementById(tableId);
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row.team}</td><td>${row.division}</td><td>${row.league}</td><td>${row.stat1}</td><td>${row.stat2}</td><td>${row.stat3}</td>`;
+            tbody.appendChild(tr);
         });
-
-        dropdown.addEventListener("mouseleave", () => {
-            const content = dropdown.querySelector(".dropdown-content");
-            content.classList.remove("show");
-        });
-    });
-
-    // Update for Teams page
-    const statsTypeSelect = document.getElementById("stats-type");
-    const teamsTableContainer = document.getElementById("teams-table-container");
-
-    statsTypeSelect.addEventListener("change", function() {
-        const selectedValue = this.value;
-        let headers = [];
-        switch (selectedValue) {
-            case "totals":
-            case "averages":
-                headers = ["Team", "Division", "League", "Minutes", "Points", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Efficiency"];
-                break;
-            case "shooting":
-                headers = ["Team", "Division", "League", "2PM", "2PA", "2P%", "3PM", "3PA", "3P%", "FGM", "FGA", "FG%", "FTM", "FTA", "FT%"];
-                break;
-            case "advanced":
-                headers = ["Team", "Division", "League", "ORTG", "DRTG", "NRTG", "TS%", "PPP", "PER", "PIE"];
-                break;
-            case "four-factors":
-                headers = ["Team", "Division", "League", "EFG%", "TOV%", "ORB%", "FT-Rate", "EFG%", "TOV%", "ORB%", "FT-Rate"];
-                break;
-        }
-        renderTeamsTable(headers);
-    });
-
-    function renderTeamsTable(headers) {
-        let tableHTML = `<table>
-            <thead>
-                <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
-            </thead>
-            <tbody>
-                <!-- Dynamische Daten hier einfügen -->
-            </tbody>
-        </table>`;
-        teamsTableContainer.innerHTML = tableHTML;
     }
-    
-    // Update for Players page
-    const playerStatsTypeSelect = document.getElementById("stats-type");
-    const playersTableContainer = document.getElementById("players-table-container");
 
-    playerStatsTypeSelect.addEventListener("change", function() {
-        const selectedValue = this.value;
-        let headers = [];
-        switch (selectedValue) {
-            case "totals":
-                headers = ["Player", "Position", "Birth Year", "Minutes", "Points", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Efficiency", "DD", "TD"];
-                break;
-            case "averages":
-                headers = ["Player", "Position", "Birth Year", "Minutes", "Points", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Efficiency", "PER", "PIE"];
-                break;
-            case "shooting":
-                headers = ["Player", "Position", "Birth Year", "2PM", "2PA", "2P%", "3PM", "3PA", "3P%", "FGM", "FGA", "FG%", "FTM", "FTA", "FT%"];
-                break;
-            case "advanced1":
-                headers = ["Player", "Position", "Birth Year", "ORTG", "DRTG", "NRTG", "OBPM", "DBPM", "BPM", "VORP", "OWS", "DWS", "WS", "WS/40", "PER"];
-                break;
-            case "advanced2":
-                headers = ["Player", "Position", "Birth Year", "FIC", "FIC/Gm", "PIE", "Assist Ratio", "Assist Rate", "AS/TO", "Rebound%", "Steal%", "Block%", "Usage Rate", "TS%"];
-                break;
-            case "four-factors":
-                headers = ["Player", "Position", "Birth Year", "EFG%", "TOV%", "ORB%", "FT-Rate", "EFG%", "TOV%", "ORB%", "FT-Rate"];
-                break;
-        }
-        renderPlayersTable(headers);
-    });
-
-    function renderPlayersTable(headers) {
-        let tableHTML = `<table>
-            <thead>
-                <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
-            </thead>
-            <tbody>
-                <!-- Dynamische Daten hier einfügen -->
-            </tbody>
-        </table>`;
-        playersTableContainer.innerHTML = tableHTML;
+    function updateTeamsTable() {
+        const statType = document.getElementById('stat-type').value;
+        const filePath = csvFilesTeams[statType];
+        loadCSV(filePath, data => populateTable('teams-table', data));
     }
+
+    document.getElementById('stat-type').addEventListener('change', updateTeamsTable);
+    updateTeamsTable();  // Initial load
+
+    // Players-Seite
+    const csvFilesPlayers = {
+        totals: 'data/players_totals.csv',
+        averages: 'data/players_averages.csv',
+        shooting: 'data/players_shooting.csv',
+        advanced1: 'data/players_advanced1.csv',
+        advanced2: 'data/players_advanced2.csv',
+        fourFactors: 'data/players_four_factors.csv'
+    };
+
+    function updatePlayersTable() {
+        const statType = document.getElementById('stat-type').value;
+        const filePath = csvFilesPlayers[statType];
+        loadCSV(filePath, data => populateTable('players-table', data));
+    }
+
+    document.getElementById('stat-type').addEventListener('change', updatePlayersTable);
+    document.getElementById('division').addEventListener('change', updatePlayersTable);
+    document.getElementById('league').addEventListener('change', updatePlayersTable);
+    document.getElementById('position').addEventListener('change', updatePlayersTable);
+    document.getElementById('birth-year').addEventListener('change', updatePlayersTable);
+    updatePlayersTable();  // Initial load
+
+    // Roster-Seite
+    const csvFilesRoster = {
+        roster: 'data/roster.csv'
+    };
+
+    function updateRosterTable() {
+        loadCSV(csvFilesRoster.roster, data => populateTable('roster-table', data));
+    }
+
+    updateRosterTable();  // Initial load
+
 });

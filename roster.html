@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +11,28 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Stats</a>
-                    <div class="dropdown-content">
-                        <a href="teams.html">Teams</a>
-                        <a href="players.html">Players</a>
-                    </div>
+                <li><a href="#">Stats</a>
+                    <ul>
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="players.html">Players</a></li>
+                    </ul>
                 </li>
                 <li><a href="roster.html">Roster</a></li>
             </ul>
         </nav>
-        <div id="countdown"></div>
     </header>
+    
     <main>
-        <section id="roster">
-            <h1>Team Roster</h1>
-            <div class="filter-container">
-                <label for="team">Team:</label>
-                <select id="team">
-                    <option value="all">All</option>
-                    <option value="team1">Team 1</option>
-                    <option value="team2">Team 2</option>
-                </select>
-            </div>
-            <div id="roster-table-container">
-                <!-- Tabellen werden hier dynamisch geladen -->
-            </div>
+        <section>
+            <h2>Roster</h2>
+            <table id="roster-table">
+                <thead>
+                    <tr><th>Player</th><th>Team</th><th>Position</th><th>Number</th><th>Height</th><th>Weight</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </section>
     </main>
-    <footer>
-        <p>© 2024 Basketball Stats. All rights reserved.</p>
-    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>

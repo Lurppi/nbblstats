@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,65 +11,62 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Stats</a>
-                    <div class="dropdown-content">
-                        <a href="teams.html">Teams</a>
-                        <a href="players.html">Players</a>
-                    </div>
+                <li><a href="#">Stats</a>
+                    <ul>
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="players.html">Players</a></li>
+                    </ul>
                 </li>
                 <li><a href="roster.html">Roster</a></li>
             </ul>
         </nav>
-        <div id="countdown"></div>
     </header>
+    
     <main>
-        <section id="players">
-            <h1>Players Stats</h1>
-            <div class="filter-container">
-                <label for="division">Division:</label>
-                <select id="division">
-                    <option value="all">All</option>
-                    <option value="division1">Division 1</option>
-                    <option value="division2">Division 2</option>
-                </select>
-                <label for="league">League:</label>
-                <select id="league">
-                    <option value="all">All</option>
-                    <option value="league1">League 1</option>
-                    <option value="league2">League 2</option>
-                </select>
-                <label for="position">Position:</label>
-                <select id="position">
-                    <option value="all">All</option>
-                    <option value="guard">Guard</option>
-                    <option value="forward">Forward</option>
-                    <option value="center">Center</option>
-                </select>
-                <label for="birth-year">Birth Year:</label>
-                <select id="birth-year">
-                    <option value="all">All</option>
-                    <option value="2000">2000</option>
-                    <option value="1999">1999</option>
-                </select>
-                <label for="stats-type">Stats Type:</label>
-                <select id="stats-type">
-                    <option value="totals">Totals</option>
-                    <option value="averages">Averages</option>
-                    <option value="shooting">Shooting</option>
-                    <option value="advanced1">Advanced1</option>
-                    <option value="advanced2">Advanced2</option>
-                    <option value="four-factors">Four Factors</option>
-                </select>
-            </div>
-            <div id="players-table-container">
-                <!-- Tabellen werden hier dynamisch geladen -->
-            </div>
+        <section>
+            <h2>Player Statistics</h2>
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="all">All</option>
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+            </select>
+            <label for="league">League:</label>
+            <select id="league">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
+            </select>
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="all">All</option>
+                <option value="guard">Guard</option>
+                <option value="forward">Forward</option>
+                <option value="center">Center</option>
+            </select>
+            <label for="birth-year">Birth Year:</label>
+            <select id="birth-year">
+                <option value="all">All</option>
+                <option value="2000">2000</option>
+                <option value="1999">1999</option>
+                <!-- Add more years as needed -->
+            </select>
+            <label for="stat-type">Stats Type:</label>
+            <select id="stat-type">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced1">Advanced1</option>
+                <option value="advanced2">Advanced2</option>
+                <option value="fourfactors">Four Factors</option>
+            </select>
+            <table id="players-table">
+                <thead>
+                    <tr><th>Player</th><th>Position</th><th>Birth Year</th><th>Stat 1</th><th>Stat 2</th><th>Stat 3</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </section>
     </main>
-    <footer>
-        <p>© 2024 Basketball Stats. All rights reserved.</p>
-    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
