@@ -6,6 +6,28 @@
     <title>Player Stats</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
+    <style>
+        /* Zusätzliche Styles für die Tabelle */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .player-name {
+            text-align: left;
+            width: 200px; /* Größere Breite für Namen */
+        }
+        td, th {
+            width: 100px; /* Einheitliche Breite für alle Spalten */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -65,11 +87,12 @@
             <!-- Weitere Jahre hinzufügen -->
         </select>
 
-        <table id="players-table" class="display">
+        <table id="players-table">
             <thead>
                 <tr>
-                    <th>Player Name</th>
+                    <th class="player-name">Player Name</th>
                     <th>Position</th>
+                    <th>Birth Year</th>
                     <th>Minutes</th>
                     <th>Points</th>
                     <th>Rebounds</th>
@@ -83,8 +106,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Player One</td>
+                    <td class="player-name">Player One</td>
                     <td>PG</td>
+                    <td>1990</td>
                     <td>35</td>
                     <td>20</td>
                     <td>5</td>
@@ -94,6 +118,20 @@
                     <td>3</td>
                     <td>2</td>
                     <td>24</td>
+                </tr>
+                <tr>
+                    <td class="player-name">Player Two</td>
+                    <td>SG</td>
+                    <td>1991</td>
+                    <td>30</td>
+                    <td>18</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>22</td>
                 </tr>
                 <!-- Weitere Spieler hinzufügen -->
             </tbody>
