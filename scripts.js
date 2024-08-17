@@ -1,31 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const countdownDate = new Date('2024-10-13T13:00:00').getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const timeDiff = countdownDate - now;
-
-        if (timeDiff <= 0) {
-            document.getElementById('countdown').textContent = 'The season has started!';
-            return;
-        }
-
-        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-        document.getElementById('countdown').textContent =
-            `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
     function loadCSV(url, callback) {
         fetch(url)
             .then(response => response.text())
-            .then(text => Papa.parse(text, { header: true, skipEmptyLines: true, complete: (results) => callback(results.data) }));
+            .then(data => {
+                const parsedData = Papa.parse(data, { header: true }).data;
+                callback(parsedData);
+            });
     }
 
     function populateTable(tableId, data) {
@@ -35,13 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         data.forEach(row => {
             const tr = document.createElement('tr');
-            Object.values(row).forEach(cell => {
+            Object.values(row).forEach(text => {
                 const td = document.createElement('td');
-                td.textContent = cell;
+                td.textContent = text;
                 tr.appendChild(td);
             });
             tbody.appendChild(tr);
         });
+    }
+
+    function filterHome() {
+        const fileMapping = {
+            'top-performers-points': 'data/top-performers-points.csv',
+            'top-performers-rebounds': 'data/top-performers-rebounds.csv',
+            'top-performers-assists': 'data/top-performers-assists.csv',
+            'top-performers-steals': 'data/top-performers-steals.csv',
+            'top-performers-blocks': 'data/top-performers-blocks.csv',
+            'top-performers-per': 'data/top-performers-per.csv',
+            'season-top-performers-points': 'data/regular-season-top-performers-points.csv',
+            'season-top-performers-rebounds': 'data/regular-season-top-performers-rebounds.csv',
+            'season-top-performers-assists': 'data/regular-season-top-performers-assists.csv'
+        };
+
+        for (const [id, url] of Object.entries(fileMapping)) {
+            loadCSV(url, data => {
+                populateTable(id, data);
+            });
+        }
     }
 
     function filterTeams() {
@@ -93,13 +93,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.getElementById('division-filter').addEventListener('change', filterTeams);
-    document.getElementById('league-filter').addEventListener('change', filterTeams);
-    document.getElementById('stats-type-filter').addEventListener('change', filterTeams);
-
-    document.getElementById('division-filter').addEventListener('change', filterPlayers);
-    document.getElementById('league-filter').addEventListener('change', filterPlayers);
+    document.getElementById('division-filter').addEventListener('change', () => {
+        filterTeams();
+        filterPlayers();
+    });
+    document.getElementById('league-filter').addEventListener('change', () => {
+        filterTeams();
+        filterPlayers();
+    });
+    document.getElementById('stats-type-filter').addEventListener('change', () => {
+        filterHome();
+        filterTeams();
+        filterPlayers();
+    });
     document.getElementById('position-filter').addEventListener('change', filterPlayers);
     document.getElementById('birth-year-filter').addEventListener('change', filterPlayers);
-    document.getElementById('stats-type-filter').addEventListener('change', filterPlayers);
+
+    // Initial Load
+    filterHome();
+    filterTeams();
+    filterPlayers();
 });

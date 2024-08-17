@@ -8,93 +8,103 @@ body {
 header {
     background: #333;
     color: #fff;
-    padding: 1em 0;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
+    padding: 10px;
     position: relative;
 }
 
-nav ul li a {
+.navbar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a {
     color: #fff;
     text-decoration: none;
-    padding: 0.5em 1em;
+    padding: 10px;
     display: block;
 }
 
-nav ul li ul.dropdown {
+.dropdown {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background: #333;
+    background: #fff;
+    color: #000;
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-nav ul li:hover ul.dropdown {
-    display: block;
-}
-
-nav ul li ul.dropdown li {
+.dropdown li {
     width: 200px;
 }
 
-nav ul li ul.dropdown li ul {
-    top: 0;
-    left: 100%;
+.navbar li:hover .dropdown {
+    display: block;
 }
 
 #countdown {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
     text-align: center;
-    margin: 1em 0;
-    font-size: 1.2em;
+    margin: 10px 0;
 }
 
-/* Table Styles */
 .tables-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: 10px;
 }
 
 .table-container {
-    flex: 1;
-    min-width: 30%;
+    flex: 1 1 calc(33% - 10px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1em 0;
+}
+
+table, th, td {
     border: 1px solid #ddd;
 }
 
 th, td {
-    padding: 0.5em;
-    border: 1px solid #ddd;
-    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 thead {
-    background: #f4f4f4;
+    background-color: #f9f9f9;
 }
 
-/* Responsive Design */
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
+    margin-right: 10px;
+}
+
+.filters select {
+    margin-right: 20px;
+}
+
 @media (max-width: 768px) {
     .tables-container {
         flex-direction: column;
-    }
-    .table-container {
-        width: 100%;
     }
 }
