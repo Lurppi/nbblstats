@@ -77,12 +77,14 @@ main {
 .table-container table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed; /* Ensure consistent column width */
 }
 
 .table-container th, .table-container td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    word-wrap: break-word; /* Break long words */
 }
 
 .table-container th {
