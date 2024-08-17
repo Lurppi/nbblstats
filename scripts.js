@@ -29,28 +29,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 const thead = document.createElement('tr');
 
                 // Create table header
-                Object.keys(data[0]).forEach(key => {
-                    const th = document.createElement('th');
-                    th.textContent = key;
-                    thead.appendChild(th);
-                });
-
-                header.appendChild(thead);
-                table.appendChild(header);
-
-                // Create table rows
-                data.forEach(row => {
-                    const tr = document.createElement('tr');
-                    Object.values(row).forEach(value => {
-                        const td = document.createElement('td');
-                        td.textContent = value;
-                        tr.appendChild(td);
+                if (data.length > 0) {
+                    Object.keys(data[0]).forEach(key => {
+                        const th = document.createElement('th');
+                        th.textContent = key;
+                        thead.appendChild(th);
                     });
-                    body.appendChild(tr);
-                });
 
-                table.appendChild(body);
-                document.getElementById(id).appendChild(table);
+                    header.appendChild(thead);
+                    table.appendChild(header);
+
+                    // Create table rows
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        Object.values(row).forEach(value => {
+                            const td = document.createElement('td');
+                            td.textContent = value;
+                            tr.appendChild(td);
+                        });
+                        body.appendChild(tr);
+                    });
+
+                    table.appendChild(body);
+                    document.getElementById(id).appendChild(table);
+                }
             }
         });
     }
