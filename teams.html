@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Teams</title>
+    <title>Teams - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="menu">
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Stats</a>
+                    <a href="#" class="dropbtn">Stats</a>
                     <div class="dropdown-content">
                         <a href="teams.html">Teams</a>
                         <a href="players.html">Players</a>
@@ -21,40 +20,42 @@
                 </li>
                 <li><a href="roster.html">Roster</a></li>
             </ul>
-        </div>
+        </nav>
+        <div id="countdown"></div>
     </header>
-
-    <div id="countdown"></div>
-
-    <section>
-        <h1>Teams</h1>
-
-        <div class="filters">
-            <label for="division">Division:</label>
-            <select id="division">
-                <option value="all">All</option>
-                <!-- Add options dynamically -->
-            </select>
-
-            <label for="league">League:</label>
-            <select id="league">
-                <option value="all">All</option>
-                <!-- Add options dynamically -->
-            </select>
-
-            <label for="stats-filter">Stats:</label>
-            <select id="stats-filter">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced">Advanced</option>
-                <option value="four-factors">Four Factors</option>
-            </select>
-        </div>
-
-        <div id="teams-table-container">
-            <!-- Tables will be injected here based on filter selection -->
-        </div>
-    </section>
+    <main>
+        <section id="teams">
+            <h1>Teams Statistics</h1>
+            <div class="filter-container">
+                <label for="division-filter">Division:</label>
+                <select id="division-filter">
+                    <option value="all">All</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
+                <label for="league-filter">League:</label>
+                <select id="league-filter">
+                    <option value="all">All</option>
+                    <option value="regular">Regular Season</option>
+                    <option value="playoffs">Playoffs</option>
+                </select>
+                <label for="stats-type">Stats Type:</label>
+                <select id="stats-type">
+                    <option value="totals">Totals</option>
+                    <option value="averages">Averages</option>
+                    <option value="shooting">Shooting</option>
+                    <option value="advanced">Advanced</option>
+                    <option value="four-factors">Four Factors</option>
+                </select>
+            </div>
+            <div id="teams-table-container">
+                <!-- Table will be populated here based on filter -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>

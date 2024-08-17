@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Home</title>
+    <title>Home - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="menu">
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Stats</a>
+                    <a href="#" class="dropbtn">Stats</a>
                     <div class="dropdown-content">
                         <a href="teams.html">Teams</a>
                         <a href="players.html">Players</a>
@@ -21,394 +20,242 @@
                 </li>
                 <li><a href="roster.html">Roster</a></li>
             </ul>
-        </div>
+        </nav>
+        <div id="countdown"></div>
     </header>
-
-    <div id="countdown"></div>
-
-    <section>
-        <h1>Top Performers</h1>
-
-        <!-- Top Performers Last Week -->
-        <div class="table-group">
-            <!-- Points (Last Week) -->
-            <div class="table-container">
-                <h2>Points (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>28</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>27</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main>
+        <section id="home-stats">
+            <h1>Top Performers</h1>
+            <div class="stats-container">
+                <div class="stat-category">
+                    <h2>Points</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>25</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>22</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>20</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Rebounds</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Rebounds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>15</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>12</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>10</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Assists</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Assists</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>10</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>8</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>7</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <!-- Rebounds (Last Week) -->
-            <div class="table-container">
-                <h2>Rebounds (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Rebounds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>13</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="stats-container">
+                <div class="stat-category">
+                    <h2>Steals</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Steals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>5</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>4</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Blocks</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Blocks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>4</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>3</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>2</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>3PM</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>3PM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>6</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>5</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>4</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <!-- Assists (Last Week) -->
-            <div class="table-container">
-                <h2>Assists (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Assists</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>8</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h1>Top Performers - Regular Season</h1>
+            <div class="stats-container">
+                <div class="stat-category">
+                    <h2>Points</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>30</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>28</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>25</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Rebounds</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Rebounds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>18</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>16</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>15</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Assists</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Assists</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>12</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>10</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-
-        <div class="table-group">
-            <!-- Steals (Last Week) -->
-            <div class="table-container">
-                <h2>Steals (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Steals</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="stats-container">
+                <div class="stat-category">
+                    <h2>Steals</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Steals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>7</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>6</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>5</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>Blocks</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Blocks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>5</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>4</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stat-category">
+                    <h2>3PM</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>3PM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Top 3 Players -->
+                            <tr><td>Player 1</td><td>Team A</td><td>8</td></tr>
+                            <tr><td>Player 2</td><td>Team B</td><td>7</td></tr>
+                            <tr><td>Player 3</td><td>Team C</td><td>6</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <!-- Blocks (Last Week) -->
-            <div class="table-container">
-                <h2>Blocks (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Blocks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>3</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 3PM (Last Week) -->
-            <div class="table-container">
-                <h2>3PM (Last Week)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>3PM</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>6</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="table-group">
-            <!-- Points (Regular Season) -->
-            <div class="table-container">
-                <h2>Points (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>35</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>32</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>30</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Rebounds (Regular Season) -->
-            <div class="table-container">
-                <h2>Rebounds (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Rebounds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>18</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>16</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>14</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Assists (Regular Season) -->
-            <div class="table-container">
-                <h2>Assists (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Assists</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>10</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="table-group">
-            <!-- Steals (Regular Season) -->
-            <div class="table-container">
-                <h2>Steals (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Steals</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>6</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Blocks (Regular Season) -->
-            <div class="table-container">
-                <h2>Blocks (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Blocks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>6</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>4</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 3PM (Regular Season) -->
-            <div class="table-container">
-                <h2>3PM (Regular Season)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>3PM</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Player 1</td>
-                            <td>Team A</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>Player 2</td>
-                            <td>Team B</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>Player 3</td>
-                            <td>Team C</td>
-                            <td>7</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>

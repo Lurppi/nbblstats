@@ -1,138 +1,141 @@
-/* Allgemeine Stile */
+/* Allgemeines Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 header {
     background: #333;
     color: #fff;
-    padding: 10px 0;
-    text-align: center;
+    padding: 10px;
+    position: relative;
 }
 
-.menu ul {
+nav ul {
     list-style: none;
+    margin: 0;
     padding: 0;
-    margin: 0;
 }
 
-.menu ul li {
-    display: inline-block;
-    margin: 0;
+nav ul li {
+    display: inline;
+    margin-right: 15px;
 }
 
-.menu ul li a {
+nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     display: inline-block;
 }
 
-.menu ul li a:hover,
-.menu ul li a.active {
-    background: #555;
-}
-
-.dropdown {
+nav .dropdown {
+    display: inline-block;
     position: relative;
-    display: inline-block;
 }
 
-.dropdown-content {
+nav .dropdown-content {
     display: none;
     position: absolute;
-    background: #fff;
+    background: #333;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
-.dropdown-content a {
-    color: #333;
+nav .dropdown-content a {
+    color: #fff;
     padding: 12px 16px;
-    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+nav .dropdown:hover .dropdown-content {
     display: block;
 }
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+nav .dropdown-content a:hover {
+    background-color: #575757;
 }
 
 #countdown {
-    background: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-    font-size: 24px;
-}
-
-/* Filter */
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.filters label {
-    margin-right: 5px;
-}
-
-.filters select {
-    padding: 5px;
-}
-
-/* Tabellen-Design */
-.table-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-around;
-    margin: 20px 0;
-}
-
-.table-container {
-    flex: 1;
-    min-width: 300px;
-    box-sizing: border-box;
-}
-
-.table-container h2 {
-    background-color: #007BFF;
     color: #fff;
-    padding: 10px;
-    text-align: center;
-    margin: 0;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+main {
+    padding: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-table th,
-table td {
+table th, table td {
     padding: 10px;
+    text-align: center;
     border: 1px solid #ddd;
-    text-align: left;
 }
 
 table th {
     background-color: #f4f4f4;
 }
 
-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+.stat-category {
+    margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-    .table-group {
-        flex-direction: column;
-    }
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
+
+.stat-category h2 {
+    margin-top: 0;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-container label {
+    margin-right: 10px;
+}
+
+.filter-container select {
+    margin-right: 20px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-category {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-category h2 {
+    background: #f4f4f4;
+    margin: 0;
+    padding: 10px;
+}
+
