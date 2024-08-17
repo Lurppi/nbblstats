@@ -24,59 +24,37 @@
         </div>
     </header>
 
+    <div id="countdown"></div>
+
     <section>
-        <h1>Teams Statistics</h1>
-        <div class="filter">
+        <h1>Teams</h1>
+
+        <div class="filters">
             <label for="division">Division:</label>
             <select id="division">
                 <option value="all">All</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
+                <!-- Add options dynamically -->
             </select>
 
             <label for="league">League:</label>
             <select id="league">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-                <option value="season">Season</option>
+                <option value="all">All</option>
+                <!-- Add options dynamically -->
             </select>
 
-            <label for="statsType">Stats Type:</label>
-            <select id="statsType">
+            <label for="stats-filter">Stats:</label>
+            <select id="stats-filter">
                 <option value="totals">Totals</option>
                 <option value="averages">Averages</option>
                 <option value="shooting">Shooting</option>
                 <option value="advanced">Advanced</option>
-                <option value="fourfactors">Four Factors</option>
+                <option value="four-factors">Four Factors</option>
             </select>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Team A</td>
-                    <td>30</td>
-                    <td>60</td>
-                </tr>
-                <tr>
-                    <td>Team B</td>
-                    <td>25</td>
-                    <td>55</td>
-                </tr>
-                <tr>
-                    <td>Team C</td>
-                    <td>20</td>
-                    <td>50</td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="teams-table-container">
+            <!-- Tables will be injected here based on filter selection -->
+        </div>
     </section>
 </body>
 </html>

@@ -24,102 +24,50 @@
         </div>
     </header>
 
+    <div id="countdown"></div>
+
     <section>
-        <h1>Players Statistics</h1>
-        <div class="filter">
+        <h1>Players</h1>
+
+        <div class="filters">
             <label for="division">Division:</label>
             <select id="division">
                 <option value="all">All</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
+                <!-- Add options dynamically -->
             </select>
 
             <label for="league">League:</label>
             <select id="league">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-                <option value="season">Season</option>
+                <option value="all">All</option>
+                <!-- Add options dynamically -->
             </select>
 
             <label for="position">Position:</label>
             <select id="position">
                 <option value="all">All</option>
-                <option value="pg">PG</option>
-                <option value="sg">SG</option>
-                <option value="sf">SF</option>
-                <option value="pf">PF</option>
-                <option value="c">C</option>
+                <!-- Add options dynamically -->
             </select>
 
-            <label for="statsType">Stats Type:</label>
-            <select id="statsType">
+            <label for="birth-year">Birth Year:</label>
+            <select id="birth-year">
+                <option value="all">All</option>
+                <!-- Add options dynamically -->
+            </select>
+
+            <label for="stats-filter">Stats:</label>
+            <select id="stats-filter">
                 <option value="totals">Totals</option>
                 <option value="averages">Averages</option>
                 <option value="shooting">Shooting</option>
                 <option value="advanced1">Advanced1</option>
                 <option value="advanced2">Advanced2</option>
-                <option value="fourfactors">Four Factors</option>
-            </select>
-
-            <label for="year">Birth Year:</label>
-            <select id="year">
-                <option value="all">All</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <!-- Add more years as needed -->
+                <option value="four-factors">Four Factors</option>
             </select>
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Points</th>
-                    <th>Rebounds</th>
-                    <th>Assists</th>
-                    <th>Steals</th>
-                    <th>Blocks</th>
-                    <th>3PM</th>
-                    <th>Birth Year</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Player 1</td>
-                    <td>Team A</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>8</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>2000</td>
-                </tr>
-                <tr>
-                    <td>Player 2</td>
-                    <td>Team B</td>
-                    <td>28</td>
-                    <td>10</td>
-                    <td>7</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>2001</td>
-                </tr>
-                <tr>
-                    <td>Player 3</td>
-                    <td>Team C</td>
-                    <td>25</td>
-                    <td>9</td>
-                    <td>6</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>2000</td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="players-table-container">
+            <!-- Tables will be injected here based on filter selection -->
+        </div>
     </section>
 </body>
 </html>
