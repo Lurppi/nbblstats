@@ -25,67 +25,99 @@
     </header>
 
     <section>
-        <h1>Player Statistics</h1>
-        <form id="filter-form">
+        <h1>Players Statistics</h1>
+        <div class="filter">
             <label for="division">Division:</label>
-            <select id="division" name="division">
-                <option value="both">Both</option>
+            <select id="division">
+                <option value="all">All</option>
                 <option value="A">Division A</option>
                 <option value="B">Division B</option>
             </select>
+
             <label for="league">League:</label>
-            <select id="league" name="league">
+            <select id="league">
                 <option value="regular">Regular Season</option>
                 <option value="playoffs">Playoffs</option>
                 <option value="season">Season</option>
             </select>
+
             <label for="position">Position:</label>
-            <select id="position" name="position">
+            <select id="position">
                 <option value="all">All</option>
-                <option value="PG">Point Guard</option>
-                <option value="SG">Shooting Guard</option>
-                <option value="SF">Small Forward</option>
-                <option value="PF">Power Forward</option>
-                <option value="C">Center</option>
+                <option value="pg">PG</option>
+                <option value="sg">SG</option>
+                <option value="sf">SF</option>
+                <option value="pf">PF</option>
+                <option value="c">C</option>
             </select>
-            <label for="birth-year">Birth Year:</label>
-            <select id="birth-year" name="birth-year">
+
+            <label for="statsType">Stats Type:</label>
+            <select id="statsType">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced1">Advanced1</option>
+                <option value="advanced2">Advanced2</option>
+                <option value="fourfactors">Four Factors</option>
+            </select>
+
+            <label for="year">Birth Year:</label>
+            <select id="year">
                 <option value="all">All</option>
                 <option value="2000">2000</option>
-                <option value="1999">1999</option>
+                <option value="2001">2001</option>
                 <!-- Add more years as needed -->
             </select>
-        </form>
+        </div>
 
-        <table id="players-table">
+        <table>
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Team</th>
-                    <th>Position</th>
-                    <th>Birth Year</th>
                     <th>Points</th>
                     <th>Rebounds</th>
                     <th>Assists</th>
                     <th>Steals</th>
                     <th>Blocks</th>
                     <th>3PM</th>
+                    <th>Birth Year</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Player X</td>
+                    <td>Player 1</td>
                     <td>Team A</td>
-                    <td>PG</td>
-                    <td>2000</td>
-                    <td>22</td>
+                    <td>30</td>
+                    <td>12</td>
+                    <td>8</td>
+                    <td>4</td>
+                    <td>3</td>
                     <td>5</td>
+                    <td>2000</td>
+                </tr>
+                <tr>
+                    <td>Player 2</td>
+                    <td>Team B</td>
+                    <td>28</td>
+                    <td>10</td>
                     <td>7</td>
                     <td>3</td>
-                    <td>1</td>
                     <td>2</td>
+                    <td>4</td>
+                    <td>2001</td>
                 </tr>
-                <!-- Repeat rows as needed -->
+                <tr>
+                    <td>Player 3</td>
+                    <td>Team C</td>
+                    <td>25</td>
+                    <td>9</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>2000</td>
+                </tr>
             </tbody>
         </table>
     </section>

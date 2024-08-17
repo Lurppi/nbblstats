@@ -25,59 +25,56 @@
     </header>
 
     <section>
-        <h1>Team Statistics</h1>
-        <form id="filter-form">
+        <h1>Teams Statistics</h1>
+        <div class="filter">
             <label for="division">Division:</label>
-            <select id="division" name="division">
-                <option value="both">Both</option>
+            <select id="division">
+                <option value="all">All</option>
                 <option value="A">Division A</option>
                 <option value="B">Division B</option>
             </select>
+
             <label for="league">League:</label>
-            <select id="league" name="league">
+            <select id="league">
                 <option value="regular">Regular Season</option>
                 <option value="playoffs">Playoffs</option>
                 <option value="season">Season</option>
             </select>
-            <label for="stat-type">Stat Type:</label>
-            <select id="stat-type" name="stat-type">
+
+            <label for="statsType">Stats Type:</label>
+            <select id="statsType">
                 <option value="totals">Totals</option>
                 <option value="averages">Averages</option>
                 <option value="shooting">Shooting</option>
                 <option value="advanced">Advanced</option>
-                <option value="four-factors">Four Factors</option>
+                <option value="fourfactors">Four Factors</option>
             </select>
-        </form>
+        </div>
 
-        <table id="teams-table">
+        <table>
             <thead>
                 <tr>
+                    <th>Name</th>
                     <th>Team</th>
-                    <th>Minutes</th>
                     <th>Points</th>
-                    <th>Rebounds</th>
-                    <th>Assists</th>
-                    <th>Steals</th>
-                    <th>Blocks</th>
-                    <th>Turnovers</th>
-                    <th>Fouls</th>
-                    <th>Efficiency</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Team A</td>
-                    <td>120</td>
-                    <td>95</td>
-                    <td>45</td>
-                    <td>25</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>12</td>
-                    <td>18</td>
-                    <td>120</td>
+                    <td>30</td>
+                    <td>60</td>
                 </tr>
-                <!-- Repeat rows as needed -->
+                <tr>
+                    <td>Team B</td>
+                    <td>25</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td>Team C</td>
+                    <td>20</td>
+                    <td>50</td>
+                </tr>
             </tbody>
         </table>
     </section>
