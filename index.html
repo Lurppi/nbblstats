@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <h1>Basketball Stats</h1>
     </header>
 
-    <div id="countdown" class="countdown"></div>
-
     <nav>
         <ul class="menu">
             <li><a href="index.html">Home</a></li>
             <li class="dropdown">
-                <a href="#">Stats</a>
+                <span class="dropdown-btn">Stats</span>
                 <ul class="dropdown-content">
                     <li><a href="teams.html">Teams</a></li>
                     <li><a href="players.html">Players</a></li>
@@ -28,165 +25,69 @@
         </ul>
     </nav>
 
-    <section class="home-section">
-        <h2>Top Performers of the Week</h2>
-        <div class="performance-tables">
-            <!-- Points Table -->
-            <div class="performance-table">
-                <h3>Points</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Top 3 Rows -->
-                        <tr>
-                            <td>Player A</td>
-                            <td>Team X</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                            <td>Player B</td>
-                            <td>Team Y</td>
-                            <td>28</td>
-                        </tr>
-                        <tr>
-                            <td>Player C</td>
-                            <td>Team Z</td>
-                            <td>27</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="accordion">View More</button>
-                <div class="panel">
-                    <table>
-                        <tbody>
-                            <!-- Additional Rows -->
-                            <tr>
-                                <td>Player D</td>
-                                <td>Team W</td>
-                                <td>25</td>
-                            </tr>
-                            <tr>
-                                <td>Player E</td>
-                                <td>Team V</td>
-                                <td>24</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <section>
+        <h2>Top 3 Performers - Last Week</h2>
+        <div class="top3-container">
+            <table class="top3">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Player 1</td>
+                        <td>Team A</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>Player 2</td>
+                        <td>Team B</td>
+                        <td>28</td>
+                    </tr>
+                    <tr>
+                        <td>Player 3</td>
+                        <td>Team C</td>
+                        <td>26</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="more-container">
+                <button class="view-more">View More</button>
             </div>
-
-            <!-- Rebounds Table -->
-            <div class="performance-table">
-                <h3>Rebounds</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Rebounds</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Top 3 Rows -->
-                        <tr>
-                            <td>Player F</td>
-                            <td>Team U</td>
-                            <td>15</td>
-                        </tr>
-                        <tr>
-                            <td>Player G</td>
-                            <td>Team T</td>
-                            <td>14</td>
-                        </tr>
-                        <tr>
-                            <td>Player H</td>
-                            <td>Team S</td>
-                            <td>13</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="accordion">View More</button>
-                <div class="panel">
-                    <table>
-                        <tbody>
-                            <!-- Additional Rows -->
-                            <tr>
-                                <td>Player I</td>
-                                <td>Team R</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>Player J</td>
-                                <td>Team Q</td>
-                                <td>11</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Assists Table -->
-            <div class="performance-table">
-                <h3>Assists</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Team</th>
-                            <th>Assists</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Top 3 Rows -->
-                        <tr>
-                            <td>Player K</td>
-                            <td>Team P</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>Player L</td>
-                            <td>Team O</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>Player M</td>
-                            <td>Team N</td>
-                            <td>8</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="accordion">View More</button>
-                <div class="panel">
-                    <table>
-                        <tbody>
-                            <!-- Additional Rows -->
-                            <tr>
-                                <td>Player N</td>
-                                <td>Team M</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>Player O</td>
-                                <td>Team L</td>
-                                <td>6</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Add more tables as needed for Steals, Blocks, 3PM -->
         </div>
+        <div class="additional-players">
+            <table class="expandable">
+                <tbody>
+                    <!-- Hidden rows to be revealed on click -->
+                    <tr>
+                        <td>Player 4</td>
+                        <td>Team D</td>
+                        <td>24</td>
+                    </tr>
+                    <tr>
+                        <td>Player 5</td>
+                        <td>Team E</td>
+                        <td>22</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Repeat the above structure for Rebounds, Assists, etc. -->
     </section>
 
     <footer>
         <p>&copy; 2024 Basketball Stats</p>
     </footer>
+
+    <script>
+        document.querySelector('.view-more').addEventListener('click', function() {
+            document.querySelector('.additional-players').style.display = 'block';
+            this.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
+

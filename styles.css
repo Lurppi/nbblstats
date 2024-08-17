@@ -1,16 +1,44 @@
-/* Countdown Styles */
-.countdown {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    font-size: 20px;
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
 }
 
-/* Add rest of your styles as needed */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
 
-.dropdown:hover .dropdown-content {
-    display: block;
+nav {
+    background-color: #444;
+    overflow: hidden;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    float: left;
+}
+
+.menu li a, .dropdown-btn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu li a:hover, .dropdown:hover .dropdown-btn {
+    background-color: #111;
 }
 
 .dropdown-content {
@@ -18,59 +46,72 @@
     position: absolute;
     background-color: #444;
     min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: #fff;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-align: left;
 }
 
 .dropdown-content a:hover {
-    background-color: #666;
+    background-color: #575757;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-.panel {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
+section {
+    padding: 20px;
 }
 
-.accordion {
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+h2 {
+    color: #333;
 }
 
-.accordion:hover {
-    background-color: #555;
-}
-
-.panel table {
+table {
     width: 100%;
     border-collapse: collapse;
+    margin: 20px 0;
 }
 
-.panel th, .panel td {
+table, th, td {
     border: 1px solid #ddd;
-    padding: 10px;
+}
+
+th, td {
+    padding: 8px;
     text-align: left;
 }
 
-.panel th {
-    background-color: #f4f4f4;
+th {
+    background-color: #f2f2f2;
+}
+
+.top3-container {
+    margin-bottom: 20px;
+}
+
+.more-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.additional-players {
+    display: none;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
