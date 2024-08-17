@@ -25,33 +25,32 @@
     </header>
     <main>
         <section id="players">
-            <h1>Players Statistics</h1>
+            <h1>Players Stats</h1>
             <div class="filter-container">
-                <label for="division-filter">Division:</label>
-                <select id="division-filter">
+                <label for="division">Division:</label>
+                <select id="division">
                     <option value="all">All</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
+                    <option value="division1">Division 1</option>
+                    <option value="division2">Division 2</option>
                 </select>
-                <label for="league-filter">League:</label>
-                <select id="league-filter">
+                <label for="league">League:</label>
+                <select id="league">
                     <option value="all">All</option>
-                    <option value="regular">Regular Season</option>
-                    <option value="playoffs">Playoffs</option>
+                    <option value="league1">League 1</option>
+                    <option value="league2">League 2</option>
                 </select>
-                <label for="position-filter">Position:</label>
-                <select id="position-filter">
+                <label for="position">Position:</label>
+                <select id="position">
                     <option value="all">All</option>
-                    <option value="PG">PG</option>
-                    <option value="SG">SG</option>
-                    <option value="SF">SF</option>
-                    <option value="PF">PF</option>
-                    <option value="C">C</option>
+                    <option value="guard">Guard</option>
+                    <option value="forward">Forward</option>
+                    <option value="center">Center</option>
                 </select>
-                <label for="birth-year-filter">Birth Year:</label>
-                <select id="birth-year-filter">
+                <label for="birth-year">Birth Year:</label>
+                <select id="birth-year">
                     <option value="all">All</option>
-                    <!-- Options will be dynamically generated -->
+                    <option value="2000">2000</option>
+                    <option value="1999">1999</option>
                 </select>
                 <label for="stats-type">Stats Type:</label>
                 <select id="stats-type">
@@ -64,7 +63,7 @@
                 </select>
             </div>
             <div id="players-table-container">
-                <!-- Table will be populated here based on filter -->
+                <!-- Tabellen werden hier dynamisch geladen -->
             </div>
         </section>
     </main>

@@ -1,102 +1,84 @@
-/* Allgemeines Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: #f4f4f4;
 }
 
 header {
     background: #333;
     color: #fff;
-    padding: 10px;
-    position: relative;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-nav ul {
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav ul {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    display: flex;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-    display: inline-block;
-}
-
-nav .dropdown {
-    display: inline-block;
+header nav li {
     position: relative;
 }
 
-nav .dropdown-content {
+header nav a {
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+}
+
+header nav a:hover {
+    background: #555;
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
+    top: 100%;
+    left: 0;
     background: #333;
     min-width: 160px;
-    z-index: 1;
+    z-index: 1000;
 }
 
-nav .dropdown-content a {
+.dropdown-content a {
     color: #fff;
-    padding: 12px 16px;
-    display: block;
-    text-align: left;
+    padding: 10px;
+    text-decoration: none;
 }
 
-nav .dropdown:hover .dropdown-content {
-    display: block;
+.dropdown-content a:hover {
+    background: #555;
 }
 
-nav .dropdown-content a:hover {
-    background-color: #575757;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 #countdown {
+    text-align: center;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 10px;
 }
 
 main {
     padding: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table th, table td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f4f4f4;
-}
-
-.stat-category {
-    margin-bottom: 20px;
-}
-
-.stats-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.stat-category h2 {
-    margin-top: 0;
+    margin-top: 70px; /* Header height */
 }
 
 footer {
@@ -139,3 +121,21 @@ footer {
     padding: 10px;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #f4f4f4;
+}
+
+tr:hover {
+    background: #f9f9f9;
+}

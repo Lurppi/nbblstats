@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Roster</title>
+    <title>Roster - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="menu">
+        <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Stats</a>
+                    <a href="#" class="dropbtn">Stats</a>
                     <div class="dropdown-content">
                         <a href="teams.html">Teams</a>
                         <a href="players.html">Players</a>
@@ -21,36 +20,28 @@
                 </li>
                 <li><a href="roster.html">Roster</a></li>
             </ul>
-        </div>
+        </nav>
+        <div id="countdown"></div>
     </header>
-
-    <section>
-        <h1>Team Roster</h1>
-        <table id="roster-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Birth Year</th>
-                    <th>Nationality</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Player A</td>
-                    <td>Team X</td>
-                    <td>SF</td>
-                    <td>6'7"</td>
-                    <td>210 lbs</td>
-                    <td>1998</td>
-                    <td>German</td>
-                </tr>
-                <!-- Repeat rows as needed -->
-            </tbody>
-        </table>
-    </section>
+    <main>
+        <section id="roster">
+            <h1>Team Roster</h1>
+            <div class="filter-container">
+                <label for="team">Team:</label>
+                <select id="team">
+                    <option value="all">All</option>
+                    <option value="team1">Team 1</option>
+                    <option value="team2">Team 2</option>
+                </select>
+            </div>
+            <div id="roster-table-container">
+                <!-- Tabellen werden hier dynamisch geladen -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
