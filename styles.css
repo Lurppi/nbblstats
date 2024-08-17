@@ -1,113 +1,114 @@
-/* Reset styles for consistency */
-body, html {
+/* Grundlegendes Layout und Design */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
-/* Header styles */
 header {
     background-color: #333;
     color: #fff;
     padding: 10px 0;
 }
 
-.menu {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
 .menu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .menu ul li {
-    display: inline;
     position: relative;
+    margin: 0 15px;
 }
 
-.menu ul li a {
+.menu a {
     color: #fff;
-    padding: 14px 20px;
     text-decoration: none;
-    display: inline-block;
+    padding: 10px 20px;
+    display: block;
+    font-size: 16px;
 }
 
-.menu .dropdown-content {
+.menu li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: #444;
     min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-.menu .dropdown-content a {
+.dropdown-content a {
     color: #fff;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.menu .dropdown-content a:hover {
-    background-color: #575757;
+.dropdown-content a:hover {
+    background-color: #555;
 }
 
-.menu .dropdown:hover .dropdown-content {
-    display: block;
+.top3-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
 }
 
-.menu .dropdown:hover .dropdown-btn {
-    background-color: #575757;
+.table-container {
+    flex: 1;
+    margin: 10px;
+    min-width: calc(33.333% - 20px); /* 3 Tabellen nebeneinander */
 }
 
-/* Countdown styles */
-#countdown {
-    text-align: center;
-    font-size: 1.5em;
-    margin: 20px 0;
-}
-
-/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    background-color: #f9f9f9;
 }
 
 table th, table td {
+    padding: 10px;
+    text-align: left;
     border: 1px solid #ddd;
-    padding: 8px;
 }
 
 table th {
-    background-color: #f4f4f4;
-    text-align: left;
+    background-color: #f2f2f2;
+    font-weight: bold;
 }
 
-table .name-col {
-    width: 40%; /* Adjusted width for player names */
+table td {
+    font-size: 14px;
 }
 
-/* Top performers section */
-.top3-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+table th:first-child, table td:first-child {
+    width: 40%; /* Namensspalte breiter */
+}
+
+table th:nth-child(2), table td:nth-child(2) {
+    width: 30%;
+}
+
+table th:nth-child(3), table td:nth-child(3) {
+    width: 30%;
+}
+
+/* Countdown */
+#countdown {
+    text-align: center;
     margin: 20px 0;
-}
-
-.top3-container .table-container {
-    flex: 1 1 calc(33.333% - 20px);
-    box-sizing: border-box;
-}
-
-/* Responsive design for tablets and phones */
-@media (max-width: 768px) {
-    .top3-container .table-container {
-        flex: 1 1 100%;
-    }
+    font-size: 20px;
+    background-color: #eee;
+    padding: 10px;
 }
