@@ -1,40 +1,66 @@
 $(document).ready(function() {
-    // Initialisiere DataTables für Teams und Spieler
-    var teamsTable = $('#teams-table').DataTable();
-    var playersTable = $('#players-table').DataTable();
+    // Initialisierung der DataTables
+    $('#teams-table').DataTable();
+    $('#players-table').DataTable();
+    $('#roster-table').DataTable();
 
-    // Funktion zum Laden der Daten
-    function loadCSV(file, table) {
-        $.ajax({
-            url: file,
-            dataType: 'text',
-        }).done(function(data) {
-            var parsedData = Papa.parse(data, {header: true});
-            table.clear();
-            table.rows.add(parsedData.data);
-            table.draw();
-        });
-    }
-
-    // Lade die Standarddaten
-    loadCSV('teams_totals.csv', teamsTable);
-    loadCSV('players_totals.csv', playersTable);
-
-    // Filterfunktionen für Teams
-    $('#team-division, #team-league, #team-position, #team-stats').change(function() {
-        var division = $('#team-division').val();
-        var league = $('#team-league').val();
-        var position = $('#team-position').val();
-        var statsType = $('#team-stats').val();
-        loadCSV(`teams_${statsType}_${division}_${league}_${position}.csv`, teamsTable);
+    // Daten aus CSV laden
+    Papa.parse('teams_data.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            $('#teams-table').DataTable().clear().rows.add(results.data).draw();
+        }
     });
 
-    // Filterfunktionen für Spieler
-    $('#player-division, #player-league, #player-position, #player-stats').change(function() {
-        var division = $('#player-division').val();
-        var league = $('#player-league').val();
-        var position = $('#player-position').val();
-        var statsType = $('#player-stats').val();
-        loadCSV(`players_${statsType}_${division}_${league}_${position}.csv`, playersTable);
+    Papa.parse('players_data.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            $('#players-table').DataTable().clear().rows.add(results.data).draw();
+        }
+    });
+
+    Papa.parse('roster_data.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+            $('#roster-table').DataTable().clear().rows.add(results.data).draw();
+        }
+    });
+
+    // Filter-Logik
+    $('#division').on('change', function() {
+        $('#teams-table').DataTable().column(1).search(this.value).draw();
+        $('#players-table').DataTable().column(1).search(this.value).draw();
+    });
+
+    $('#league').on('change', function() {
+        $('#teams-table').DataTable().column(2).search(this.value).draw();
+        $('#players-table').DataTable().column(2).search(this.value).draw();
+    });
+
+    $('#stats-type').on('change', function() {
+        // Implementiere die Filter-Logik für Statistikarten
+    });
+
+    $('#position').on('change', function() {
+        $('#players-table').DataTable().column(3).search(this.value).draw();
+    });
+
+    $('#year').on('change', function() {
+        $('#players-table').DataTable().column(4).search(this.value).draw();
+    });
+
+    $('#team-select').on('change', function() {
+        var team = this.value;
+        Papa.parse('roster_data.csv', {
+            download: true,
+            header: true,
+            complete: function(results) {
+                var filteredData = results.data.filter(row => row.Team === team);
+                $('#roster-table').DataTable().clear().rows.add(filteredData).draw();
+            }
+        });
     });
 });

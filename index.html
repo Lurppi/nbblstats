@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Statistiken</title>
+    <title>Basketball Statistik Website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
@@ -11,248 +11,94 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#stats">Stats</a>
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#stats" onclick="showSection('stats')">Stats</a>
                     <ul class="dropdown">
-                        <li><a href="#teams">Teams</a></li>
-                        <li><a href="#players">Players</a></li>
+                        <li><a href="#teams" onclick="showSection('teams')">Teams</a></li>
+                        <li><a href="#players" onclick="showSection('players')">Players</a></li>
                     </ul>
                 </li>
-                <li><a href="#roster">Roster</a></li>
+                <li><a href="#roster" onclick="showSection('roster')">Roster</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <!-- Home Section -->
-        <section id="home">
-            <h1>Top Performer</h1>
-            <!-- Top Performer für den letzten Spieltag -->
+        <section id="home" class="section">
+            <h1>Basketball Top Performers</h1>
             <div class="top-performers">
-                <h2>Top 5 Performer des letzten Spieltags</h2>
-                <div class="top-performers-category">
-                    <h3>Points</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Rebounds</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Rebounds</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Assists</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Assists</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Efficiency</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Efficiency</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Player Efficiency Rating</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>PER</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>3-Pointer Made</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>3PM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <!-- Top Performer der Regular Season -->
-            <div class="top-performers">
-                <h2>Top 5 Performer der Regular Season</h2>
-                <div class="top-performers-category">
-                    <h3>Points</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Points</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Rebounds</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Rebounds</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Assists</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Assists</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Efficiency</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Efficiency</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>Player Efficiency Rating</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>PER</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="top-performers-category">
-                    <h3>3-Pointer Made</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>3PM</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Daten hier -->
-                        </tbody>
-                    </table>
-                </div>
+                <h2>Top 5 Performers of the Week</h2>
+                <table class="display" id="week-performers">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Player 1</th>
+                            <th>Player 2</th>
+                            <th>Player 3</th>
+                            <th>Player 4</th>
+                            <th>Player 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Top Performers of the Week Data -->
+                    </tbody>
+                </table>
+                <h2>Top 5 Performers of the Season</h2>
+                <table class="display" id="season-performers">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Player 1</th>
+                            <th>Player 2</th>
+                            <th>Player 3</th>
+                            <th>Player 4</th>
+                            <th>Player 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Top Performers of the Season Data -->
+                    </tbody>
+                </table>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section id="stats">
-            <h1>Statistiken</h1>
-            
-            <!-- Teams Untermenü -->
-            <div id="teams">
-                <h2>Teams</h2>
-                <label for="team-division">Division:</label>
-                <select id="team-division">
-                    <option value="both">Beide</option>
+        <section id="stats" class="section" style="display: none;">
+            <h1>Statistics</h1>
+            <div class="dropdown-content">
+                <h2>Filter Options</h2>
+                <label for="division">Division:</label>
+                <select id="division">
+                    <option value="both">Both</option>
                     <option value="A">Division A</option>
                     <option value="B">Division B</option>
                 </select>
-                
-                <label for="team-league">League:</label>
-                <select id="team-league">
+                <label for="league">League:</label>
+                <select id="league">
                     <option value="regular">Regular Season</option>
                     <option value="playoffs">Playoffs</option>
                     <option value="season">Season</option>
                 </select>
-                
-                <label for="team-position">Position:</label>
-                <select id="team-position">
-                    <option value="all">Alle</option>
-                    <option value="PG">PG</option>
-                    <option value="SG">SG</option>
-                    <option value="SF">SF</option>
-                    <option value="PF">PF</option>
-                    <option value="C">C</option>
-                </select>
-                
-                <label for="team-stats">Statistik:</label>
-                <select id="team-stats">
+                <label for="stats-type">Statistik:</label>
+                <select id="stats-type">
                     <option value="totals">Totals</option>
                     <option value="averages">Averages</option>
                     <option value="shooting">Shooting</option>
                     <option value="advanced">Advanced</option>
                     <option value="four-factors">Four Factors</option>
                 </select>
+            </div>
 
+            <!-- Teams Section -->
+            <section id="teams" style="display: none;">
+                <h2>Teams Statistics</h2>
                 <table id="teams-table" class="display">
                     <thead>
                         <tr>
                             <th>Team Name</th>
                             <th>Division</th>
                             <th>League</th>
-                            <th>Position</th>
                             <th>Minutes</th>
                             <th>Points</th>
                             <th>Rebounds</th>
@@ -262,50 +108,30 @@
                             <th>Turnovers</th>
                             <th>Fouls</th>
                             <th>Efficiency</th>
-                            <!-- Weitere Spalten je nach Statistiktyp -->
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Daten für Teams werden hier geladen -->
+                        <!-- Teams Data -->
                     </tbody>
                 </table>
-            </div>
+            </section>
 
-            <!-- Players Untermenü -->
-            <div id="players">
-                <h2>Players</h2>
-                <label for="player-division">Division:</label>
-                <select id="player-division">
-                    <option value="both">Beide</option>
-                    <option value="A">Division A</option>
-                    <option value="B">Division B</option>
-                </select>
-                
-                <label for="player-league">League:</label>
-                <select id="player-league">
-                    <option value="regular">Regular Season</option>
-                    <option value="playoffs">Playoffs</option>
-                    <option value="season">Season</option>
-                </select>
-                
-                <label for="player-position">Position:</label>
-                <select id="player-position">
-                    <option value="all">Alle</option>
+            <!-- Players Section -->
+            <section id="players" style="display: none;">
+                <h2>Players Statistics</h2>
+                <label for="position">Position:</label>
+                <select id="position">
+                    <option value="all">All</option>
                     <option value="PG">PG</option>
                     <option value="SG">SG</option>
                     <option value="SF">SF</option>
                     <option value="PF">PF</option>
                     <option value="C">C</option>
                 </select>
-                
-                <label for="player-stats">Statistik:</label>
-                <select id="player-stats">
-                    <option value="totals">Totals</option>
-                    <option value="averages">Averages</option>
-                    <option value="shooting">Shooting</option>
-                    <option value="advanced1">Advanced1</option>
-                    <option value="advanced2">Advanced2</option>
-                    <option value="four-factors">Four Factors</option>
+                <label for="year">Year:</label>
+                <select id="year">
+                    <option value="all">All</option>
+                    <!-- Add years dynamically -->
                 </select>
 
                 <table id="players-table" class="display">
@@ -324,19 +150,46 @@
                             <th>Turnovers</th>
                             <th>Fouls</th>
                             <th>Efficiency</th>
-                            <!-- Weitere Spalten je nach Statistiktyp -->
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Daten für Spieler werden hier geladen -->
+                        <!-- Players Data -->
                     </tbody>
                 </table>
-            </div>
+            </section>
         </section>
 
-        <section id="roster">
+        <!-- Roster Section -->
+        <section id="roster" class="section" style="display: none;">
             <h1>Roster</h1>
-            <!-- Roster Inhalte hier -->
+            <label for="team-select">Select Team:</label>
+            <select id="team-select">
+                <!-- Team options here -->
+            </select>
+
+            <table id="roster-table" class="display">
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Size</th>
+                        <th>Weight</th>
+                        <th>Nationality</th>
+                        <th>Position</th>
+                        <th>Minutes</th>
+                        <th>Points</th>
+                        <th>Rebounds</th>
+                        <th>Assists</th>
+                        <th>Steals</th>
+                        <th>Blocks</th>
+                        <th>Turnovers</th>
+                        <th>Fouls</th>
+                        <th>Efficiency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Roster Data -->
+                </tbody>
+            </table>
         </section>
     </main>
 
@@ -348,5 +201,84 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts.js"></script>
+
+    <script>
+        // JavaScript to handle section visibility
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        $(document).ready(function() {
+            // Initialisierung der DataTables
+            $('#teams-table').DataTable();
+            $('#players-table').DataTable();
+            $('#roster-table').DataTable();
+
+            // Daten aus CSV laden
+            Papa.parse('teams_data.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#teams-table').DataTable().clear().rows.add(results.data).draw();
+                }
+            });
+
+            Papa.parse('players_data.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#players-table').DataTable().clear().rows.add(results.data).draw();
+                }
+            });
+
+            Papa.parse('roster_data.csv', {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    $('#roster-table').DataTable().clear().rows.add(results.data).draw();
+                }
+            });
+
+            // Filter-Logik
+            $('#division').on('change', function() {
+                $('#teams-table').DataTable().column(1).search(this.value).draw();
+                $('#players-table').DataTable().column(1).search(this.value).draw();
+            });
+
+            $('#league').on('change', function() {
+                $('#teams-table').DataTable().column(2).search(this.value).draw();
+                $('#players-table').DataTable().column(2).search(this.value).draw();
+            });
+
+            $('#stats-type').on('change', function() {
+                // Implementiere die Filter-Logik für Statistikarten
+            });
+
+            $('#position').on('change', function() {
+                $('#players-table').DataTable().column(3).search(this.value).draw();
+            });
+
+            $('#year').on('change', function() {
+                $('#players-table').DataTable().column(4).search(this.value).draw();
+            });
+
+            $('#team-select').on('change', function() {
+                var team = this.value;
+                Papa.parse('roster_data.csv', {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        var filteredData = results.data.filter(row => row.Team === team);
+                        $('#roster-table').DataTable().clear().rows.add(filteredData).draw();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
