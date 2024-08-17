@@ -8,7 +8,6 @@ header {
     background: #333;
     color: #fff;
     padding: 10px 20px;
-    position: relative;
 }
 
 nav ul {
@@ -27,7 +26,6 @@ nav ul li a {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
-    display: block;
 }
 
 nav ul li ul.dropdown {
@@ -62,32 +60,41 @@ main {
 .table-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 .table-container {
+    flex: 1 1 calc(33.333% - 20px); /* Drei Tabellen nebeneinander */
+    max-width: calc(33.333% - 20px);
     border: 1px solid #ddd;
-    padding: 10px;
     border-radius: 5px;
-    flex: 1 1 calc(33.333% - 20px); /* Ensures three columns */
+    padding: 5px;
     overflow-x: auto;
-    max-width: 100%; /* Prevents overflow */
 }
 
 .table-container table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Ensure consistent column width */
+    table-layout: fixed; /* Konsistente Spaltenbreite */
 }
 
 .table-container th, .table-container td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-    word-wrap: break-word; /* Break long words */
+    word-wrap: break-word; /* Lange Wörter umbrechen */
 }
 
 .table-container th {
     background-color: #f4f4f4;
+}
+
+/* Bedingte Formatierungen für lange Namen */
+.table-container td {
+    font-size: 14px;
+}
+
+.table-container td.long-name {
+    font-size: 12px; /* Schriftgröße für lange Namen verkleinern */
 }
