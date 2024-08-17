@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+nav ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    background: #444;
+    padding: 10px;
+    list-style-type: none;
+    margin: 0;
+    min-width: 150px;
+}
+
+nav ul li:hover ul.dropdown {
+    display: block;
+}
+
+nav ul li ul.dropdown li {
+    display: block;
+}
+
+#countdown {
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    margin: 10px 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.table-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1 1 calc(33.333% - 20px); /* Ensures three columns */
+    overflow-x: auto;
+    max-width: 100%; /* Prevents overflow */
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensure consistent column width */
+}
+
+.table-container th, .table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    word-wrap: break-word; /* Break long words */
+}
+
+.table-container th {
+    background-color: #f4f4f4;
+}
