@@ -4,90 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basketball Stats</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        nav {
-            background: #444;
-            color: #fff;
-            overflow: hidden;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            float: left;
-            position: relative;
-        }
-        nav ul li a {
-            display: block;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-        }
-        nav ul li:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: #555;
-            top: 100%;
-            left: 0;
-            width: 200px;
-            z-index: 1;
-        }
-        .dropdown-content a {
-            padding: 10px;
-            color: #fff;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background: #666;
-        }
-        .section {
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-        .top-performers {
-            margin-bottom: 40px;
-        }
-        .top-performers table {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -106,6 +23,7 @@
             <li><a href="#" onclick="showSection('roster')">Roster</a></li>
         </ul>
     </nav>
+
     <section id="home" class="section">
         <h1>Basketball Top Performers</h1>
         <div class="top-performers">
@@ -191,6 +109,14 @@
         </div>
     </section>
 
+    <section id="stats" class="section" style="display: none;">
+        <h1>Stats</h1>
+        <div class="section-links">
+            <a href="#" onclick="showSection('teams')">Teams</a>
+            <a href="#" onclick="showSection('players')">Players</a>
+        </div>
+    </section>
+
     <section id="teams" class="section" style="display: none;">
         <h2>Teams Statistics</h2>
         <label for="division">Division:</label>
@@ -237,16 +163,129 @@
                     <td>A</td>
                     <td>Regular</td>
                     <td>2400</td>
-                    <td>1200</td>
-                    <td>600</td>
-                    <td>300</td>
-                    <td>150</td>
-                    <td>100</td>
-                    <td>200</td>
-                    <td>80</td>
-                    <td>0.52</td>
+                    <td>1150</td>
+                    <td>580</td>
+                    <td>290</td>
+                    <td>140</td>
+                    <td>95</td>
+                    <td>190</td>
+                    <td>85</td>
+                    <td>0.51</td>
                 </tr>
+                <!-- Weitere Teams hinzufügen -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="players" class="section" style="display: none;">
+        <h2>Players Statistics</h2>
+        <label for="position">Position:</label>
+        <select id="position">
+            <option value="all">All Positions</option>
+            <option value="pg">PG</option>
+            <option value="sg">SG</option>
+            <option value="sf">SF</option>
+            <option value="pf">PF</option>
+            <option value="c">C</option>
+        </select>
+        <label for="year">Year:</label>
+        <select id="year">
+            <option value="all">All Years</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <!-- Weitere Jahre hinzufügen -->
+        </select>
+        <label for="league">League:</label>
+        <select id="player-league">
+            <option value="regular">Regular Season</option>
+            <option value="playoffs">Playoffs</option>
+            <option value="season">Season</option>
+        </select>
+        <label for="stats-type">Statistik:</label>
+        <select id="player-stats-type">
+            <option value="totals">Totals</option>
+            <option value="averages">Averages</option>
+            <option value="shooting">Shooting</option>
+            <option value="advanced1">Advanced1</option>
+            <option value="advanced2">Advanced2</option>
+            <option value="four-factors">Four Factors</option>
+        </select>
+
+        <table id="players-table" class="display">
+            <thead>
                 <tr>
-                    <td>Team Beta</td>
-                    <td>B</td>
-                    <td>Playoffs</
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Minutes</th>
+                    <th>Points</th>
+                    <th>Rebounds</th>
+                    <th>Assists</th>
+                    <th>Steals</th>
+                    <th>Blocks</th>
+                    <th>Turnovers</th>
+                    <th>Fouls</th>
+                    <th>Efficiency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player One</td>
+                    <td>PG</td>
+                    <td>35</td>
+                    <td>20</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>24</td>
+                </tr>
+                <!-- Weitere Spieler hinzufügen -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="roster" class="section" style="display: none;">
+        <h2>Team Roster</h2>
+        <label for="team">Select Team:</label>
+        <select id="team">
+            <option value="team-alpha">Team Alpha</option>
+            <option value="team-beta">Team Beta</option>
+            <!-- Weitere Teams hinzufügen -->
+        </select>
+
+        <table id="roster-table" class="display">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Nationality</th>
+                    <th>Statistics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player A</td>
+                    <td>PG</td>
+                    <td>6'1"</td>
+                    <td>180 lbs</td>
+                    <td>USA</td>
+                    <td><a href="#" onclick="showPlayerStats('player-a')">View Stats</a></td>
+                </tr>
+                <!-- Weitere Spieler hinzufügen -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
