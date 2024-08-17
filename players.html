@@ -3,136 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players Stats</title>
+    <title>Players - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
-    <style>
-        /* Navigation Styles (same as in index.html) */
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav ul li {
-            float: left;
-            position: relative;
-        }
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            background-color: #111;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-        nav ul li:hover .dropdown-content {
-            display: block;
-        }
-        /* Additional styles for players page content */
-        header, footer {
-            text-align: center;
-            padding: 20px;
-        }
-        .players-table {
-            margin: 20px auto;
-            width: 80%;
-            border-collapse: collapse;
-        }
-        .players-table th, .players-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        .players-table th {
-            background-color: #f4f4f4;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats - Players</h1>
+        <h1>Basketball Stats</h1>
     </header>
+
     <nav>
-        <ul>
+        <ul class="menu">
             <li><a href="index.html">Home</a></li>
-            <li>
+            <li class="dropdown">
                 <a href="#">Stats</a>
-                <div class="dropdown-content">
-                    <a href="teams.html">Teams</a>
-                    <a href="players.html">Players</a>
-                </div>
+                <ul class="dropdown-content">
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                </ul>
             </li>
             <li><a href="roster.html">Roster</a></li>
         </ul>
     </nav>
 
     <section>
-        <h2>Players Statistics</h2>
-        <label for="division">Division:</label>
-        <select id="division">
-            <option value="both">Both</option>
-            <option value="A">Division A</option>
-            <option value="B">Division B</option>
-        </select>
-        <label for="league">League:</label>
-        <select id="league">
-            <option value="regular">Regular Season</option>
-            <option value="playoffs">Playoffs</option>
-            <option value="season">Season</option>
-        </select>
-        <label for="stats-type">Statistik:</label>
-        <select id="stats-type">
-            <option value="totals">Totals</option>
-            <option value="averages">Averages</option>
-            <option value="shooting">Shooting</option>
-            <option value="advanced1">Advanced1</option>
-            <option value="advanced2">Advanced2</option>
-            <option value="four-factors">Four Factors</option>
-        </select>
-        <label for="position">Position:</label>
-        <select id="position">
-            <option value="all">All</option>
-            <option value="PG">PG</option>
-            <option value="SG">SG</option>
-            <option value="SF">SF</option>
-            <option value="PF">PF</option>
-            <option value="C">C</option>
-        </select>
-        <label for="birth-year">Birth Year:</label>
-        <select id="birth-year">
-            <option value="all">All</option>
-            <option value="2000">2000</option>
-            <option value="1999">1999</option>
-            <!-- Add more years as needed -->
-        </select>
-        <table class="players-table">
+        <h2>Player Statistics</h2>
+        <table>
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Position</th>
+                    <th>Team</th>
                     <th>Birth Year</th>
+                    <th>Position</th>
                     <th>Minutes</th>
                     <th>Points</th>
                     <th>Rebounds</th>
@@ -145,42 +46,28 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample Data -->
                 <tr>
                     <td>Player A</td>
+                    <td>Team X</td>
+                    <td>2000</td>
                     <td>PG</td>
-                    <td>1999</td>
-                    <td>30</td>
-                    <td>20</td>
+                    <td>35</td>
+                    <td>28</td>
                     <td>5</td>
                     <td>7</td>
                     <td>2</td>
                     <td>1</td>
                     <td>3</td>
                     <td>2</td>
-                    <td>25</td>
+                    <td>36</td>
                 </tr>
-                <tr>
-                    <td>Player B</td>
-                    <td>SG</td>
-                    <td>1998</td>
-                    <td>32</td>
-                    <td>25</td>
-                    <td>6</td>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>30</td>
-                </tr>
-                <!-- Add more rows as needed -->
+                <!-- Additional rows for other players -->
             </tbody>
         </table>
     </section>
 
     <footer>
-        <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
+        <p>&copy; 2024 Basketball Stats</p>
     </footer>
 </body>
 </html>

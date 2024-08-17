@@ -3,86 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams Stats</title>
+    <title>Teams - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
-    <style>
-        /* Navigation Styles (same as in index.html) */
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav ul li {
-            float: left;
-            position: relative;
-        }
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            background-color: #111;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-        nav ul li:hover .dropdown-content {
-            display: block;
-        }
-        /* Additional styles for teams page content */
-        header, footer {
-            text-align: center;
-            padding: 20px;
-        }
-        .teams-table {
-            margin: 20px auto;
-            width: 80%;
-            border-collapse: collapse;
-        }
-        .teams-table th, .teams-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        .teams-table th {
-            background-color: #f4f4f4;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats - Teams</h1>
+        <h1>Basketball Stats</h1>
     </header>
+
     <nav>
-        <ul>
+        <ul class="menu">
             <li><a href="index.html">Home</a></li>
-            <li>
+            <li class="dropdown">
                 <a href="#">Stats</a>
-                <div class="dropdown-content">
-                    <a href="teams.html">Teams</a>
-                    <a href="players.html">Players</a>
-                </div>
+                <ul class="dropdown-content">
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                </ul>
             </li>
             <li><a href="roster.html">Roster</a></li>
         </ul>
@@ -90,30 +27,12 @@
 
     <section>
         <h2>Teams Statistics</h2>
-        <label for="division">Division:</label>
-        <select id="division">
-            <option value="both">Both</option>
-            <option value="A">Division A</option>
-            <option value="B">Division B</option>
-        </select>
-        <label for="league">League:</label>
-        <select id="league">
-            <option value="regular">Regular Season</option>
-            <option value="playoffs">Playoffs</option>
-            <option value="season">Season</option>
-        </select>
-        <label for="stats-type">Statistik:</label>
-        <select id="stats-type">
-            <option value="totals">Totals</option>
-            <option value="averages">Averages</option>
-            <option value="shooting">Shooting</option>
-            <option value="advanced">Advanced</option>
-            <option value="four-factors">Four Factors</option>
-        </select>
-        <table class="teams-table">
+        <table>
             <thead>
                 <tr>
                     <th>Team</th>
+                    <th>Division</th>
+                    <th>League</th>
                     <th>Minutes</th>
                     <th>Points</th>
                     <th>Rebounds</th>
@@ -126,38 +45,27 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample Data -->
                 <tr>
                     <td>Team A</td>
-                    <td>120</td>
+                    <td>Division 1</td>
+                    <td>Regular Season</td>
+                    <td>240</td>
                     <td>100</td>
                     <td>45</td>
-                    <td>25</td>
+                    <td>20</td>
                     <td>10</td>
                     <td>5</td>
                     <td>15</td>
-                    <td>10</td>
+                    <td>20</td>
                     <td>120</td>
                 </tr>
-                <tr>
-                    <td>Team B</td>
-                    <td>130</td>
-                    <td>110</td>
-                    <td>50</td>
-                    <td>30</td>
-                    <td>12</td>
-                    <td>7</td>
-                    <td>14</td>
-                    <td>12</td>
-                    <td>130</td>
-                </tr>
-                <!-- Add more rows as needed -->
+                <!-- Additional rows for other teams -->
             </tbody>
         </table>
     </section>
 
     <footer>
-        <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
+        <p>&copy; 2024 Basketball Stats</p>
     </footer>
 </body>
 </html>
