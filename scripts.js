@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    // Funktion zum Anzeigen der jeweiligen Sektionen
+    function showSection(sectionId) {
+        $('.section').hide();
+        $('#' + sectionId).show();
+    }
+
     // Initialisierung der DataTables
     $('#teams-table').DataTable();
     $('#players-table').DataTable();
@@ -63,4 +69,7 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Setze die Standard-Sektion auf Home
+    showSection('home');
 });

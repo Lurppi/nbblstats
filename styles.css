@@ -61,6 +61,7 @@ label {
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 table, th, td {
@@ -84,5 +85,17 @@ footer {
 }
 
 .dropdown-content {
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.top-performers {
+    margin-bottom: 40px;
+}
+
+.top-performers table {
     margin-bottom: 20px;
 }
