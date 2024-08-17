@@ -70,8 +70,9 @@ main {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
-    flex: 1 1 calc(33.333% - 20px);
+    flex: 1 1 calc(33.333% - 20px); /* Ensures three columns */
     overflow-x: auto;
+    max-width: 100%; /* Prevents overflow */
 }
 
 .table-container table {
