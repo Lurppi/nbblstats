@@ -3,29 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Stats</title>
+    <title>Players Stats</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
     <style>
-        /* Zusätzliche Styles für die Tabelle */
-        table {
-            width: 100%;
+        /* Navigation Styles (same as in index.html) */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul li {
+            float: left;
+            position: relative;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+        /* Additional styles for players page content */
+        header, footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .players-table {
+            margin: 20px auto;
+            width: 80%;
             border-collapse: collapse;
         }
-        th, td {
+        .players-table th, .players-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
-        th {
+        .players-table th {
             background-color: #f4f4f4;
-        }
-        .player-name {
-            text-align: left;
-            width: 200px; /* Größere Breite für Namen */
-        }
-        td, th {
-            width: 100px; /* Einheitliche Breite für alle Spalten */
         }
     </style>
 </head>
@@ -49,15 +90,6 @@
 
     <section>
         <h2>Players Statistics</h2>
-        <label for="position">Position:</label>
-        <select id="position">
-            <option value="all">All Positions</option>
-            <option value="pg">PG</option>
-            <option value="sg">SG</option>
-            <option value="sf">SF</option>
-            <option value="pf">PF</option>
-            <option value="c">C</option>
-        </select>
         <label for="division">Division:</label>
         <select id="division">
             <option value="both">Both</option>
@@ -79,18 +111,26 @@
             <option value="advanced2">Advanced2</option>
             <option value="four-factors">Four Factors</option>
         </select>
+        <label for="position">Position:</label>
+        <select id="position">
+            <option value="all">All</option>
+            <option value="PG">PG</option>
+            <option value="SG">SG</option>
+            <option value="SF">SF</option>
+            <option value="PF">PF</option>
+            <option value="C">C</option>
+        </select>
         <label for="birth-year">Birth Year:</label>
         <select id="birth-year">
             <option value="all">All</option>
             <option value="2000">2000</option>
             <option value="1999">1999</option>
-            <!-- Weitere Jahre hinzufügen -->
+            <!-- Add more years as needed -->
         </select>
-
-        <table id="players-table">
+        <table class="players-table">
             <thead>
                 <tr>
-                    <th class="player-name">Player Name</th>
+                    <th>Name</th>
                     <th>Position</th>
                     <th>Birth Year</th>
                     <th>Minutes</th>
@@ -105,11 +145,12 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Sample Data -->
                 <tr>
-                    <td class="player-name">Player One</td>
+                    <td>Player A</td>
                     <td>PG</td>
-                    <td>1990</td>
-                    <td>35</td>
+                    <td>1999</td>
+                    <td>30</td>
                     <td>20</td>
                     <td>5</td>
                     <td>7</td>
@@ -117,23 +158,23 @@
                     <td>1</td>
                     <td>3</td>
                     <td>2</td>
-                    <td>24</td>
+                    <td>25</td>
                 </tr>
                 <tr>
-                    <td class="player-name">Player Two</td>
+                    <td>Player B</td>
                     <td>SG</td>
-                    <td>1991</td>
-                    <td>30</td>
-                    <td>18</td>
+                    <td>1998</td>
+                    <td>32</td>
+                    <td>25</td>
                     <td>6</td>
                     <td>5</td>
                     <td>3</td>
                     <td>2</td>
-                    <td>4</td>
+                    <td>2</td>
                     <td>1</td>
-                    <td>22</td>
+                    <td>30</td>
                 </tr>
-                <!-- Weitere Spieler hinzufügen -->
+                <!-- Add more rows as needed -->
             </tbody>
         </table>
     </section>

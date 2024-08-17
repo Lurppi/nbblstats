@@ -6,10 +6,73 @@
     <title>Roster</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
+    <style>
+        /* Navigation Styles (same as in index.html) */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul li {
+            float: left;
+            position: relative;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        nav ul li:hover .dropdown-content {
+            display: block;
+        }
+        /* Additional styles for roster page content */
+        header, footer {
+            text-align: center;
+            padding: 20px;
+        }
+        .roster-table {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+        }
+        .roster-table th, .roster-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .roster-table th {
+            background-color: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats - Roster</h1>
+        <h1>Basketball Roster</h1>
     </header>
     <nav>
         <ul>
@@ -29,32 +92,41 @@
         <h2>Team Roster</h2>
         <label for="team">Select Team:</label>
         <select id="team">
-            <option value="team-alpha">Team Alpha</option>
-            <option value="team-beta">Team Beta</option>
-            <!-- Weitere Teams hinzufügen -->
+            <option value="all">All Teams</option>
+            <option value="teamA">Team A</option>
+            <option value="teamB">Team B</option>
+            <!-- Add more teams as needed -->
         </select>
-
-        <table id="roster-table" class="display">
+        <table class="roster-table">
             <thead>
                 <tr>
-                    <th>Player Name</th>
+                    <th>Name</th>
                     <th>Position</th>
+                    <th>Birth Year</th>
                     <th>Height</th>
                     <th>Weight</th>
                     <th>Nationality</th>
-                    <th>Statistics</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Sample Data -->
                 <tr>
                     <td>Player A</td>
                     <td>PG</td>
+                    <td>1999</td>
                     <td>6'1"</td>
                     <td>180 lbs</td>
                     <td>USA</td>
-                    <td><a href="#">View Stats</a></td>
                 </tr>
-                <!-- Weitere Spieler hinzufügen -->
+                <tr>
+                    <td>Player B</td>
+                    <td>SG</td>
+                    <td>1998</td>
+                    <td>6'3"</td>
+                    <td>190 lbs</td>
+                    <td>USA</td>
+                </tr>
+                <!-- Add more rows as needed -->
             </tbody>
         </table>
     </section>

@@ -3,73 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats</title>
+    <title>Home - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
-    <style>
-        /* Navigation Styles */
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav ul li {
-            float: left;
-            position: relative;
-        }
-        nav ul li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            background-color: #111;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-        nav ul li:hover .dropdown-content {
-            display: block;
-        }
-        /* Additional styles for home page content */
-        header, footer {
-            text-align: center;
-            padding: 20px;
-        }
-        .top-performers, .regular-season-performers {
-            margin: 20px auto;
-            width: 80%;
-            border-collapse: collapse;
-        }
-        .top-performers th, .regular-season-performers th, 
-        .top-performers td, .regular-season-performers td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        .top-performers th, .regular-season-performers th {
-            background-color: #f4f4f4;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -89,74 +24,170 @@
         </ul>
     </nav>
 
-    <section>
-        <h2>Top Performers</h2>
-        <table class="top-performers">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Top 1</th>
-                    <th>Top 2</th>
-                    <th>Top 3</th>
-                    <th>Top 4</th>
-                    <th>Top 5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data for the last week's top performers -->
-                <tr>
-                    <td>Points</td>
-                    <td>Player A</td>
-                    <td>Player B</td>
-                    <td>Player C</td>
-                    <td>Player D</td>
-                    <td>Player E</td>
-                </tr>
-                <tr>
-                    <td>Rebounds</td>
-                    <td>Player F</td>
-                    <td>Player G</td>
-                    <td>Player H</td>
-                    <td>Player I</td>
-                    <td>Player J</td>
-                </tr>
-                <!-- Add more categories and data as needed -->
-            </tbody>
-        </table>
+    <section class="home-section">
+        <h2>Top Performers of the Week</h2>
+        <div class="performance-tables">
+            <div class="performance-table">
+                <h3>Points</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player A</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player B</td>
+                            <td>28</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="performance-table">
+                <h3>Rebounds</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Rebounds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player C</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player D</td>
+                            <td>12</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="performance-table">
+                <h3>Assists</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Assists</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player E</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player F</td>
+                            <td>8</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        <h2>Regular Season Top Performers</h2>
-        <table class="regular-season-performers">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Top 1</th>
-                    <th>Top 2</th>
-                    <th>Top 3</th>
-                    <th>Top 4</th>
-                    <th>Top 5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data for the regular season top performers -->
-                <tr>
-                    <td>Points</td>
-                    <td>Player K</td>
-                    <td>Player L</td>
-                    <td>Player M</td>
-                    <td>Player N</td>
-                    <td>Player O</td>
-                </tr>
-                <tr>
-                    <td>Rebounds</td>
-                    <td>Player P</td>
-                    <td>Player Q</td>
-                    <td>Player R</td>
-                    <td>Player S</td>
-                    <td>Player T</td>
-                </tr>
-                <!-- Add more categories and data as needed -->
-            </tbody>
-        </table>
+        <h2>Top Performers of the Regular Season</h2>
+        <div class="performance-tables">
+            <div class="performance-table">
+                <h3>Points</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player G</td>
+                            <td>25</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player H</td>
+                            <td>23</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="performance-table">
+                <h3>Rebounds</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Rebounds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player I</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player J</td>
+                            <td>10</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="performance-table">
+                <h3>3PM (3-Pointers Made)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>3PM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Data -->
+                        <tr>
+                            <td>1</td>
+                            <td>Player K</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Player L</td>
+                            <td>4</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
     <footer>
