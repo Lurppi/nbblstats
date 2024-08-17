@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats Home</title>
+    <title>Basketball Stats - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,14 +23,18 @@
         <div id="countdown"></div>
     </header>
     <main>
-        <section id="top-performers">
-            <h2>Top Performers of the Week</h2>
+        <section id="home">
+            <h2>Top Performers</h2>
             <div class="tables-container">
                 <div class="table-container">
                     <h3>Points</h3>
                     <table id="top-performers-points">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Points</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -41,7 +45,11 @@
                     <h3>Rebounds</h3>
                     <table id="top-performers-rebounds">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Rebounds</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -52,7 +60,11 @@
                     <h3>Assists</h3>
                     <table id="top-performers-assists">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Assists</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -65,7 +77,11 @@
                     <h3>Steals</h3>
                     <table id="top-performers-steals">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Steals</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -76,7 +92,11 @@
                     <h3>Blocks</h3>
                     <table id="top-performers-blocks">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Blocks</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -84,10 +104,14 @@
                     </table>
                 </div>
                 <div class="table-container">
-                    <h3>3-Pointers Made</h3>
+                    <h3>3PM</h3>
                     <table id="top-performers-3pm">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>3PM</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -95,13 +119,16 @@
                     </table>
                 </div>
             </div>
-            <h2>Top Performers of the Regular Season</h2>
             <div class="tables-container">
                 <div class="table-container">
-                    <h3>Points</h3>
+                    <h3>Regular Season Top 3 Points</h3>
                     <table id="season-top-performers-points">
                         <thead>
-                            <tr><th>Name</th><th>Team</th><th>Points</th></tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Team</th>
+                                <th>Stat</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <!-- Content will be injected here by JavaScript -->
@@ -109,65 +136,5 @@
                     </table>
                 </div>
                 <div class="table-container">
-                    <h3>Rebounds</h3>
-                    <table id="season-top-performers-rebounds">
-                        <thead>
-                            <tr><th>Name</th><th>Team</th><th>Rebounds</th></tr>
-                        </thead>
-                        <tbody>
-                            <!-- Content will be injected here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h3>Assists</h3>
-                    <table id="season-top-performers-assists">
-                        <thead>
-                            <tr><th>Name</th><th>Team</th><th>Assists</th></tr>
-                        </thead>
-                        <tbody>
-                            <!-- Content will be injected here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="tables-container">
-                <div class="table-container">
-                    <h3>Steals</h3>
-                    <table id="season-top-performers-steals">
-                        <thead>
-                            <tr><th>Name</th><th>Team</th><th>Steals</th></tr>
-                        </thead>
-                        <tbody>
-                            <!-- Content will be injected here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h3>Blocks</h3>
-                    <table id="season-top-performers-blocks">
-                        <thead>
-                            <tr><th>Name</th><th>Team</th><th>Blocks</th></tr>
-                        </thead>
-                        <tbody>
-                            <!-- Content will be injected here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h3>3-Pointers Made</h3>
-                    <table id="season-top-performers-3pm">
-                        <thead>
-                            <tr><th>Name</th><th>Team</th><th>3PM</th></tr>
-                        </thead>
-                        <tbody>
-                            <!-- Content will be injected here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="scripts.js"></script>
-</body>
-</html>
+                    <h3>Regular Season Top 3 Rebounds</h3>
+                    <table id="season-top-performers-re

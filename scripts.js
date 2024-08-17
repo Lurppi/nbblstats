@@ -1,60 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Function to load CSV data and populate table
-    function loadCSV(filePath, callback) {
-        fetch(filePath)
-            .then(response => response.text())
-            .then(text => {
-                const data = Papa.parse(text, { header: true });
-                callback(data.data);
-            });
-    }
+    const countdownDate = new Date('2024-10-13T13:00:00').getTime();
 
-    // Function to populate table with data
-    function populateTable(tableId, data) {
-        const table = document.getElementById(tableId);
-        const tbody = table.querySelector('tbody');
-        tbody.innerHTML = '';  // Clear existing content
-
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            Object.keys(row).forEach(key => {
-                const td = document.createElement('td');
-                td.textContent = row[key];
-                tr.appendChild(td);
-            });
-            tbody.appendChild(tr);
-        });
-    }
-
-    // Update Home tables with data
-    function updateHomeTables() {
-        const fileMapping = {
-            'top-performers-points': 'data/top-performers-points.csv',
-            'top-performers-rebounds': 'data/top-performers-rebounds.csv',
-            'top-performers-assists': 'data/top-performers-assists.csv',
-            'top-performers-steals': 'data/top-performers-steals.csv',
-            'top-performers-blocks': 'data/top-performers-blocks.csv',
-            'top-performers-3pm': 'data/top-performers-3pm.csv',
-            'season-top-performers-points': 'data/season-top-performers-points.csv',
-            'season-top-performers-rebounds': 'data/season-top-performers-rebounds.csv',
-            'season-top-performers-assists': 'data/season-top-performers-assists.csv',
-            'season-top-performers-steals': 'data/season-top-performers-steals.csv',
-            'season-top-performers-blocks': 'data/season-top-performers-blocks.csv',
-            'season-top-performers-3pm': 'data/season-top-performers-3pm.csv'
-        };
-
-        Object.keys(fileMapping).forEach(tableId => {
-            loadCSV(fileMapping[tableId], data => populateTable(tableId, data));
-        });
-    }
-
-    updateHomeTables();  // Initial load
-
-    // Countdown Timer
     function updateCountdown() {
-        const targetDate = new Date('2024-10-13T13:00:00');
-        const now = new Date();
-        const timeDiff = targetDate - now;
+        const now = new Date().getTime();
+        const timeDiff = countdownDate - now;
 
         if (timeDiff <= 0) {
             document.getElementById('countdown').textContent = 'The season has started!';
@@ -73,7 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Function to filter teams
+    function loadCSV(url, callback) {
+        fetch(url)
+            .then(response => response.text())
+            .then(text => Papa.parse(text, { header: true, skipEmptyLines: true, complete: (results) => callback(results.data) }));
+    }
+
+    function populateTable(tableId, data) {
+        const table = document.getElementById(tableId);
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
+
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            Object.values(row).forEach(cell => {
+                const td = document.createElement('td');
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+    }
+
     function filterTeams() {
         const division = document.getElementById('division-filter').value;
         const league = document.getElementById('league-filter').value;
@@ -96,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to filter players
     function filterPlayers() {
         const division = document.getElementById('division-filter').value;
         const league = document.getElementById('league-filter').value;

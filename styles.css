@@ -1,77 +1,66 @@
-/* Global Styles */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 1em;
-    position: relative;
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar {
-    list-style-type: none;
-    padding: 0;
+nav ul {
+    list-style: none;
     margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
-.navbar > li {
-    display: inline-block;
+nav ul li {
     position: relative;
 }
 
-.navbar > li > a {
-    color: white;
+nav ul li a {
+    color: #fff;
     text-decoration: none;
     padding: 0.5em 1em;
     display: block;
 }
 
-.dropdown {
+nav ul li ul.dropdown {
     display: none;
     position: absolute;
-    background-color: #444;
     top: 100%;
     left: 0;
-    list-style-type: none;
+    background: #333;
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.dropdown li {
+nav ul li:hover ul.dropdown {
     display: block;
 }
 
-.dropdown li a {
-    color: white;
-    padding: 0.5em 1em;
-    display: block;
+nav ul li ul.dropdown li {
+    width: 200px;
 }
 
-.navbar > li:hover .dropdown {
-    display: block;
+nav ul li ul.dropdown li ul {
+    top: 0;
+    left: 100%;
 }
 
 #countdown {
-    font-size: 1.5em;
     text-align: center;
-    margin-top: 0.5em;
+    margin: 1em 0;
+    font-size: 1.2em;
 }
 
-main {
-    padding: 1em;
-}
-
+/* Table Styles */
 .tables-container {
     display: flex;
     flex-wrap: wrap;
@@ -80,29 +69,32 @@ main {
 
 .table-container {
     flex: 1;
-    min-width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.table-container h3 {
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0.5em;
+    min-width: 30%;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin: 1em 0;
+    border: 1px solid #ddd;
 }
 
 th, td {
     padding: 0.5em;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
-th {
-    background-color: #f4f4f4;
+thead {
+    background: #f4f4f4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tables-container {
+        flex-direction: column;
+    }
+    .table-container {
+        width: 100%;
+    }
 }
