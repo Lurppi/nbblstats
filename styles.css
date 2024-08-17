@@ -83,18 +83,26 @@ main {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-    word-wrap: break-word; /* Lange Wörter umbrechen */
+    overflow-wrap: break-word; /* Lange Wörter umbrechen */
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .table-container th {
     background-color: #f4f4f4;
 }
 
-/* Bedingte Formatierungen für lange Namen */
-.table-container td {
-    font-size: 14px;
+.table-container td.name-column,
+.table-container td.team-column {
+    width: 40%; /* Größere Breite für Name und Team */
 }
 
+.table-container td.stat-column {
+    width: 20%; /* Kleinere Breite für Stat-Spalten */
+}
+
+/* Bedingte Formatierungen für lange Namen */
 .table-container td.long-name {
     font-size: 12px; /* Schriftgröße für lange Namen verkleinern */
+    line-height: 1.2; /* Zeilenhöhe für Zeilenumbruch */
 }

@@ -50,9 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
                             
                             // Bedingte Formatierung für lange Namen
                             if (key === 'Player' || key === 'Team') {
+                                td.classList.add('name-column');
                                 if (value.length >= 12) {
                                     td.classList.add('long-name');
                                 }
+                            } else {
+                                td.classList.add('stat-column');
                             }
 
                             tr.appendChild(td);
