@@ -25,13 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = results.data;
                 const top3 = data.slice(0, 3); // Nur die Top 3 Spieler anzeigen
 
-                const table = document.createElement('table');
-                const header = document.createElement('thead');
-                const body = document.createElement('tbody');
-                const thead = document.createElement('tr');
+                const tableContainer = document.getElementById(id);
+                tableContainer.innerHTML = ''; // Clear any existing content
 
-                // Create table header
                 if (top3.length > 0) {
+                    const table = document.createElement('table');
+                    const header = document.createElement('thead');
+                    const body = document.createElement('tbody');
+                    const thead = document.createElement('tr');
+
+                    // Create table header
                     Object.keys(top3[0]).forEach(key => {
                         const th = document.createElement('th');
                         th.textContent = key;
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
 
                     table.appendChild(body);
-                    document.getElementById(id).appendChild(table);
+                    tableContainer.appendChild(table);
                 }
             }
         });

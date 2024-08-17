@@ -71,6 +71,7 @@ main {
     padding: 10px;
     border-radius: 5px;
     flex: 1 1 calc(33.333% - 20px);
+    overflow-x: auto; /* Ensure tables fit within the container */
 }
 
 .table-container table {
