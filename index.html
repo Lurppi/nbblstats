@@ -5,26 +5,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basketball Statistiken - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Include jQuery and DataTables CSS for sortable and filterable tables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#stats">Stats</a></li>
+                <li><a href="#stats">Stats</a>
+                    <ul>
+                        <li><a href="#teams">Teams</a></li>
+                        <li><a href="#players">Players</a></li>
+                    </ul>
+                </li>
                 <li><a href="#roster">Roster</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <section id="home">
             <h1>Top Performer</h1>
-            <!-- Weitere Inhalte hier -->
+
+            <!-- Obere Hälfte: Top Performer der Woche -->
+            <div class="top-performers-week">
+                <h2>Top Performer der Woche</h2>
+                <div class="performer-category">
+                    <h3>Punkte</h3>
+                    <table id="points-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Punkte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Rebounds</h3>
+                    <table id="rebounds-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Rebounds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Assists</h3>
+                    <table id="assists-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Assists</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Efficiency</h3>
+                    <table id="efficiency-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Efficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Player Efficiency Rating (PER)</h3>
+                    <table id="per-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>PER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>3-Pointer Made</h3>
+                    <table id="three-pointers-week" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>3-Pointer Made</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Woche -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Untere Hälfte: Top Performer der Regular Season -->
+            <div class="top-performers-season">
+                <h2>Top Performer der Regular Season</h2>
+                <div class="performer-category">
+                    <h3>Punkte</h3>
+                    <table id="points-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Punkte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Rebounds</h3>
+                    <table id="rebounds-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Rebounds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Assists</h3>
+                    <table id="assists-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Assists</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Efficiency</h3>
+                    <table id="efficiency-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>Efficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>Player Efficiency Rating (PER)</h3>
+                    <table id="per-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>PER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="performer-category">
+                    <h3>3-Pointer Made</h3>
+                    <table id="three-pointers-season" class="display">
+                        <thead>
+                            <tr>
+                                <th>Platz</th>
+                                <th>Spieler</th>
+                                <th>3-Pointer Made</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Daten für Saison -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
     </main>
+
     <footer>
         <p>© 2024 Basketball Statistiken</p>
     </footer>
+
+    <!-- Include jQuery and DataTables JavaScript for sortable and filterable tables -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
