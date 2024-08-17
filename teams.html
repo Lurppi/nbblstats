@@ -1,56 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams - Basketball Stats</title>
+    <title>Basketball Stats - Teams</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats</h1>
+        <div class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Stats</a>
+                    <div class="dropdown-content">
+                        <a href="teams.html">Teams</a>
+                        <a href="players.html">Players</a>
+                    </div>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
+        </div>
     </header>
 
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <span class="dropdown-btn">Stats</span>
-                <ul class="dropdown-content">
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="players.html">Players</a></li>
-                </ul>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
-    </nav>
-
     <section>
-        <h2>Team Statistics</h2>
-        <div>
-            <!-- Filters and Team stats table -->
-            <!-- Example of a filter and stats table -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Division</th>
-                        <th>League</th>
-                        <th>Totals</th>
-                        <th>Averages</th>
-                        <th>Shooting</th>
-                        <th>Advanced</th>
-                        <th>Four Factors</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Add rows here for each team's statistics -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+        <h1>Team Statistics</h1>
+        <form id="filter-form">
+            <label for="division">Division:</label>
+            <select id="division" name="division">
+                <option value="both">Both</option>
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+            </select>
+            <label for="league">League:</label>
+            <select id="league" name="league">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
+                <option value="season">Season</option>
+            </select>
+            <label for="stat-type">Stat Type:</label>
+            <select id="stat-type" name="stat-type">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced">Advanced</option>
+                <option value="four-factors">Four Factors</option>
+            </select>
+        </form>
 
-    <footer>
-        <p>&copy; 2024 Basketball Stats</p>
-    </footer>
+        <table id="teams-table">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Minutes</th>
+                    <th>Points</th>
+                    <th>Rebounds</th>
+                    <th>Assists</th>
+                    <th>Steals</th>
+                    <th>Blocks</th>
+                    <th>Turnovers</th>
+                    <th>Fouls</th>
+                    <th>Efficiency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Team A</td>
+                    <td>120</td>
+                    <td>95</td>
+                    <td>45</td>
+                    <td>25</td>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>12</td>
+                    <td>18</td>
+                    <td>120</td>
+                </tr>
+                <!-- Repeat rows as needed -->
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>

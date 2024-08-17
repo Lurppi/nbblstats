@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Basketball Stats</title>
+    <title>Basketball Stats - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats</h1>
+        <div class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Stats</a>
+                    <div class="dropdown-content">
+                        <a href="teams.html">Teams</a>
+                        <a href="players.html">Players</a>
+                    </div>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
+        </div>
+        <div id="countdown"></div>
     </header>
 
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <span class="dropdown-btn">Stats</span>
-                <ul class="dropdown-content">
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="players.html">Players</a></li>
-                </ul>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
-    </nav>
-
     <section>
-        <h2>Top 3 Performers - Last Week</h2>
+        <h1>Basketball Stats</h1>
+
         <div class="top3-container">
-            <table class="top3">
+            <h2>Top Performers - Last Week</h2>
+            <h3>Points</h3>
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -50,44 +53,147 @@
                     <tr>
                         <td>Player 3</td>
                         <td>Team C</td>
-                        <td>26</td>
+                        <td>25</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="more-container">
-                <button class="view-more">View More</button>
-            </div>
-        </div>
-        <div class="additional-players">
-            <table class="expandable">
+            <h3>Rebounds</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Rebounds</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <!-- Hidden rows to be revealed on click -->
                     <tr>
                         <td>Player 4</td>
                         <td>Team D</td>
-                        <td>24</td>
+                        <td>15</td>
                     </tr>
                     <tr>
                         <td>Player 5</td>
                         <td>Team E</td>
-                        <td>22</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Player 6</td>
+                        <td>Team F</td>
+                        <td>13</td>
                     </tr>
                 </tbody>
             </table>
+            <h3>Assists</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Assists</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Player 7</td>
+                        <td>Team G</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Player 8</td>
+                        <td>Team H</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>Player 9</td>
+                        <td>Team I</td>
+                        <td>8</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Steals</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Steals</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Player 10</td>
+                        <td>Team J</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Player 11</td>
+                        <td>Team K</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>Player 12</td>
+                        <td>Team L</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Blocks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Blocks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Player 13</td>
+                        <td>Team M</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>Player 14</td>
+                        <td>Team N</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Player 15</td>
+                        <td>Team O</td>
+                        <td>4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>3PM</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>3PM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Player 16</td>
+                        <td>Team P</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>Player 17</td>
+                        <td>Team Q</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>Player 18</td>
+                        <td>Team R</td>
+                        <td>5</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Repeat similar blocks for other stats categories -->
         </div>
-        <!-- Repeat the above structure for Rebounds, Assists, etc. -->
     </section>
-
-    <footer>
-        <p>&copy; 2024 Basketball Stats</p>
-    </footer>
-
-    <script>
-        document.querySelector('.view-more').addEventListener('click', function() {
-            document.querySelector('.additional-players').style.display = 'block';
-            this.style.display = 'none';
-        });
-    </script>
 </body>
 </html>
-

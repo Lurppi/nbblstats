@@ -1,58 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players - Basketball Stats</title>
+    <title>Basketball Stats - Players</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Basketball Stats</h1>
+        <div class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn">Stats</a>
+                    <div class="dropdown-content">
+                        <a href="teams.html">Teams</a>
+                        <a href="players.html">Players</a>
+                    </div>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
+        </div>
     </header>
 
-    <nav>
-        <ul class="menu">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <span class="dropdown-btn">Stats</span>
-                <ul class="dropdown-content">
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="players.html">Players</a></li>
-                </ul>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
-    </nav>
-
     <section>
-        <h2>Player Statistics</h2>
-        <div>
-            <!-- Filters and Player stats table -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Team</th>
-                        <th>Position</th>
-                        <th>Birth Year</th>
-                        <th>Totals</th>
-                        <th>Averages</th>
-                        <th>Shooting</th>
-                        <th>Advanced1</th>
-                        <th>Advanced2</th>
-                        <th>Four Factors</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Add rows here for each player's statistics -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+        <h1>Player Statistics</h1>
+        <form id="filter-form">
+            <label for="division">Division:</label>
+            <select id="division" name="division">
+                <option value="both">Both</option>
+                <option value="A">Division A</option>
+                <option value="B">Division B</option>
+            </select>
+            <label for="league">League:</label>
+            <select id="league" name="league">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
+                <option value="season">Season</option>
+            </select>
+            <label for="position">Position:</label>
+            <select id="position" name="position">
+                <option value="all">All</option>
+                <option value="PG">Point Guard</option>
+                <option value="SG">Shooting Guard</option>
+                <option value="SF">Small Forward</option>
+                <option value="PF">Power Forward</option>
+                <option value="C">Center</option>
+            </select>
+            <label for="birth-year">Birth Year:</label>
+            <select id="birth-year" name="birth-year">
+                <option value="all">All</option>
+                <option value="2000">2000</option>
+                <option value="1999">1999</option>
+                <!-- Add more years as needed -->
+            </select>
+        </form>
 
-    <footer>
-        <p>&copy; 2024 Basketball Stats</p>
-    </footer>
+        <table id="players-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>Birth Year</th>
+                    <th>Points</th>
+                    <th>Rebounds</th>
+                    <th>Assists</th>
+                    <th>Steals</th>
+                    <th>Blocks</th>
+                    <th>3PM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player X</td>
+                    <td>Team A</td>
+                    <td>PG</td>
+                    <td>2000</td>
+                    <td>22</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <!-- Repeat rows as needed -->
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>
