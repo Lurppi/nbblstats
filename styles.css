@@ -75,13 +75,13 @@ nav ul li:hover .dropdown-content {
 
 .performance-tables {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 .performance-table {
-    width: 30%;
-    margin: 10px;
+    width: 100%;
+    max-width: 30%;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
@@ -95,17 +95,41 @@ nav ul li:hover .dropdown-content {
     margin: 0;
 }
 
-.performance-table table {
+.accordion {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion:hover {
+    background-color: #555;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.panel table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.performance-table th, .performance-table td {
+.panel th, .panel td {
     border: 1px solid #ddd;
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
-.performance-table th {
+.panel th {
     background-color: #f4f4f4;
 }
