@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roster - Basketball Stats</title>
+    <title>Basketball Stats - Roster</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
+            <ul class="navbar">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Stats</a>
-                    <ul>
+                <li><a href="#" id="stats-menu">Stats</a>
+                    <ul class="dropdown">
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
                     </ul>
@@ -20,16 +20,33 @@
                 <li><a href="roster.html">Roster</a></li>
             </ul>
         </nav>
+        <div id="countdown"></div>
     </header>
-    
     <main>
-        <section>
+        <section id="roster">
             <h2>Roster</h2>
+            <div>
+                <label for="team-filter">Team:</label>
+                <select id="team-filter">
+                    <option value="all">All</option>
+                    <!-- Add more options dynamically -->
+                </select>
+            </div>
             <table id="roster-table">
                 <thead>
-                    <tr><th>Player</th><th>Team</th><th>Position</th><th>Number</th><th>Height</th><th>Weight</th></tr>
+                    <tr>
+                        <th>Player</th>
+                        <th>Position</th>
+                        <th>Height</th>
+                        <th>Weight</th>
+                        <th>Birth Year</th>
+                        <th>Nationality</th>
+                        <th>Statistics</th>
+                    </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Content will be injected here by JavaScript -->
+                </tbody>
             </table>
         </section>
     </main>

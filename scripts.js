@@ -1,73 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-
-    const csvFilesHome = {
-        weekPoints: 'data/week_points.csv',
-        weekRebounds: 'data/week_rebounds.csv',
-        weekAssists: 'data/week_assists.csv',
-        weekSteals: 'data/week_steals.csv',
-        weekBlocks: 'data/week_blocks.csv',
-        week3PM: 'data/week_3pm.csv',
-        seasonPoints: 'data/season_points.csv',
-        seasonRebounds: 'data/season_rebounds.csv',
-        seasonAssists: 'data/season_assists.csv',
-        seasonSteals: 'data/season_steals.csv',
-        seasonBlocks: 'data/season_blocks.csv',
-        season3PM: 'data/season_3pm.csv'
-    };
-
+document.addEventListener('DOMContentLoaded', () => {
+    // Function to load CSV data and populate table
     function loadCSV(filePath, callback) {
         fetch(filePath)
             .then(response => response.text())
-            .then(text => callback(parseCSV(text)))
-            .catch(error => console.error('Error loading CSV:', error));
+            .then(text => {
+                const data = Papa.parse(text, { header: true });
+                callback(data.data);
+            });
     }
 
-    function parseCSV(text) {
-        const rows = text.split('\n').map(row => row.split(','));
-        return rows.slice(1).map(row => ({
-            name: row[0],
-            team: row[1],
-            stat: row[2]
-        }));
-    }
-
+    // Function to populate table with data
     function populateTable(tableId, data) {
         const table = document.getElementById(tableId);
         const tbody = table.querySelector('tbody');
-        tbody.innerHTML = '';
+        tbody.innerHTML = '';  // Clear existing content
+
         data.forEach(row => {
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${row.name}</td><td>${row.team}</td><td>${row.stat}</td>`;
+            Object.keys(row).forEach(key => {
+                const td = document.createElement('td');
+                td.textContent = row[key];
+                tr.appendChild(td);
+            });
             tbody.appendChild(tr);
         });
     }
 
+    // Update Home tables with data
     function updateHomeTables() {
-        const tableIds = [
-            'top-performers-points', 'top-performers-rebounds', 'top-performers-assists',
-            'top-performers-steals', 'top-performers-blocks', 'top-performers-3pm',
-            'season-top-performers-points', 'season-top-performers-rebounds', 'season-top-performers-assists',
-            'season-top-performers-steals', 'season-top-performers-blocks', 'season-top-performers-3pm'
-        ];
-        
         const fileMapping = {
-            'top-performers-points': csvFilesHome.weekPoints,
-            'top-performers-rebounds': csvFilesHome.weekRebounds,
-            'top-performers-assists': csvFilesHome.weekAssists,
-            'top-performers-steals': csvFilesHome.weekSteals,
-            'top-performers-blocks': csvFilesHome.weekBlocks,
-            'top-performers-3pm': csvFilesHome.week3PM,
-            'season-top-performers-points': csvFilesHome.seasonPoints,
-            'season-top-performers-rebounds': csvFilesHome.seasonRebounds,
-            'season-top-performers-assists': csvFilesHome.seasonAssists,
-            'season-top-performers-steals': csvFilesHome.seasonSteals,
-            'season-top-performers-blocks': csvFilesHome.seasonBlocks,
-            'season-top-performers-3pm': csvFilesHome.season3PM
+            'top-performers-points': 'data/top-performers-points.csv',
+            'top-performers-rebounds': 'data/top-performers-rebounds.csv',
+            'top-performers-assists': 'data/top-performers-assists.csv',
+            'top-performers-steals': 'data/top-performers-steals.csv',
+            'top-performers-blocks': 'data/top-performers-blocks.csv',
+            'top-performers-3pm': 'data/top-performers-3pm.csv',
+            'season-top-performers-points': 'data/season-top-performers-points.csv',
+            'season-top-performers-rebounds': 'data/season-top-performers-rebounds.csv',
+            'season-top-performers-assists': 'data/season-top-performers-assists.csv',
+            'season-top-performers-steals': 'data/season-top-performers-steals.csv',
+            'season-top-performers-blocks': 'data/season-top-performers-blocks.csv',
+            'season-top-performers-3pm': 'data/season-top-performers-3pm.csv'
         };
 
-        tableIds.forEach(tableId => {
-            const filePath = fileMapping[tableId];
-            loadCSV(filePath, data => populateTable(tableId, data));
+        Object.keys(fileMapping).forEach(tableId => {
+            loadCSV(fileMapping[tableId], data => populateTable(tableId, data));
         });
     }
 
@@ -80,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeDiff = targetDate - now;
 
         if (timeDiff <= 0) {
-            document.getElementById('countdown').innerHTML = 'Season Starts Now!';
+            document.getElementById('countdown').textContent = 'The season has started!';
             return;
         }
 
@@ -89,9 +66,71 @@ document.addEventListener('DOMContentLoaded', function() {
         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('countdown').textContent =
+            `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
     }
 
-    setInterval(updateCountdown, 1000);  // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
+    // Function to filter teams
+    function filterTeams() {
+        const division = document.getElementById('division-filter').value;
+        const league = document.getElementById('league-filter').value;
+        const statsType = document.getElementById('stats-type-filter').value;
+
+        const fileMapping = {
+            'totals': 'data/teams-totals.csv',
+            'averages': 'data/teams-averages.csv',
+            'shooting': 'data/teams-shooting.csv',
+            'advanced': 'data/teams-advanced.csv',
+            'four-factors': 'data/teams-four-factors.csv'
+        };
+
+        loadCSV(fileMapping[statsType], data => {
+            const filteredData = data.filter(row => 
+                (division === 'all' || row['Division'] === division) &&
+                (league === 'all' || row['League'] === league)
+            );
+            populateTable('teams-table', filteredData);
+        });
+    }
+
+    // Function to filter players
+    function filterPlayers() {
+        const division = document.getElementById('division-filter').value;
+        const league = document.getElementById('league-filter').value;
+        const position = document.getElementById('position-filter').value;
+        const birthYear = document.getElementById('birth-year-filter').value;
+        const statsType = document.getElementById('stats-type-filter').value;
+
+        const fileMapping = {
+            'totals': 'data/players-totals.csv',
+            'averages': 'data/players-averages.csv',
+            'shooting': 'data/players-shooting.csv',
+            'advanced1': 'data/players-advanced1.csv',
+            'advanced2': 'data/players-advanced2.csv',
+            'four-factors': 'data/players-four-factors.csv'
+        };
+
+        loadCSV(fileMapping[statsType], data => {
+            const filteredData = data.filter(row => 
+                (division === 'all' || row['Division'] === division) &&
+                (league === 'all' || row['League'] === league) &&
+                (position === 'all' || row['Position'] === position) &&
+                (birthYear === 'all' || row['Birth Year'] === birthYear)
+            );
+            populateTable('players-table', filteredData);
+        });
+    }
+
+    document.getElementById('division-filter').addEventListener('change', filterTeams);
+    document.getElementById('league-filter').addEventListener('change', filterTeams);
+    document.getElementById('stats-type-filter').addEventListener('change', filterTeams);
+
+    document.getElementById('division-filter').addEventListener('change', filterPlayers);
+    document.getElementById('league-filter').addEventListener('change', filterPlayers);
+    document.getElementById('position-filter').addEventListener('change', filterPlayers);
+    document.getElementById('birth-year-filter').addEventListener('change', filterPlayers);
+    document.getElementById('stats-type-filter').addEventListener('change', filterPlayers);
 });

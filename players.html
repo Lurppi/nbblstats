@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players - Basketball Stats</title>
+    <title>Basketball Stats - Players</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
+            <ul class="navbar">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#">Stats</a>
-                    <ul>
+                <li><a href="#" id="stats-menu">Stats</a>
+                    <ul class="dropdown">
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
                     </ul>
@@ -20,50 +20,54 @@
                 <li><a href="roster.html">Roster</a></li>
             </ul>
         </nav>
+        <div id="countdown"></div>
     </header>
-    
     <main>
-        <section>
-            <h2>Player Statistics</h2>
-            <label for="division">Division:</label>
-            <select id="division">
-                <option value="all">All</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
-            </select>
-            <label for="league">League:</label>
-            <select id="league">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-            <label for="position">Position:</label>
-            <select id="position">
-                <option value="all">All</option>
-                <option value="guard">Guard</option>
-                <option value="forward">Forward</option>
-                <option value="center">Center</option>
-            </select>
-            <label for="birth-year">Birth Year:</label>
-            <select id="birth-year">
-                <option value="all">All</option>
-                <option value="2000">2000</option>
-                <option value="1999">1999</option>
-                <!-- Add more years as needed -->
-            </select>
-            <label for="stat-type">Stats Type:</label>
-            <select id="stat-type">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced1">Advanced1</option>
-                <option value="advanced2">Advanced2</option>
-                <option value="fourfactors">Four Factors</option>
-            </select>
+        <section id="players">
+            <h2>Players</h2>
+            <div>
+                <label for="division-filter">Division:</label>
+                <select id="division-filter">
+                    <option value="all">All</option>
+                    <!-- Add more options dynamically -->
+                </select>
+                <label for="league-filter">League:</label>
+                <select id="league-filter">
+                    <option value="all">All</option>
+                    <!-- Add more options dynamically -->
+                </select>
+                <label for="position-filter">Position:</label>
+                <select id="position-filter">
+                    <option value="all">All</option>
+                    <!-- Add more options dynamically -->
+                </select>
+                <label for="birth-year-filter">Birth Year:</label>
+                <select id="birth-year-filter">
+                    <option value="all">All</option>
+                    <!-- Add more options dynamically -->
+                </select>
+                <label for="stats-type-filter">Stats Type:</label>
+                <select id="stats-type-filter">
+                    <option value="totals">Totals</option>
+                    <option value="averages">Averages</option>
+                    <option value="shooting">Shooting</option>
+                    <option value="advanced1">Advanced1</option>
+                    <option value="advanced2">Advanced2</option>
+                    <option value="four-factors">Four Factors</option>
+                </select>
+            </div>
             <table id="players-table">
                 <thead>
-                    <tr><th>Player</th><th>Position</th><th>Birth Year</th><th>Stat 1</th><th>Stat 2</th><th>Stat 3</th></tr>
+                    <tr>
+                        <th>Player</th>
+                        <th>Position</th>
+                        <th>Birth Year</th>
+                        <!-- Columns will change based on the stats type -->
+                    </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <!-- Content will be injected here by JavaScript -->
+                </tbody>
             </table>
         </section>
     </main>
