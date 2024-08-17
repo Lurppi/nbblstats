@@ -23,14 +23,16 @@ document.addEventListener('DOMContentLoaded', function () {
             header: true,
             complete: function (results) {
                 const data = results.data;
+                const top3 = data.slice(0, 3); // Nur die Top 3 Spieler anzeigen
+
                 const table = document.createElement('table');
                 const header = document.createElement('thead');
                 const body = document.createElement('tbody');
                 const thead = document.createElement('tr');
 
                 // Create table header
-                if (data.length > 0) {
-                    Object.keys(data[0]).forEach(key => {
+                if (top3.length > 0) {
+                    Object.keys(top3[0]).forEach(key => {
                         const th = document.createElement('th');
                         th.textContent = key;
                         thead.appendChild(th);
@@ -40,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     table.appendChild(header);
 
                     // Create table rows
-                    data.forEach(row => {
+                    top3.forEach(row => {
                         const tr = document.createElement('tr');
                         Object.values(row).forEach(value => {
                             const td = document.createElement('td');
-                            td.textContent = value;
+                            td.textContent = value !== undefined ? value : ''; // Handle undefined values
                             tr.appendChild(td);
                         });
                         body.appendChild(tr);
