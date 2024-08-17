@@ -6,7 +6,7 @@
     <title>Teams - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="teams">
     <header>
         <nav>
             <ul>
@@ -23,22 +23,30 @@
         </nav>
     </header>
     <main>
-        <h1>Teams Stats</h1>
-        <section>
-            <label for="filter">Filter:</label>
-            <select id="filter">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced">Advanced</option>
-                <option value="four-factors">Four Factors</option>
+        <h2>Teams</h2>
+        <div class="filter">
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
             </select>
-        </section>
-        <section id="teams-table">
-            <!-- Table will be dynamically generated here -->
-        </section>
+            <label for="league">League:</label>
+            <select id="league">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
+            </select>
+            <label for="stats-type">Stats-Type:</label>
+            <select id="stats-type">
+                <option value="Totals">Totals</option>
+                <option value="Averages">Averages</option>
+                <option value="Shooting">Shooting</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Four Factors">Four Factors</option>
+            </select>
+        </div>
+        <div id="teams-table"></div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.0/papaparse.min.js"></script>
-    <script src="teams-scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

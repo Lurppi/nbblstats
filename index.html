@@ -6,7 +6,7 @@
     <title>Home - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home">
     <header>
         <nav>
             <ul>
@@ -24,35 +24,26 @@
         <div id="countdown"></div>
     </header>
     <main>
-        <h1>Top Performers</h1>
         <section>
-            <h2>Weekly Top Performers</h2>
-            <div class="table-container">
-                <div id="points-top-3"></div>
-                <div id="rebounds-top-3"></div>
-                <div id="assists-top-3"></div>
-            </div>
-            <div class="table-container">
-                <div id="steals-top-3"></div>
-                <div id="blocks-top-3"></div>
-                <div id="per-top-3"></div>
-            </div>
+            <h2>Top Performer der Woche</h2>
+            <div class="table-container" id="points-week"></div>
+            <div class="table-container" id="rebounds-week"></div>
+            <div class="table-container" id="assists-week"></div>
+            <div class="table-container" id="steals-week"></div>
+            <div class="table-container" id="blocks-week"></div>
+            <div class="table-container" id="per-week"></div>
         </section>
         <section>
-            <h2>Regular Season Top Performers</h2>
-            <div class="table-container">
-                <div id="points-reg-season"></div>
-                <div id="rebounds-reg-season"></div>
-                <div id="assists-reg-season"></div>
-            </div>
-            <div class="table-container">
-                <div id="steals-reg-season"></div>
-                <div id="blocks-reg-season"></div>
-                <div id="per-reg-season"></div>
-            </div>
+            <h2>Top Performer der Regular Season</h2>
+            <div class="table-container" id="points-reg-season"></div>
+            <div class="table-container" id="rebounds-reg-season"></div>
+            <div class="table-container" id="assists-reg-season"></div>
+            <div class="table-container" id="steals-reg-season"></div>
+            <div class="table-container" id="blocks-reg-season"></div>
+            <div class="table-container" id="per-reg-season"></div>
         </section>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

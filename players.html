@@ -6,7 +6,7 @@
     <title>Players - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="players">
     <header>
         <nav>
             <ul>
@@ -23,51 +23,41 @@
         </nav>
     </header>
     <main>
-        <h1>Players Stats</h1>
-        <section>
-            <label for="stats-type">Stats Type:</label>
+        <h2>Players</h2>
+        <div class="filter">
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
+            </select>
+            <label for="league">League:</label>
+            <select id="league">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
+            </select>
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
+            </select>
+            <label for="birth-year">Birth Year:</label>
+            <select id="birth-year">
+                <option value="all">Alle</option>
+                <!-- Weitere Optionen hinzufügen -->
+            </select>
+            <label for="stats-type">Stats-Type:</label>
             <select id="stats-type">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced1">Advanced1</option>
-                <option value="advanced2">Advanced2</option>
-                <option value="four-factors">Four Factors</option>
+                <option value="Totals">Totals</option>
+                <option value="Averages">Averages</option>
+                <option value="Shooting">Shooting</option>
+                <option value="Advanced1">Advanced1</option>
+                <option value="Advanced2">Advanced2</option>
+                <option value="Four Factors">Four Factors</option>
             </select>
-        </section>
-        <section>
-            <label for="filter-division">Division:</label>
-            <select id="filter-division">
-                <option value="">All</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
-            </select>
-            <label for="filter-league">League:</label>
-            <select id="filter-league">
-                <option value="">All</option>
-                <option value="regular-season">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-            <label for="filter-position">Position:</label>
-            <select id="filter-position">
-                <option value="">All</option>
-                <option value="PG">PG</option>
-                <option value="SG">SG</option>
-                <option value="SF">SF</option>
-                <option value="PF">PF</option>
-                <option value="C">C</option>
-            </select>
-            <label for="filter-birth-year">Birth Year:</label>
-            <select id="filter-birth-year">
-                <option value="">All</option>
-                <!-- Birth years will be dynamically added -->
-            </select>
-        </section>
-        <section id="players-table">
-            <!-- Table will be dynamically generated here -->
-        </section>
+        </div>
+        <div id="players-table"></div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.0/papaparse.min.js"></script>
-    <script src="players-scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

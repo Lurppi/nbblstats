@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Roster</title>
+    <title>Roster - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="roster">
     <header>
         <nav>
-            <ul class="navbar">
+            <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#" id="stats-menu">Stats</a>
+                <li>
+                    <a href="#">Stats</a>
                     <ul class="dropdown">
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
@@ -20,36 +21,12 @@
                 <li><a href="roster.html">Roster</a></li>
             </ul>
         </nav>
-        <div id="countdown"></div>
     </header>
     <main>
-        <section id="roster">
-            <h2>Roster</h2>
-            <div>
-                <label for="team-filter">Team:</label>
-                <select id="team-filter">
-                    <option value="all">All</option>
-                    <!-- Add more options dynamically -->
-                </select>
-            </div>
-            <table id="roster-table">
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Position</th>
-                        <th>Height</th>
-                        <th>Weight</th>
-                        <th>Birth Year</th>
-                        <th>Nationality</th>
-                        <th>Statistics</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Content will be injected here by JavaScript -->
-                </tbody>
-            </table>
-        </section>
+        <h2>Roster</h2>
+        <div id="roster-table"></div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
