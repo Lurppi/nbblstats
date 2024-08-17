@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Teams</title>
+    <title>Teams - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul class="navbar">
+            <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#" id="stats-menu">Stats</a>
+                <li>
+                    <a href="#">Stats</a>
                     <ul class="dropdown">
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
@@ -22,49 +23,22 @@
         </nav>
     </header>
     <main>
-        <section id="teams">
-            <h2>Teams</h2>
-            <div class="filters">
-                <label for="division-filter">Division:</label>
-                <select id="division-filter">
-                    <option value="all">All</option>
-                    <option value="division1">Division 1</option>
-                    <option value="division2">Division 2</option>
-                    <!-- Add more divisions as needed -->
-                </select>
-
-                <label for="league-filter">League:</label>
-                <select id="league-filter">
-                    <option value="all">All</option>
-                    <option value="league1">League 1</option>
-                    <option value="league2">League 2</option>
-                    <!-- Add more leagues as needed -->
-                </select>
-
-                <label for="stats-type-filter">Stats Type:</label>
-                <select id="stats-type-filter">
-                    <option value="totals">Totals</option>
-                    <option value="averages">Averages</option>
-                    <option value="shooting">Shooting</option>
-                    <option value="advanced">Advanced</option>
-                    <option value="four-factors">Four Factors</option>
-                </select>
-            </div>
-            <table id="teams-table">
-                <thead>
-                    <tr>
-                        <th>Team</th>
-                        <th>Division</th>
-                        <th>League</th>
-                        <!-- Dynamic columns based on selected stats type -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Content will be injected here by JavaScript -->
-                </tbody>
-            </table>
+        <h1>Teams Stats</h1>
+        <section>
+            <label for="filter">Filter:</label>
+            <select id="filter">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced">Advanced</option>
+                <option value="four-factors">Four Factors</option>
+            </select>
+        </section>
+        <section id="teams-table">
+            <!-- Table will be dynamically generated here -->
         </section>
     </main>
-    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.0/papaparse.min.js"></script>
+    <script src="teams-scripts.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
-/* General Styles */
+/* styles.css */
+
+/* Allgemeine Stile */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,105 +8,97 @@ body {
 }
 
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px;
-    position: relative;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
 }
 
-.navbar {
+nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
 }
 
-.navbar li {
+nav ul li {
     position: relative;
+    margin: 0 15px;
 }
 
-.navbar a {
-    color: #fff;
+nav ul li a {
+    color: white;
     text-decoration: none;
     padding: 10px;
     display: block;
 }
 
-.dropdown {
+nav ul li ul.dropdown {
     display: none;
     position: absolute;
-    background: #fff;
-    color: #000;
-    list-style: none;
+    top: 100%;
+    left: 0;
+    background-color: #444;
     padding: 0;
+    list-style: none;
     margin: 0;
 }
 
-.dropdown li {
-    width: 200px;
-}
-
-.navbar li:hover .dropdown {
+nav ul li:hover ul.dropdown {
     display: block;
 }
 
+nav ul li ul.dropdown li {
+    margin: 0;
+}
+
+nav ul li ul.dropdown li a {
+    padding: 10px;
+}
+
 #countdown {
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
     text-align: center;
-    margin: 10px 0;
+    font-size: 20px;
+    color: white;
 }
 
-.tables-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
+/* Tabellen-Stile */
 .table-container {
-    flex: 1 1 calc(33% - 10px);
-    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
 table {
-    width: 100%;
+    width: 30%;
     border-collapse: collapse;
-}
-
-table, th, td {
+    margin: 10px;
     border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
+    border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
-}
-
-th {
-    background-color: #f4f4f4;
-    color: #333;
+    text-align: left;
 }
 
 thead {
+    background-color: #f4f4f4;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.filters {
-    margin-bottom: 20px;
-}
-
-.filters label {
-    margin-right: 10px;
-}
-
-.filters select {
-    margin-right: 20px;
-}
-
-@media (max-width: 768px) {
-    .tables-container {
-        flex-direction: column;
-    }
+tbody tr:hover {
+    background-color: #e2e2e2;
 }
