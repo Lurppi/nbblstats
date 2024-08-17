@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roster</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Basketball Stats - Roster</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">Stats</a>
+                <div class="dropdown-content">
+                    <a href="teams.html">Teams</a>
+                    <a href="players.html">Players</a>
+                </div>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Team Roster</h2>
+        <label for="team">Select Team:</label>
+        <select id="team">
+            <option value="team-alpha">Team Alpha</option>
+            <option value="team-beta">Team Beta</option>
+            <!-- Weitere Teams hinzufügen -->
+        </select>
+
+        <table id="roster-table" class="display">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Nationality</th>
+                    <th>Statistics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player A</td>
+                    <td>PG</td>
+                    <td>6'1"</td>
+                    <td>180 lbs</td>
+                    <td>USA</td>
+                    <td><a href="#">View Stats</a></td>
+                </tr>
+                <!-- Weitere Spieler hinzufügen -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+</body>
+</html>

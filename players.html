@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Basketball Stats - Players</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">Stats</a>
+                <div class="dropdown-content">
+                    <a href="teams.html">Teams</a>
+                    <a href="players.html">Players</a>
+                </div>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Players Statistics</h2>
+        <label for="position">Position:</label>
+        <select id="position">
+            <option value="all">All Positions</option>
+            <option value="pg">PG</option>
+            <option value="sg">SG</option>
+            <option value="sf">SF</option>
+            <option value="pf">PF</option>
+            <option value="c">C</option>
+        </select>
+        <label for="division">Division:</label>
+        <select id="division">
+            <option value="both">Both</option>
+            <option value="A">Division A</option>
+            <option value="B">Division B</option>
+        </select>
+        <label for="league">League:</label>
+        <select id="league">
+            <option value="regular">Regular Season</option>
+            <option value="playoffs">Playoffs</option>
+            <option value="season">Season</option>
+        </select>
+        <label for="stats-type">Statistik:</label>
+        <select id="stats-type">
+            <option value="totals">Totals</option>
+            <option value="averages">Averages</option>
+            <option value="shooting">Shooting</option>
+            <option value="advanced1">Advanced1</option>
+            <option value="advanced2">Advanced2</option>
+            <option value="four-factors">Four Factors</option>
+        </select>
+        <label for="birth-year">Birth Year:</label>
+        <select id="birth-year">
+            <option value="all">All</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>
+            <!-- Weitere Jahre hinzufügen -->
+        </select>
+
+        <table id="players-table" class="display">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Minutes</th>
+                    <th>Points</th>
+                    <th>Rebounds</th>
+                    <th>Assists</th>
+                    <th>Steals</th>
+                    <th>Blocks</th>
+                    <th>Turnovers</th>
+                    <th>Fouls</th>
+                    <th>Efficiency</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player One</td>
+                    <td>PG</td>
+                    <td>35</td>
+                    <td>20</td>
+                    <td>5</td>
+                    <td>7</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>24</td>
+                </tr>
+                <!-- Weitere Spieler hinzufügen -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
+    </footer>
+</body>
+</html>

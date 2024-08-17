@@ -50,7 +50,7 @@ nav ul li:hover .dropdown-content {
 .dropdown-content a:hover {
     background: #666;
 }
-.section {
+section {
     padding: 20px;
 }
 table {

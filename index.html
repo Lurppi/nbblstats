@@ -12,19 +12,19 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li>
-                <a href="#" onclick="showSection('stats')">Stats</a>
+                <a href="#">Stats</a>
                 <div class="dropdown-content">
-                    <a href="#" onclick="showSection('teams')">Teams</a>
-                    <a href="#" onclick="showSection('players')">Players</a>
+                    <a href="teams.html">Teams</a>
+                    <a href="players.html">Players</a>
                 </div>
             </li>
-            <li><a href="#" onclick="showSection('roster')">Roster</a></li>
+            <li><a href="roster.html">Roster</a></li>
         </ul>
     </nav>
 
-    <section id="home" class="section">
+    <section id="home">
         <h1>Basketball Top Performers</h1>
         <div class="top-performers">
             <h2>Top 5 Performers of the Week</h2>
@@ -66,7 +66,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
             <h2>Top 5 Performers of the Season</h2>
             <table id="season-performers">
                 <thead>
@@ -109,183 +109,10 @@
         </div>
     </section>
 
-    <section id="stats" class="section" style="display: none;">
-        <h1>Stats</h1>
-        <div class="section-links">
-            <a href="#" onclick="showSection('teams')">Teams</a>
-            <a href="#" onclick="showSection('players')">Players</a>
-        </div>
-    </section>
-
-    <section id="teams" class="section" style="display: none;">
-        <h2>Teams Statistics</h2>
-        <label for="division">Division:</label>
-        <select id="division">
-            <option value="both">Both</option>
-            <option value="A">Division A</option>
-            <option value="B">Division B</option>
-        </select>
-        <label for="league">League:</label>
-        <select id="league">
-            <option value="regular">Regular Season</option>
-            <option value="playoffs">Playoffs</option>
-            <option value="season">Season</option>
-        </select>
-        <label for="stats-type">Statistik:</label>
-        <select id="stats-type">
-            <option value="totals">Totals</option>
-            <option value="averages">Averages</option>
-            <option value="shooting">Shooting</option>
-            <option value="advanced">Advanced</option>
-            <option value="four-factors">Four Factors</option>
-        </select>
-
-        <table id="teams-table" class="display">
-            <thead>
-                <tr>
-                    <th>Team Name</th>
-                    <th>Division</th>
-                    <th>League</th>
-                    <th>Minutes</th>
-                    <th>Points</th>
-                    <th>Rebounds</th>
-                    <th>Assists</th>
-                    <th>Steals</th>
-                    <th>Blocks</th>
-                    <th>Turnovers</th>
-                    <th>Fouls</th>
-                    <th>Efficiency</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Team Alpha</td>
-                    <td>A</td>
-                    <td>Regular</td>
-                    <td>2400</td>
-                    <td>1150</td>
-                    <td>580</td>
-                    <td>290</td>
-                    <td>140</td>
-                    <td>95</td>
-                    <td>190</td>
-                    <td>85</td>
-                    <td>0.51</td>
-                </tr>
-                <!-- Weitere Teams hinzufügen -->
-            </tbody>
-        </table>
-    </section>
-
-    <section id="players" class="section" style="display: none;">
-        <h2>Players Statistics</h2>
-        <label for="position">Position:</label>
-        <select id="position">
-            <option value="all">All Positions</option>
-            <option value="pg">PG</option>
-            <option value="sg">SG</option>
-            <option value="sf">SF</option>
-            <option value="pf">PF</option>
-            <option value="c">C</option>
-        </select>
-        <label for="year">Year:</label>
-        <select id="year">
-            <option value="all">All Years</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-            <!-- Weitere Jahre hinzufügen -->
-        </select>
-        <label for="league">League:</label>
-        <select id="player-league">
-            <option value="regular">Regular Season</option>
-            <option value="playoffs">Playoffs</option>
-            <option value="season">Season</option>
-        </select>
-        <label for="stats-type">Statistik:</label>
-        <select id="player-stats-type">
-            <option value="totals">Totals</option>
-            <option value="averages">Averages</option>
-            <option value="shooting">Shooting</option>
-            <option value="advanced1">Advanced1</option>
-            <option value="advanced2">Advanced2</option>
-            <option value="four-factors">Four Factors</option>
-        </select>
-
-        <table id="players-table" class="display">
-            <thead>
-                <tr>
-                    <th>Player Name</th>
-                    <th>Position</th>
-                    <th>Minutes</th>
-                    <th>Points</th>
-                    <th>Rebounds</th>
-                    <th>Assists</th>
-                    <th>Steals</th>
-                    <th>Blocks</th>
-                    <th>Turnovers</th>
-                    <th>Fouls</th>
-                    <th>Efficiency</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Player One</td>
-                    <td>PG</td>
-                    <td>35</td>
-                    <td>20</td>
-                    <td>5</td>
-                    <td>7</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>24</td>
-                </tr>
-                <!-- Weitere Spieler hinzufügen -->
-            </tbody>
-        </table>
-    </section>
-
-    <section id="roster" class="section" style="display: none;">
-        <h2>Team Roster</h2>
-        <label for="team">Select Team:</label>
-        <select id="team">
-            <option value="team-alpha">Team Alpha</option>
-            <option value="team-beta">Team Beta</option>
-            <!-- Weitere Teams hinzufügen -->
-        </select>
-
-        <table id="roster-table" class="display">
-            <thead>
-                <tr>
-                    <th>Player Name</th>
-                    <th>Position</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Nationality</th>
-                    <th>Statistics</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Player A</td>
-                    <td>PG</td>
-                    <td>6'1"</td>
-                    <td>180 lbs</td>
-                    <td>USA</td>
-                    <td><a href="#" onclick="showPlayerStats('player-a')">View Stats</a></td>
-                </tr>
-                <!-- Weitere Spieler hinzufügen -->
-            </tbody>
-        </table>
-    </section>
-
     <footer>
         <p>&copy; 2024 Basketball Stats. All rights reserved.</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
