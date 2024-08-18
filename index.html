@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats</title>
+    <title>Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navbar">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#" class="dropdown">Stats</a>
@@ -22,15 +22,20 @@
         </nav>
     </header>
     <main>
-        <section id="weekly-top">
-            <h2>Weekly Top 3 Performer</h2>
-            <div class="table-container" id="weekly-tables"></div>
+        <section id="weekly-tables">
+            <h2>Weekly Top 3 Performers</h2>
+            <div class="table-container">
+                <!-- Weekly Top 3 Performer Tables -->
+            </div>
         </section>
-        <section id="regular-season-top">
-            <h2>Regular Season Top 3 Performer</h2>
-            <div class="table-container" id="regular-season-tables"></div>
+        <section id="regular-season-tables">
+            <h2>Regular Season Top 3 Performers</h2>
+            <div class="table-container">
+                <!-- Regular Season Top 3 Performer Tables -->
+            </div>
         </section>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

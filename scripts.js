@@ -1,68 +1,7 @@
-// Ensure PapaParse is included in your HTML file for this to work
 document.addEventListener('DOMContentLoaded', () => {
-    // Home page
-    loadTable('weekly-top', [
-        { title: 'Points', file: 'points-week.csv' },
-        { title: 'Rebounds', file: 'rebounds-week.csv' },
-        { title: 'Assists', file: 'assists-week.csv' },
-        { title: 'Steals', file: 'steals-week.csv' },
-        { title: 'Blocks', file: 'blocks-week.csv' },
-        { title: 'PER', file: 'per-week.csv' }
-    ]);
-
-    loadTable('regular-season-top', [
-        { title: 'Points', file: 'points-regular.csv' },
-        { title: 'Rebounds', file: 'rebounds-regular.csv' },
-        { title: 'Assists', file: 'assists-regular.csv' },
-        { title: 'Steals', file: 'steals-regular.csv' },
-        { title: 'Blocks', file: 'blocks-regular.csv' },
-        { title: 'PER', file: 'per-regular.csv' }
-    ]);
-
-    // Players page
-    const leagueSelect = document.getElementById('league');
-    const statsTypeSelect = document.getElementById('stats-type');
-    const divisionSelect = document.getElementById('division');
-    const positionSelect = document.getElementById('position');
-    const birthYearInput = document.getElementById('birth-year');
-
-    const loadPlayersTable = () => {
-        const league = leagueSelect.value;
-        const statsType = statsTypeSelect.value;
-        const division = divisionSelect.value;
-        const position = positionSelect.value;
-        const birthYear = birthYearInput.value;
-
-        let file = '';
-
-        if (league === 'Regular Season' && statsType === 'Totals') file = 'Regular_Totals.csv';
-        else if (league === 'Playoffs' && statsType === 'Totals') file = 'Playoffs_Totals.csv';
-        else if (league === 'Regular Season' && statsType === 'Averages') file = 'Regular_Averages.csv';
-        else if (league === 'Playoffs' && statsType === 'Averages') file = 'Playoffs_Averages.csv';
-        else if (league === 'Regular Season' && statsType === 'Shooting') file = 'Regular_Shooting.csv';
-        else if (league === 'Playoffs' && statsType === 'Shooting') file = 'Playoffs_Shooting.csv';
-        else if (league === 'Regular Season' && statsType === 'Advanced1') file = 'Regular_Advanced1.csv';
-        else if (league === 'Playoffs' && statsType === 'Advanced1') file = 'Playoffs_Advanced1.csv';
-        else if (league === 'Regular Season' && statsType === 'Advanced2') file = 'Regular_Advanced2.csv';
-        else if (league === 'Playoffs' && statsType === 'Advanced2') file = 'Playoffs_Advanced2.csv';
-        else if (league === 'Regular Season' && statsType === 'Four Factors') file = 'Regular_Four_Factors.csv';
-        else if (league === 'Playoffs' && statsType === 'Four Factors') file = 'Playoffs_Four_Factors.csv';
-
-        loadTable('player-tables', [{ title: statsType, file }], {
-            league, division, position, birthYear
-        });
-    };
-
-    leagueSelect.addEventListener('change', loadPlayersTable);
-    statsTypeSelect.addEventListener('change', loadPlayersTable);
-    divisionSelect.addEventListener('change', loadPlayersTable);
-    positionSelect.addEventListener('change', loadPlayersTable);
-    birthYearInput.addEventListener('input', loadPlayersTable);
-
-    // Function to load table
-    function loadTable(containerId, files, filters = {}) {
+    function loadTable(containerId, files, filters) {
         const container = document.getElementById(containerId);
-        container.innerHTML = '';
+        container.innerHTML = '';  // Clear previous content
 
         files.forEach(fileInfo => {
             const table = document.createElement('table');
@@ -91,46 +30,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const tbody = document.createElement('tbody');
                     data.forEach(row => {
-                        if (shouldIncludeRow(row, filters)) {
-                            const tr = document.createElement('tr');
-                            headers.forEach(header => {
-                                const td = document.createElement('td');
-                                td.textContent = row[header];
-                                tr.appendChild(td);
-                            });
-                            tbody.appendChild(tr);
-                        }
+                        const tr = document.createElement('tr');
+                        headers.forEach(header => {
+                            const td = document.createElement('td');
+                            td.textContent = row[header] || 'N/A';
+                            tr.appendChild(td);
+                        });
+                        tbody.appendChild(tr);
                     });
                     table.appendChild(tbody);
+
                     container.appendChild(table);
                 });
         });
     }
 
-    function shouldIncludeRow(row, filters) {
-        // Apply filters to determine if row should be included
-        if (filters.league && row.League !== filters.league) return false;
-        if (filters.division && row.Division !== filters.division && filters.division !== 'Both') return false;
-        if (filters.position && row.Position !== filters.position && filters.position !== 'All') return false;
-        if (filters.birthYear && row.BirthYear != filters.birthYear) return false;
-        return true;
-    }
-
     function sortTable(table, columnIndex) {
         const tbody = table.querySelector('tbody');
         const rowsArray = Array.from(tbody.querySelectorAll('tr'));
-
+        const isAscending = !table.querySelector(`thead th:nth-child(${columnIndex + 1})`).classList.contains('asc');
         rowsArray.sort((a, b) => {
-            const aText = a.children[columnIndex].textContent.trim();
-            const bText = b.children[columnIndex].textContent.trim();
-            return isNaN(aText) ? aText.localeCompare(bText) : aText - bText;
+            const aText = a.children[columnIndex].textContent;
+            const bText = b.children[columnIndex].textContent;
+            const aVal = isNaN(aText) ? aText.toLowerCase() : parseFloat(aText);
+            const bVal = isNaN(bText) ? bText.toLowerCase() : parseFloat(bText);
+            return isAscending ? aVal > bVal ? 1 : -1 : aVal < bVal ? 1 : -1;
         });
-
+        tbody.innerHTML = '';
         rowsArray.forEach(row => tbody.appendChild(row));
+        table.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
+        table.querySelector(`thead th:nth-child(${columnIndex + 1})`).classList.add(isAscending ? 'asc' : 'desc');
     }
 
-    // Initial load
-    loadTable('weekly-top', [
+    function loadPlayersTable() {
+        const league = document.getElementById('league').value;
+        const statsType = document.getElementById('stats-type').value;
+        const fileName = `${league.replace(' ', '_')}_${statsType.replace(' ', '_')}.csv`;
+        loadTable('player-tables', [{ title: `Player Stats (${statsType})`, file: fileName }], { league, statsType });
+    }
+
+    document.getElementById('league').addEventListener('change', loadPlayersTable);
+    document.getElementById('stats-type').addEventListener('change', loadPlayersTable);
+    document.getElementById('division').addEventListener('change', loadPlayersTable);
+    document.getElementById('position').addEventListener('change', loadPlayersTable);
+    document.getElementById('birth-year').addEventListener('input', loadPlayersTable);
+
+    // Load weekly tables
+    loadTable('weekly-tables', [
         { title: 'Points', file: 'points-week.csv' },
         { title: 'Rebounds', file: 'rebounds-week.csv' },
         { title: 'Assists', file: 'assists-week.csv' },
@@ -139,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'PER', file: 'per-week.csv' }
     ]);
 
-    loadTable('regular-season-top', [
+    // Load regular season tables
+    loadTable('regular-season-tables', [
         { title: 'Points', file: 'points-regular.csv' },
         { title: 'Rebounds', file: 'rebounds-regular.csv' },
         { title: 'Assists', file: 'assists-regular.csv' },
@@ -147,4 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'Blocks', file: 'blocks-regular.csv' },
         { title: 'PER', file: 'per-regular.csv' }
     ]);
+
+    // Initial load for Players page
+    loadPlayersTable();
 });
