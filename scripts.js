@@ -31,7 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
             header: true,
             complete: function(results) {
                 const data = results.data;
-                if (data.length === 0) return;
+                if (data.length === 0) {
+                    container.innerHTML = '<p>No data available</p>';
+                    return;
+                }
                 
                 const columns = Object.keys(data[0]);
                 let tableHtml = '<table><thead><tr>';
@@ -49,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tableHtml += '</tbody></table>';
                 container.innerHTML = tableHtml;
                 applyFilters();
+            },
+            error: function(error) {
+                console.error(`Error loading CSV file: ${fileName}`, error);
+                document.getElementById('player-tables').innerHTML = '<p>Error loading data</p>';
             }
         });
     }
@@ -100,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 tableHtml += '</tbody></table>';
                 document.getElementById('player-tables').innerHTML = tableHtml;
+            },
+            error: function(error) {
+                console.error(`Error applying filters on CSV file: ${fileName}`, error);
+                document.getElementById('player-tables').innerHTML = '<p>Error applying filters</p>';
             }
         });
     }
