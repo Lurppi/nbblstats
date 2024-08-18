@@ -1,21 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     function loadTable(containerId, files) {
         const container = document.getElementById(containerId);
-        container.innerHTML = '';  // Clear previous content
+        container.innerHTML = ''; // Clear previous content
 
-        files.forEach(fileInfo => {
-            const table = document.createElement('table');
-            const title = document.createElement('caption');
-            title.textContent = fileInfo.title;
-            table.appendChild(title);
-
-            fetch(fileInfo.file)
+        files.forEach(file => {
+            fetch(file.file)
                 .then(response => response.text())
                 .then(text => {
-                    const data = Papa.parse(text, { header: true }).data;
+                    const data = Papa.parse(text, { header: true, skipEmptyLines: true }).data;
                     if (data.length === 0) return;
 
                     const headers = Object.keys(data[0]);
+                    const table = document.createElement('table');
+
                     const thead = document.createElement('thead');
                     const headerRow = document.createElement('tr');
                     headers.forEach(header => {
