@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 header {
@@ -12,13 +13,19 @@ header {
     text-align: center;
 }
 
+header h1 {
+    margin: 0;
+}
+
 nav ul {
-    list-style: none;
+    list-style-type: none;
+    margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -27,27 +34,41 @@ nav ul li a {
     text-decoration: none;
 }
 
+nav ul li ul.submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 10px;
+}
+
+nav ul li:hover ul.submenu {
+    display: block;
+}
+
+nav ul li ul.submenu li {
+    margin: 0;
+}
+
 main {
     padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .table-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     gap: 20px;
 }
 
 .table-wrapper {
-    flex: 1 1 calc(33.333% - 20px);
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.table-wrapper h3 {
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 10px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 32%;
 }
 
 table {
@@ -55,39 +76,37 @@ table {
     border-collapse: collapse;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
+table th, table td {
+    border: 1px solid #ccc;
     padding: 8px;
-    text-align: center;
-    font-size: 14px; /* Adjust font size here */
+    text-align: left;
+    font-size: 14px;
+    word-wrap: break-word;
 }
 
-th {
-    background-color: #f4f4f4;
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+table td {
+    background-color: #fff;
+    color: #333;
 }
 
 .filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
 .filter-container label {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
-.filter-container select, .filter-container input {
-    margin-right: 20px;
-}
-
-input[type="number"] {
-    width: 80px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+.filter-container select, 
+.filter-container input {
+    padding: 5px;
+    font-size: 14px;
 }

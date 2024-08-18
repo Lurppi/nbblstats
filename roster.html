@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roster - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="roster">
+<body>
     <header>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li>
-                    <a href="#">Stats</a>
-                    <ul class="dropdown">
+                <li><a href="#">Stats</a>
+                    <ul>
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
                     </ul>
@@ -22,11 +21,24 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <h2>Roster</h2>
-        <div id="roster-table"></div>
+        <h1>Player Roster</h1>
+        <label for="team-filter">Team:</label>
+        <select id="team-filter">
+            <option value="">All</option>
+            <!-- Populate options dynamically -->
+        </select>
+
+        <label for="position-filter">Position:</label>
+        <select id="position-filter">
+            <option value="">All</option>
+            <!-- Populate options dynamically -->
+        </select>
+
+        <table id="roster-table"></table>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <script src="scripts.js"></script>
 </body>
 </html>

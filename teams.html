@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teams - Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="teams">
+<body>
     <header>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li>
-                    <a href="#">Stats</a>
-                    <ul class="dropdown">
+                <li><a href="#">Stats</a>
+                    <ul>
                         <li><a href="teams.html">Teams</a></li>
                         <li><a href="players.html">Players</a></li>
                     </ul>
@@ -22,31 +21,33 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <h2>Teams</h2>
-        <div class="filter">
-            <label for="division">Division:</label>
-            <select id="division">
-                <option value="all">Alle</option>
-                <!-- Weitere Optionen hinzufügen -->
-            </select>
-            <label for="league">League:</label>
-            <select id="league">
-                <option value="all">Alle</option>
-                <!-- Weitere Optionen hinzufügen -->
-            </select>
-            <label for="stats-type">Stats-Type:</label>
-            <select id="stats-type">
-                <option value="Totals">Totals</option>
-                <option value="Averages">Averages</option>
-                <option value="Shooting">Shooting</option>
-                <option value="Advanced">Advanced</option>
-                <option value="Four Factors">Four Factors</option>
-            </select>
-        </div>
-        <div id="teams-table"></div>
+        <h1>Team Statistics</h1>
+        <label for="division-filter">Division:</label>
+        <select id="division-filter">
+            <option value="">All</option>
+            <!-- Populate options dynamically -->
+        </select>
+
+        <label for="league-filter">League:</label>
+        <select id="league-filter">
+            <option value="">All</option>
+            <!-- Populate options dynamically -->
+        </select>
+
+        <label for="stats-type">Stats Type:</label>
+        <select id="stats-type">
+            <option value="totals">Totals</option>
+            <option value="averages">Averages</option>
+            <option value="shooting">Shooting</option>
+            <option value="advanced">Advanced</option>
+            <option value="four-factors">Four Factors</option>
+        </select>
+
+        <table id="team-stats-table"></table>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <script src="scripts.js"></script>
 </body>
 </html>
