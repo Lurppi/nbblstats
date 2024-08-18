@@ -2,107 +2,97 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
 
 header {
-    background: #333;
+    background-color: #333;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 0;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
+header nav ul {
+    list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
-nav ul li {
-    display: inline-block;
-    margin-right: 20px;
-    position: relative;
+header nav ul li {
+    margin: 0 15px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: #fff;
     text-decoration: none;
     padding: 5px 10px;
 }
 
-nav ul li ul.dropdown {
+header nav ul li .dropdown-content {
     display: none;
     position: absolute;
-    background: #444;
-    padding: 10px;
-    list-style-type: none;
-    margin: 0;
-    min-width: 150px;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
 }
 
-nav ul li:hover ul.dropdown {
+header nav ul li .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
     display: block;
+    text-align: left;
 }
 
-nav ul li ul.dropdown li {
+header nav ul li:hover .dropdown-content {
     display: block;
-}
-
-#countdown {
-    font-size: 18px;
-    color: #fff;
-    text-align: center;
-    margin: 10px 0;
 }
 
 main {
     padding: 20px;
 }
 
-.table-grid {
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.filters {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    justify-content: space-around;
     margin-bottom: 20px;
 }
 
-.table-container {
-    flex: 1 1 calc(33.333% - 20px); /* Drei Tabellen nebeneinander */
-    max-width: calc(33.333% - 20px);
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 5px;
-    overflow-x: auto;
+.filters label {
+    margin-right: 10px;
 }
 
-.table-container table {
+.filters input,
+.filters select {
+    padding: 5px;
+    font-size: 16px;
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed; /* Konsistente Spaltenbreite */
+    margin-bottom: 20px;
 }
 
-.table-container th, .table-container td {
+table th,
+table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
-    overflow-wrap: break-word; /* Lange Wörter umbrechen */
-    word-wrap: break-word;
-    hyphens: auto;
+    text-align: left;
 }
 
-.table-container th {
-    background-color: #f4f4f4;
+table th {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
 }
 
-.table-container td.name-column,
-.table-container td.team-column {
-    width: 40%; /* Größere Breite für Name und Team */
-}
-
-.table-container td.stat-column {
-    width: 20%; /* Kleinere Breite für Stat-Spalten */
-}
-
-/* Bedingte Formatierungen für lange Namen */
-.table-container td.long-name {
-    font-size: 12px; /* Schriftgröße für lange Namen verkleinern */
-    line-height: 1.2; /* Zeilenhöhe für Zeilenumbruch */
+table th:hover {
+    background-color: #555;
 }
