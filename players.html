@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players - NBBL Stats</title>
+    <title>Players</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
+    <div id="menu">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="stats.html">Stats</a>
+            <li><a href="#">Stats</a>
                 <ul>
                     <li><a href="teams.html">Teams</a></li>
                     <li><a href="players.html">Players</a></li>
@@ -18,15 +18,30 @@
             </li>
             <li><a href="roster.html">Roster</a></li>
         </ul>
-    </nav>
+    </div>
+
     <div class="container">
-        <h1>Players Page</h1>
-        <!-- Filters -->
+        <h1>Players Statistics</h1>
+
         <div class="filters">
             <label for="league">League:</label>
             <select id="league">
                 <option value="Regular Season">Regular Season</option>
                 <option value="Playoffs">Playoffs</option>
+            </select>
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="Both">Both</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+            </select>
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="All">All</option>
+                <option value="Point">Point</option>
+                <option value="Combo">Combo</option>
+                <option value="Wing">Wing</option>
+                <option value="Big">Big</option>
             </select>
             <label for="stats-type">Stats Type:</label>
             <select id="stats-type">
@@ -37,26 +52,10 @@
                 <option value="Advanced2">Advanced2</option>
                 <option value="Four Factors">Four Factors</option>
             </select>
-            <label for="division">Division:</label>
-            <select id="division">
-                <option value="Both">Both</option>
-                <option value="A">Division A</option>
-                <option value="B">Division B</option>
-            </select>
-            <label for="position">Position:</label>
-            <select id="position">
-                <option value="Both">Both</option>
-                <option value="Point">Point</option>
-                <option value="Combo">Combo</option>
-                <option value="Wing">Wing</option>
-                <option value="Big">Big</option>
-            </select>
-            <label for="birth-year">Year of Birth:</label>
-            <input type="text" id="birth-year">
         </div>
-        <!-- Player Tables -->
-        <div id="player-tables" class="table-container">
-            <!-- Tables will be injected here -->
+
+        <div id="players-tables">
+            <!-- Tables will be dynamically inserted here by JavaScript -->
         </div>
     </div>
     <script src="scripts.js"></script>

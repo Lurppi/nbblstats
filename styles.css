@@ -1,101 +1,81 @@
-/* General Styles */
 body {
-    background: rgba(255, 255, 255, 0.8); /* White background with opacity */
-    backdrop-filter: blur(10px); /* Apply blur effect to the background */
-    color: #333; /* Default text color */
-    font-family: Arial, sans-serif; /* Default font */
-    margin: 0;
-    padding: 0;
-}
-
-nav {
-    background-color: rgba(255, 255, 255, 0.9); /* Light background for nav bar */
+    font-family: Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-nav ul {
-    list-style: none;
+    color: #333;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: flex-end;
 }
 
-nav ul li {
+#menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    color: white;
+}
+
+#menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu ul li {
     position: relative;
-    margin: 0 15px;
+    display: inline-block;
 }
 
-nav ul li a {
+#menu a {
+    color: white;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    padding: 10px;
+    display: block;
 }
 
-nav ul li ul {
+#menu ul ul {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 0;
-    margin: 0;
-    list-style: none;
+    background: rgba(0, 0, 0, 0.9);
+    min-width: 150px;
 }
 
-nav ul li:hover ul {
+#menu ul li:hover > ul {
     display: block;
 }
 
-nav ul li ul li {
-    margin: 0;
-}
-
-nav ul li ul li a {
-    padding: 10px;
-    display: block;
-}
-
-/* Container Styles */
 .container {
-    background: rgba(255, 255, 255, 0.6); /* Slightly opaque white background */
-    border-radius: 10px; /* Rounded corners for the glass effect */
-    padding: 20px; /* Padding for content */
-    margin: 20px auto; /* Center the container with margins */
-    width: 90%;
-    max-width: 1200px; /* Maximum width for large screens */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the glass effect */
+    margin: 20px;
 }
 
-/* Table Styles */
+.section {
+    margin-bottom: 40px;
+}
+
+.table-container {
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
 table {
-    background: rgba(255, 255, 255, 0.8); /* Table background with transparency */
-    border-radius: 10px; /* Rounded corners for tables */
     border-collapse: collapse;
     width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for tables */
     margin-bottom: 20px;
 }
 
 th, td {
-    padding: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for table cells */
-    text-align: center; /* Center text in table cells */
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
 }
 
-/* Alignments */
 th {
-    background-color: rgba(255, 255, 255, 0.9);
-    font-weight: bold;
+    background-color: #f4f4f4;
+    cursor: pointer;
 }
 
-/* Filter Styles */
 .filters {
     margin-bottom: 20px;
 }
@@ -104,7 +84,10 @@ th {
     margin-right: 10px;
 }
 
-.filters select, .filters input {
+.filters select {
     margin-right: 20px;
-    padding: 5px;
+}
+
+thead th {
+    background-color: #f4f4f4;
 }
