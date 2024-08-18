@@ -7,56 +7,83 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Stats</a>
-                <ul>
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="players.html">Players</a></li>
-                </ul>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
+    <h1>Player Statistics</h1>
+    <div class="filter-controls">
+        <!-- Filter Dropdowns für Division, Position, Year of Birth -->
     </div>
-
-    <div class="container">
-        <h1>Players Statistics</h1>
-
-        <div class="filters">
-            <label for="league">League:</label>
-            <select id="league">
-                <option value="Regular Season">Regular Season</option>
-                <option value="Playoffs">Playoffs</option>
-            </select>
-            <label for="division">Division:</label>
-            <select id="division">
-                <option value="Both">Both</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-            </select>
-            <label for="position">Position:</label>
-            <select id="position">
-                <option value="All">All</option>
-                <option value="Point">Point</option>
-                <option value="Combo">Combo</option>
-                <option value="Wing">Wing</option>
-                <option value="Big">Big</option>
-            </select>
-            <label for="stats-type">Stats Type:</label>
-            <select id="stats-type">
-                <option value="Totals">Totals</option>
-                <option value="Averages">Averages</option>
-                <option value="Shooting">Shooting</option>
-                <option value="Advanced1">Advanced1</option>
-                <option value="Advanced2">Advanced2</option>
-                <option value="Four Factors">Four Factors</option>
-            </select>
-        </div>
-
-        <div id="players-tables">
-            <!-- Tables will be dynamically inserted here by JavaScript -->
-        </div>
+    <div class="table-container">
+        <table id="Regular_Totals" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Totals" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Regular_Averages" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Averages" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Regular_Shooting" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>FG%</th><th>3P%</th><th>FT%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Shooting" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>FG%</th><th>3P%</th><th>FT%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Regular_Advanced1" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>PER</th><th>TS%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Advanced1" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>PER</th><th>TS%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Regular_Advanced2" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>ORB%</th><th>DRB%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Advanced2" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>ORB%</th><th>DRB%</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Regular_Four_Factors" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>eFG%</th><th>FTR</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <table id="Playoffs_Four_Factors" class="sortable">
+            <thead>
+                <tr><th>Player</th><th>Team</th><th>eFG%</th><th>FTR</th><!-- Weitere Spalten hinzufügen --></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
     <script src="scripts.js"></script>
 </body>
