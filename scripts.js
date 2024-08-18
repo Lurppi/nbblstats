@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const headers = Object.keys(data[0]);
                     const table = document.createElement('table');
+                    table.classList.add('sortable');
 
                     const thead = document.createElement('thead');
                     const headerRow = document.createElement('tr');
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const th = document.createElement('th');
                         th.textContent = header;
                         th.classList.add('sortable');
-                        th.addEventListener('click', () => sortTable(table, headerRow.children.length));
+                        th.addEventListener('click', () => sortTable(table, headers.indexOf(header)));
                         headerRow.appendChild(th);
                     });
                     thead.appendChild(headerRow);
