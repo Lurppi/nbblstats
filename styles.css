@@ -1,96 +1,110 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-}
-
-header {
-    background-color: #333;
-    padding: 10px;
-}
-
-.navbar {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
+    background: rgba(255, 255, 255, 0.8); /* White background with opacity */
+    backdrop-filter: blur(10px); /* Apply blur effect to the background */
+    color: #333; /* Default text color */
+    font-family: Arial, sans-serif; /* Default font */
     margin: 0;
     padding: 0;
 }
 
-.navbar ul {
+nav {
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for nav bar */
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
+    justify-content: flex-end;
 }
 
-.navbar li {
+nav ul li {
     position: relative;
+    margin: 0 15px;
 }
 
-.navbar a {
-    color: #fff;
+nav ul li a {
     text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li ul li {
+    margin: 0;
+}
+
+nav ul li ul li a {
     padding: 10px;
     display: block;
 }
 
-.navbar .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    min-width: 160px;
-    z-index: 1;
+/* Container Styles */
+.container {
+    background: rgba(255, 255, 255, 0.6); /* Slightly opaque white background */
+    border-radius: 10px; /* Rounded corners for the glass effect */
+    padding: 20px; /* Padding for content */
+    margin: 20px auto; /* Center the container with margins */
+    width: 90%;
+    max-width: 1200px; /* Maximum width for large screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to lift the glass effect */
 }
 
-.navbar .dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.table-container {
-    display: inline-block;
-    width: 32%;
-    margin: 1%;
-    vertical-align: top;
-}
-
-.table-container table {
-    width: 100%;
+/* Table Styles */
+table {
+    background: rgba(255, 255, 255, 0.8); /* Table background with transparency */
+    border-radius: 10px; /* Rounded corners for tables */
     border-collapse: collapse;
-}
-
-.table-container th, .table-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.table-container th {
-    background-color: #f4f4f4;
-}
-
-#filters {
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for tables */
     margin-bottom: 20px;
 }
 
-#filters label {
+th, td {
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for table cells */
+    text-align: center; /* Center text in table cells */
+}
+
+/* Alignments */
+th {
+    background-color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+}
+
+/* Filter Styles */
+.filters {
+    margin-bottom: 20px;
+}
+
+.filters label {
     margin-right: 10px;
 }
 
-#player-tables table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-#player-tables th, #player-tables td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#player-tables th {
-    background-color: #f4f4f4;
-}
-
-table {
-    font-size: 14px;
-}
-
-input[type="number"] {
-    width: 100px;
+.filters select, .filters input {
+    margin-right: 20px;
+    padding: 5px;
 }

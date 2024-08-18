@@ -3,51 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - NBBL Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <ul class="navbar">
+    <nav>
+        <ul>
             <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="#">Stats</a>
-                <div class="dropdown-content">
-                    <a href="teams.html">Teams</a>
-                    <a href="players.html">Players</a>
-                </div>
+            <li><a href="stats.html">Stats</a>
+                <ul>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                </ul>
             </li>
             <li><a href="roster.html">Roster</a></li>
         </ul>
-    </header>
-
-    <main>
+    </nav>
+    <div class="container">
+        <h1>Home Page</h1>
+        <!-- Weekly Top 3 Performer Tables -->
         <div class="table-container">
             <h2>Weekly Top 3 Performers</h2>
-            <div class="table-row">
-                <div class="table-container" id="weekly-points"></div>
-                <div class="table-container" id="weekly-rebounds"></div>
-                <div class="table-container" id="weekly-assists"></div>
-            </div>
-            <div class="table-row">
-                <div class="table-container" id="weekly-steals"></div>
-                <div class="table-container" id="weekly-blocks"></div>
-                <div class="table-container" id="weekly-per"></div>
-            </div>
-            <h2>Regular Season Top 3 Performers</h2>
-            <div class="table-row">
-                <div class="table-container" id="regular-points"></div>
-                <div class="table-container" id="regular-rebounds"></div>
-                <div class="table-container" id="regular-assists"></div>
-            </div>
-            <div class="table-row">
-                <div class="table-container" id="regular-steals"></div>
-                <div class="table-container" id="regular-blocks"></div>
-                <div class="table-container" id="regular-per"></div>
+            <div id="weekly-tables">
+                <!-- Tables will be injected here -->
             </div>
         </div>
-    </main>
-
+        <!-- Regular Season Top 3 Performer Tables -->
+        <div class="table-container">
+            <h2>Regular Season Top 3 Performers</h2>
+            <div id="regular-season-tables">
+                <!-- Tables will be injected here -->
+            </div>
+        </div>
+    </div>
     <script src="scripts.js"></script>
 </body>
 </html>
