@@ -1,112 +1,57 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const statTypeSelect = document.getElementById('statType');
-    const seasonTypeSelect = document.getElementById('seasonType');
-    const gpFilterInput = document.getElementById('gpFilter');
-    const mpFilterInput = document.getElementById('mpFilter');
-
-    let currentData = [];
-
-    function loadCSV(filePath) {
-        Papa.parse(filePath, {
-            download: true,
-            header: true,
-            complete: function (results) {
-                currentData = results.data;
-                updateTable();
-            }
-        });
-    }
-
-    function updateTable() {
-        const gpFilter = parseInt(gpFilterInput.value) || 0;
-        const mpFilter = parseInt(mpFilterInput.value) || 0;
-
-        let filteredData = currentData.filter(row => {
-            return parseInt(row['GP']) >= gpFilter && parseInt(row['MP']) >= mpFilter;
-        });
-
-        displayTable(filteredData);
-    }
-
-    function displayTable(data) {
-        const tableContainer = document.getElementById('statsTable');
-        tableContainer.innerHTML = '';
-
-        const table = document.createElement('table');
-        const thead = document.createElement('thead');
-        const tbody = document.createElement('tbody');
-
-        if (data.length > 0) {
-            const headers = Object.keys(data[0]);
-            const headerRow = document.createElement('tr');
-
-            headers.forEach(header => {
-                const th = document.createElement('th');
-                th.textContent = header;
-                th.addEventListener('click', () => sortTable(data, header));
-                headerRow.appendChild(th);
-            });
-
-            thead.appendChild(headerRow);
-
-            data.forEach(row => {
-                const tr = document.createElement('tr');
-
-                headers.forEach(header => {
-                    const td = document.createElement('td');
-                    td.textContent = row[header];
-                    tr.appendChild(td);
-                });
-
-                tbody.appendChild(tr);
-            });
+// Helper function to load CSV files using PapaParse
+function loadCSV(file, callback) {
+    Papa.parse(file, {
+        download: true,
+        header: true,
+        complete: function(results) {
+            callback(results.data);
         }
+    });
+}
 
-        table.appendChild(thead);
-        table.appendChild(tbody);
-        tableContainer.appendChild(table);
-    }
+// Function to update tables on the home page
+function updateHomePage() {
+    loadCSV('Regular_Totals.csv', function(data) {
+        createTable(data, '#regular-points-table', ['Player', 'Position', 'GP', 'MP', 'Points', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'Turnovers', 'Fouls', 'Efficiency', 'DD', 'TD']);
+    });
+    loadCSV('Playoffs_Totals.csv', function(data) {
+        createTable(data, '#playoffs-points-table', ['Player', 'Position', 'GP', 'MP', 'Points', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'Turnovers', 'Fouls', 'Efficiency', 'DD', 'TD']);
+    });
+    // Repeat for other CSV files as needed
+}
 
-    function sortTable(data, column) {
-        const direction = data[0][column] > data[1][column] ? 1 : -1;
-        data.sort((a, b) => (a[column] > b[column] ? direction : -direction));
-        displayTable(data);
-    }
+function createTable(data, selector, columns) {
+    let table = document.querySelector(selector);
+    let headers = columns.map(col => `<th>${col}</th>`).join('');
+    let rows = data.slice(0, 3).map(row => {
+        return `<tr>${columns.map(col => `<td>${row[col]}</td>`).join('')}</tr>`;
+    }).join('');
+    table.innerHTML = `<thead><tr>${headers}</tr></thead><tbody>${rows}</tbody>`;
+}
 
-    function updateCSV() {
-        const statType = statTypeSelect.value;
-        const seasonType = seasonTypeSelect.value;
+// Function to update player stats page
+function updatePlayerStats() {
+    const statType = document.getElementById('stat-type').value;
+    const playoffFilter = document.getElementById('playoff-filter').value;
+    const minGP = document.getElementById('gp-filter').value;
+    const minMP = document.getElementById('mp-filter').value;
+    
+    let file = `${playoffFilter}_${statType}.csv`;
+    
+    loadCSV(file, function(data) {
+        // Filter by GP and MP
+        if (minGP) data = data.filter(row => row.GP >= minGP);
+        if (minMP) data = data.filter(row => row.MP >= minMP);
+        
+        createTable(data, '#player-stats-table', ['Player', 'Position', 'Birth Year', 'GP', 'MP', 'Points', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'Turnovers', 'Fouls', 'Efficiency', 'DD', 'TD']);
+    });
+}
 
-        let filePath = '';
+// Event listeners for filters
+document.getElementById('stat-type').addEventListener('change', updatePlayerStats);
+document.getElementById('playoff-filter').addEventListener('change', updatePlayerStats);
+document.getElementById('gp-filter').addEventListener('input', updatePlayerStats);
+document.getElementById('mp-filter').addEventListener('input', updatePlayerStats);
 
-        switch (statType) {
-            case 'totals':
-                filePath = seasonType === 'regular' ? 'Regular_Totals.csv' : 'Playoffs_Totals.csv';
-                break;
-            case 'averages':
-                filePath = seasonType === 'regular' ? 'Regular_Averages.csv' : 'Playoffs_Averages.csv';
-                break;
-            case 'shooting':
-                filePath = seasonType === 'regular' ? 'Regular_Shooting.csv' : 'Playoffs_Shooting.csv';
-                break;
-            case 'advanced1':
-                filePath = seasonType === 'regular' ? 'Regular_Advanced1.csv' : 'Playoffs_Advanced1.csv';
-                break;
-            case 'advanced2':
-                filePath = seasonType === 'regular' ? 'Regular_Advanced2.csv' : 'Playoffs_Advanced2.csv';
-                break;
-            case 'fourfactors':
-                filePath = seasonType === 'regular' ? 'Regular_FourFactors.csv' : 'Playoffs_FourFactors.csv';
-                break;
-        }
-
-        loadCSV(filePath);
-    }
-
-    statTypeSelect.addEventListener('change', updateCSV);
-    seasonTypeSelect.addEventListener('change', updateCSV);
-    gpFilterInput.addEventListener('input', updateTable);
-    mpFilterInput.addEventListener('input', updateTable);
-
-    updateCSV();  // Initial table load
-});
+// Initial data load for home page
+updateHomePage();

@@ -2,97 +2,91 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
 }
 
 header {
     background-color: #333;
     color: #fff;
     padding: 10px 0;
+    text-align: center;
 }
 
-header nav ul {
+nav ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
 }
 
-header nav ul li {
+nav ul li {
+    display: inline;
     margin: 0 15px;
 }
 
-header nav ul li a {
+nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 5px 10px;
-}
-
-header nav ul li .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    min-width: 160px;
-    z-index: 1;
-}
-
-header nav ul li .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-header nav ul li:hover .dropdown-content {
-    display: block;
 }
 
 main {
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
-}
-
-.filters {
+.table-container {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.filters label {
-    margin-right: 10px;
+.table-wrapper {
+    flex: 1 1 calc(33.333% - 20px);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.filters input,
-.filters select {
-    padding: 5px;
-    font-size: 16px;
+.table-wrapper h3 {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 10px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.filter-container {
     margin-bottom: 20px;
 }
 
-table th,
-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.filter-container label {
+    margin-right: 10px;
 }
 
-table th {
+.filter-container select, .filter-container input {
+    margin-right: 20px;
+}
+
+input[type="number"] {
+    width: 80px;
+}
+
+footer {
     background-color: #333;
-    color: white;
-    cursor: pointer;
-}
-
-table th:hover {
-    background-color: #555;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }

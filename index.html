@@ -3,54 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Basketball Stats</title>
+    <title>Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home">
+<body>
     <header>
+        <h1>Basketball Statistics</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li>
-                    <a href="#">Stats</a>
-                    <ul class="dropdown">
-                        <li><a href="teams.html">Teams</a></li>
-                        <li><a href="players.html">Players</a></li>
-                    </ul>
-                </li>
-                <li><a href="roster.html">Roster</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="players.html">Players</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
-        <div id="countdown"></div>
     </header>
     <main>
-        <section>
+        <section id="top-performers">
             <h2>Top Performer der Woche</h2>
-            <div class="table-grid">
-                <div class="table-container" id="points-week"></div>
-                <div class="table-container" id="rebounds-week"></div>
-                <div class="table-container" id="assists-week"></div>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <h3>Wöchentliche Punkte</h3>
+                    <table id="weekly-points-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Wöchentliche Rebounds</h3>
+                    <table id="weekly-rebounds-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Wöchentliche Assists</h3>
+                    <table id="weekly-assists-table"></table>
+                </div>
             </div>
-            <div class="table-grid">
-                <div class="table-container" id="steals-week"></div>
-                <div class="table-container" id="blocks-week"></div>
-                <div class="table-container" id="per-week"></div>
+            <h2>Regular Season</h2>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <h3>Punkte</h3>
+                    <table id="regular-points-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Rebounds</h3>
+                    <table id="regular-rebounds-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Assists</h3>
+                    <table id="regular-assists-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Steals</h3>
+                    <table id="regular-steals-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Blocks</h3>
+                    <table id="regular-blocks-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Turnovers</h3>
+                    <table id="regular-turnovers-table"></table>
+                </div>
             </div>
-        </section>
-        <section>
-            <h2>Top Performer der Regular Season</h2>
-            <div class="table-grid">
-                <div class="table-container" id="points-reg-season"></div>
-                <div class="table-container" id="rebounds-reg-season"></div>
-                <div class="table-container" id="assists-reg-season"></div>
-            </div>
-            <div class="table-grid">
-                <div class="table-container" id="steals-reg-season"></div>
-                <div class="table-container" id="blocks-reg-season"></div>
-                <div class="table-container" id="per-reg-season"></div>
+            <h2>Playoffs</h2>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <h3>Punkte</h3>
+                    <table id="playoffs-points-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Rebounds</h3>
+                    <table id="playoffs-rebounds-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Assists</h3>
+                    <table id="playoffs-assists-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Steals</h3>
+                    <table id="playoffs-steals-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Blocks</h3>
+                    <table id="playoffs-blocks-table"></table>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Turnovers</h3>
+                    <table id="playoffs-turnovers-table"></table>
+                </div>
             </div>
         </section>
     </main>
+    <footer>
+        <p>&copy; 2024 Basketball Stats</p>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts.js"></script>
 </body>
