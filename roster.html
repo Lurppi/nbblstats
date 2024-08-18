@@ -3,41 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roster - Basketball Stats</title>
+    <title>Basketball Stats - Roster</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Stats</a>
-                    <ul>
-                        <li><a href="teams.html">Teams</a></li>
-                        <li><a href="players.html">Players</a></li>
-                    </ul>
-                </li>
-                <li><a href="roster.html">Roster</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Stats</a>
+                <div class="dropdown-content">
+                    <a href="teams.html">Teams</a>
+                    <a href="players.html">Players</a>
+                </div>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
+        </ul>
+    </nav>
 
-    <main>
-        <h1>Player Roster</h1>
-        <label for="team-filter">Team:</label>
-        <select id="team-filter">
-            <option value="">All</option>
-            <!-- Populate options dynamically -->
-        </select>
-
-        <label for="position-filter">Position:</label>
-        <select id="position-filter">
-            <option value="">All</option>
-            <!-- Populate options dynamically -->
-        </select>
-
-        <table id="roster-table"></table>
-    </main>
+    <h1>Team Rosters</h1>
+    <div id="roster-table"></div>
 
     <script src="scripts.js"></script>
 </body>
