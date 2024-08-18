@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    function loadTable(containerId, files, filters) {
+    function loadTable(containerId, files) {
         const container = document.getElementById(containerId);
         container.innerHTML = '';  // Clear previous content
 
@@ -17,15 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     const headers = Object.keys(data[0]);
                     const thead = document.createElement('thead');
-                    const tr = document.createElement('tr');
+                    const headerRow = document.createElement('tr');
                     headers.forEach(header => {
                         const th = document.createElement('th');
                         th.textContent = header;
                         th.classList.add('sortable');
-                        th.addEventListener('click', () => sortTable(table, headers.indexOf(header)));
-                        tr.appendChild(th);
+                        th.addEventListener('click', () => sortTable(table, headerRow.children.length));
+                        headerRow.appendChild(th);
                     });
-                    thead.appendChild(tr);
+                    thead.appendChild(headerRow);
                     table.appendChild(thead);
 
                     const tbody = document.createElement('tbody');
