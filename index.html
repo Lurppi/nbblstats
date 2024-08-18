@@ -8,71 +8,46 @@
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Stats</a>
-                    <div class="dropdown-content">
-                        <a href="teams.html">Teams</a>
-                        <a href="players.html">Players</a>
-                    </div>
-                </li>
-                <li><a href="roster.html">Roster</a></li>
-            </ul>
-        </nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Stats</a>
+                <div class="dropdown-content">
+                    <a href="teams.html">Teams</a>
+                    <a href="players.html">Players</a>
+                </div>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
+        </ul>
     </header>
+
     <main>
-        <section id="tables">
-            <div class="weekly-top">
-                <h2>Weekly Top 3 Performers</h2>
-                <div class="row">
-                    <div class="table-container" id="weekly-points"></div>
-                    <div class="table-container" id="weekly-rebounds"></div>
-                    <div class="table-container" id="weekly-assists"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="weekly-steals"></div>
-                    <div class="table-container" id="weekly-blocks"></div>
-                    <div class="table-container" id="weekly-per"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="weekly-points-2"></div>
-                    <div class="table-container" id="weekly-rebounds-2"></div>
-                    <div class="table-container" id="weekly-assists-2"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="weekly-steals-2"></div>
-                    <div class="table-container" id="weekly-blocks-2"></div>
-                    <div class="table-container" id="weekly-per-2"></div>
-                </div>
+        <div class="table-container">
+            <h2>Weekly Top 3 Performers</h2>
+            <div class="table-row">
+                <div class="table-container" id="weekly-points"></div>
+                <div class="table-container" id="weekly-rebounds"></div>
+                <div class="table-container" id="weekly-assists"></div>
             </div>
-            <div class="regular-season-top">
-                <h2>Regular Season Top 3 Performers</h2>
-                <div class="row">
-                    <div class="table-container" id="regular-points"></div>
-                    <div class="table-container" id="regular-rebounds"></div>
-                    <div class="table-container" id="regular-assists"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="regular-steals"></div>
-                    <div class="table-container" id="regular-blocks"></div>
-                    <div class="table-container" id="regular-per"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="regular-points-2"></div>
-                    <div class="table-container" id="regular-rebounds-2"></div>
-                    <div class="table-container" id="regular-assists-2"></div>
-                </div>
-                <div class="row">
-                    <div class="table-container" id="regular-steals-2"></div>
-                    <div class="table-container" id="regular-blocks-2"></div>
-                    <div class="table-container" id="regular-per-2"></div>
-                </div>
+            <div class="table-row">
+                <div class="table-container" id="weekly-steals"></div>
+                <div class="table-container" id="weekly-blocks"></div>
+                <div class="table-container" id="weekly-per"></div>
             </div>
-        </section>
+            <h2>Regular Season Top 3 Performers</h2>
+            <div class="table-row">
+                <div class="table-container" id="regular-points"></div>
+                <div class="table-container" id="regular-rebounds"></div>
+                <div class="table-container" id="regular-assists"></div>
+            </div>
+            <div class="table-row">
+                <div class="table-container" id="regular-steals"></div>
+                <div class="table-container" id="regular-blocks"></div>
+                <div class="table-container" id="regular-per"></div>
+            </div>
+        </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <script src="scripts.js"></script>
 </body>
 </html>

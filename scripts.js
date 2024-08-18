@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const tableConfigs = {
         'Regular Season': {
             'Totals': 'Regular_Totals.csv',
@@ -24,107 +24,129 @@ document.addEventListener('DOMContentLoaded', () => {
     const positionSelect = document.getElementById('position');
     const birthYearInput = document.getElementById('birth-year');
 
-    function loadTable(fileName, containerId) {
-        const container = document.getElementById(containerId);
+    function loadTable(fileName) {
         Papa.parse(fileName, {
             download: true,
             header: true,
             complete: function(results) {
                 const data = results.data;
-                if (data.length === 0) {
-                    container.innerHTML = '<p>No data available</p>';
-                    return;
-                }
-                
-                const columns = Object.keys(data[0]);
-                let tableHtml = '<table><thead><tr>';
-                columns.forEach(column => {
-                    tableHtml += `<th>${column}</th>`;
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+
+                // Create table header
+                const headerRow = document.createElement('tr');
+                Object.keys(data[0]).forEach(key => {
+                    const th = document.createElement('th');
+                    th.textContent = key;
+                    headerRow.appendChild(th);
                 });
-                tableHtml += '</tr></thead><tbody>';
+                thead.appendChild(headerRow);
+
+                // Create table rows
                 data.forEach(row => {
-                    tableHtml += '<tr>';
-                    columns.forEach(column => {
-                        tableHtml += `<td>${row[column]}</td>`;
+                    const tr = document.createElement('tr');
+                    Object.values(row).forEach(value => {
+                        const td = document.createElement('td');
+                        td.textContent = value;
+                        tr.appendChild(td);
                     });
-                    tableHtml += '</tr>';
+                    tbody.appendChild(tr);
                 });
-                tableHtml += '</tbody></table>';
-                container.innerHTML = tableHtml;
-                applyFilters();
-            },
-            error: function(error) {
-                console.error(`Error loading CSV file: ${fileName}`, error);
-                document.getElementById('player-tables').innerHTML = '<p>Error loading data</p>';
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                document.getElementById('player-tables').innerHTML = '';
+                document.getElementById('player-tables').appendChild(table);
+                addSorting(table);
             }
         });
     }
 
-    function updateTables() {
-        const league = leagueSelect.value;
-        const statsType = statsTypeSelect.value;
-        const fileName = tableConfigs[league][statsType];
-        const containerId = 'player-tables';
-
-        loadTable(fileName, containerId);
+    function addSorting(table) {
+        const headers = table.querySelectorAll('th');
+        headers.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                const rows = Array.from(table.querySelectorAll('tbody tr'));
+                const isAscending = header.classList.contains('asc');
+                rows.sort((a, b) => {
+                    const aText = a.children[index].textContent.trim();
+                    const bText = b.children[index].textContent.trim();
+                    if (isNaN(aText) || isNaN(bText)) {
+                        return (aText > bText ? 1 : -1) * (isAscending ? -1 : 1);
+                    }
+                    return (parseFloat(aText) - parseFloat(bText)) * (isAscending ? -1 : 1);
+                });
+                const tbody = table.querySelector('tbody');
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+                header.classList.toggle('asc', !isAscending);
+                header.classList.toggle('desc', isAscending);
+            });
+        });
     }
 
-    function applyFilters() {
+    function updatePlayersTable() {
         const league = leagueSelect.value;
         const statsType = statsTypeSelect.value;
         const fileName = tableConfigs[league][statsType];
-        
+        loadTable(fileName);
+    }
+
+    leagueSelect.addEventListener('change', updatePlayersTable);
+    statsTypeSelect.addEventListener('change', updatePlayersTable);
+    divisionSelect.addEventListener('change', filterPlayers);
+    positionSelect.addEventListener('change', filterPlayers);
+    birthYearInput.addEventListener('input', filterPlayers);
+
+    function filterPlayers() {
+        const league = leagueSelect.value;
+        const statsType = statsTypeSelect.value;
+        const fileName = tableConfigs[league][statsType];
         Papa.parse(fileName, {
             download: true,
             header: true,
             complete: function(results) {
                 const data = results.data;
                 const filteredData = data.filter(row => {
-                    const division = divisionSelect.value;
-                    const position = positionSelect.value;
-                    const birthYear = birthYearInput.value;
-                    
-                    const matchesDivision = division === 'Both' || row['DIV'] === division;
-                    const matchesPosition = position === 'All' || row['POS'] === position;
-                    const matchesYear = birthYear === '' || row['BORN'] == birthYear;
-
-                    return matchesDivision && matchesPosition && matchesYear;
+                    const divisionMatch = (divisionSelect.value === 'Both' || row.DIV === divisionSelect.value);
+                    const positionMatch = (positionSelect.value === 'Both' || row.POS === positionSelect.value);
+                    const yearMatch = (!birthYearInput.value || row.BORN === birthYearInput.value);
+                    return divisionMatch && positionMatch && yearMatch;
                 });
+                const table = document.createElement('table');
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
 
-                // Generate table HTML
-                const columns = Object.keys(filteredData[0] || {});
-                let tableHtml = '<table><thead><tr>';
-                columns.forEach(column => {
-                    tableHtml += `<th>${column}</th>`;
+                // Create table header
+                const headerRow = document.createElement('tr');
+                Object.keys(data[0]).forEach(key => {
+                    const th = document.createElement('th');
+                    th.textContent = key;
+                    headerRow.appendChild(th);
                 });
-                tableHtml += '</tr></thead><tbody>';
+                thead.appendChild(headerRow);
+
+                // Create table rows
                 filteredData.forEach(row => {
-                    tableHtml += '<tr>';
-                    columns.forEach(column => {
-                        tableHtml += `<td>${row[column]}</td>`;
+                    const tr = document.createElement('tr');
+                    Object.values(row).forEach(value => {
+                        const td = document.createElement('td');
+                        td.textContent = value;
+                        tr.appendChild(td);
                     });
-                    tableHtml += '</tr>';
+                    tbody.appendChild(tr);
                 });
-                tableHtml += '</tbody></table>';
-                document.getElementById('player-tables').innerHTML = tableHtml;
-            },
-            error: function(error) {
-                console.error(`Error applying filters on CSV file: ${fileName}`, error);
-                document.getElementById('player-tables').innerHTML = '<p>Error applying filters</p>';
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+                document.getElementById('player-tables').innerHTML = '';
+                document.getElementById('player-tables').appendChild(table);
+                addSorting(table);
             }
         });
     }
 
-    leagueSelect.addEventListener('change', updateTables);
-    statsTypeSelect.addEventListener('change', updateTables);
-    divisionSelect.addEventListener('change', applyFilters);
-    positionSelect.addEventListener('change', applyFilters);
-    birthYearInput.addEventListener('input', applyFilters);
-
-    // Set default filter values and load initial table
-    window.onload = () => {
-        leagueSelect.value = 'Regular Season';
-        statsTypeSelect.value = 'Totals';
-        updateTables();
-    };
+    // Initialize with default filters
+    updatePlayersTable();
 });
