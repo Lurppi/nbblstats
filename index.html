@@ -3,48 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Home</title>
+    <title>Basketball Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropbtn">Stats</a>
-                <div class="dropdown-content">
-                    <a href="teams.html">Teams</a>
-                    <a href="players.html">Players</a>
-                </div>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
-    </nav>
-
-    <h1>Top Performers of the Week</h1>
-    <div class="table-row">
-        <div id="points-week"></div>
-        <div id="rebounds-week"></div>
-        <div id="assists-week"></div>
-    </div>
-    <div class="table-row">
-        <div id="steals-week"></div>
-        <div id="blocks-week"></div>
-        <div id="per-week"></div>
-    </div>
-
-    <h1>Regular Season Top Performers</h1>
-    <div class="table-row">
-        <div id="points-regular"></div>
-        <div id="rebounds-regular"></div>
-        <div id="assists-regular"></div>
-    </div>
-    <div class="table-row">
-        <div id="steals-regular"></div>
-        <div id="blocks-regular"></div>
-        <div id="per-regular"></div>
-    </div>
-
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="dropdown">Stats</a>
+                    <ul class="dropdown-content">
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="players.html">Players</a></li>
+                    </ul>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="weekly-top">
+            <h2>Weekly Top 3 Performer</h2>
+            <div class="table-container" id="weekly-tables"></div>
+        </section>
+        <section id="regular-season-top">
+            <h2>Regular Season Top 3 Performer</h2>
+            <div class="table-container" id="regular-season-tables"></div>
+        </section>
+    </main>
     <script src="scripts.js"></script>
 </body>
 </html>
