@@ -12,10 +12,10 @@ function loadCSV(file, callback) {
 // Function to update tables on the home page
 function updateHomePage() {
     loadCSV('Regular_Totals.csv', function(data) {
-        createTable(data, '#regular-points-table', ['Player', 'Position', 'GP', 'MP', 'Points', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'Turnovers', 'Fouls', 'Efficiency', 'DD', 'TD']);
+        createTable(data, '#regular-points-table', ['Player', 'Points']);
     });
     loadCSV('Playoffs_Totals.csv', function(data) {
-        createTable(data, '#playoffs-points-table', ['Player', 'Position', 'GP', 'MP', 'Points', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'Turnovers', 'Fouls', 'Efficiency', 'DD', 'TD']);
+        createTable(data, '#playoffs-points-table', ['Player', 'Points']);
     });
     // Repeat for other CSV files as needed
 }
@@ -24,7 +24,7 @@ function createTable(data, selector, columns) {
     let table = document.querySelector(selector);
     let headers = columns.map(col => `<th>${col}</th>`).join('');
     let rows = data.slice(0, 3).map(row => {
-        return `<tr>${columns.map(col => `<td>${row[col]}</td>`).join('')}</tr>`;
+        return `<tr>${columns.map(col => `<td>${row[col] || ''}</td>`).join('')}</tr>`;
     }).join('');
     table.innerHTML = `<thead><tr>${headers}</tr></thead><tbody>${rows}</tbody>`;
 }
