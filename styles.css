@@ -43,16 +43,20 @@ th.sortable::after {
 .navbar ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .navbar li {
     position: relative;
+    display: inline-block;
 }
 
 .navbar a {
     text-decoration: none;
     padding: 10px;
     display: block;
+    color: #000;
+    background: #f0f0f0;
 }
 
 .navbar .dropdown-content {
@@ -61,6 +65,7 @@ th.sortable::after {
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
 .navbar .dropdown-content a {
@@ -72,4 +77,8 @@ th.sortable::after {
 
 .navbar li:hover .dropdown-content {
     display: block;
+}
+
+.navbar .dropdown:hover .dropbtn {
+    background-color: #ddd;
 }

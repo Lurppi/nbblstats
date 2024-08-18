@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const league = document.getElementById('league').value;
         const statsType = document.getElementById('stats-type').value;
         const fileName = `${league.replace(' ', '_')}_${statsType.replace(' ', '_')}.csv`;
-        loadTable('player-tables', [{ title: `Player Stats (${statsType})`, file: fileName }], { league, statsType });
+        loadTable('player-tables', [{ title: `Player Stats (${statsType})`, file: fileName }]);
     }
 
     document.getElementById('league').addEventListener('change', loadPlayersTable);
