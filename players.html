@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players Stats</title>
+    <title>Players - NBBL Stats</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
@@ -18,20 +17,20 @@
             </ul>
         </nav>
     </header>
-
     <main>
-        <h2>Player Statistics</h2>
-        <div id="filters">
-            <div class="filter-container">
-                <label for="league-filter">League</label>
-                <select id="league-filter">
+        <h1>Players Stats</h1>
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter">
+                <label for="league">League</label>
+                <select id="league" onchange="loadTables()">
                     <option value="regular">Regular Season</option>
                     <option value="playoffs">Playoffs</option>
                 </select>
             </div>
-            <div class="filter-container">
-                <label for="stats-type-filter">Stats Type</label>
-                <select id="stats-type-filter">
+            <div class="filter">
+                <label for="stat-type">Stat Type</label>
+                <select id="stat-type" onchange="loadTables()">
                     <option value="totals">Totals</option>
                     <option value="averages">Averages</option>
                     <option value="shooting">Shooting</option>
@@ -40,42 +39,41 @@
                     <option value="fourfactors">Four Factors</option>
                 </select>
             </div>
-            <div class="filter-container">
-                <label for="division-filter">Division</label>
-                <select id="division-filter">
+            <div class="filter">
+                <label for="division">Division</label>
+                <select id="division" onchange="filterTable()">
                     <option value="both">Both</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                 </select>
             </div>
-            <div class="filter-container">
-                <label for="position-filter">Position</label>
-                <select id="position-filter">
+            <div class="filter">
+                <label for="position">Position</label>
+                <select id="position" onchange="filterTable()">
                     <option value="all">All</option>
-                    <option value="Point">Point</option>
-                    <option value="Combo">Combo</option>
-                    <option value="Wing">Wing</option>
-                    <option value="Forward">Forward</option>
-                    <option value="Big">Big</option>
+                    <option value="point">Point</option>
+                    <option value="combo">Combo</option>
+                    <option value="wing">Wing</option>
+                    <option value="forward">Forward</option>
+                    <option value="big">Big</option>
                 </select>
             </div>
-            <div class="filter-container">
-                <label for="born-filter">Year of Birth</label>
-                <input type="number" id="born-filter" placeholder="Year of Birth">
+            <div class="filter">
+                <label for="born">Year of Birth</label>
+                <input type="number" id="born" oninput="filterTable()" placeholder="Enter year">
             </div>
-            <div class="filter-container">
-                <label for="games-played-filter">Games Played</label>
-                <input type="number" id="games-played-filter" placeholder="Games Played">
+            <div class="filter">
+                <label for="games-played">Games Played</label>
+                <input type="number" id="games-played" oninput="filterTable()" placeholder="Minimum games">
             </div>
-            <div class="filter-container">
-                <label for="minutes-played-filter">Minutes Played</label>
-                <input type="number" id="minutes-played-filter" placeholder="Minutes Played">
+            <div class="filter">
+                <label for="minutes-played">Minutes Played</label>
+                <input type="number" id="minutes-played" oninput="filterTable()" placeholder="Minimum minutes">
             </div>
         </div>
-
-        <div id="table-container">
-            <!-- Tabellen werden hier geladen -->
-        </div>
+        <!-- Tables -->
+        <div id="player-tables"></div>
     </main>
+    <script src="scripts.js"></script>
 </body>
 </html>
