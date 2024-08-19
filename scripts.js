@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(csvUrl)
             .then(response => response.text())
             .then(csvData => {
-                const rows = csvData.split('\n').map(row => row.split(','));
+                const rows = csvData.split('\n').map(row => row.split(';'));
                 const table = document.createElement('table');
                 table.classList.add('sortable');
                 const thead = document.createElement('thead');
@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const year = filters.year.value;
 
             document.querySelectorAll('.table-container table tbody tr').forEach(row => {
-                const divisionText = row.cells[0].textContent.trim(); // Anpassung an die richtige Spalte
-                const positionText = row.cells[1].textContent.trim(); // Anpassung an die richtige Spalte
-                const yearText = row.cells[2].textContent.trim(); // Anpassung an die richtige Spalte
+                const divisionText = row.cells[0].textContent.trim(); 
+                const positionText = row.cells[1].textContent.trim(); 
+                const yearText = row.cells[2].textContent.trim(); 
 
                 const divisionMatch = division === 'Both' || divisionText === division;
                 const positionMatch = position === 'All' || positionText === position;
