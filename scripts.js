@@ -17,10 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.text())
                 .then(data => {
                     tableElement.innerHTML = csvToHtmlTable(data, id);
-                    if (type === 'weekly') {
-                        if (tableElement.id === 'points-week') addTop3Sorting(tableElement, data);
+                    if (type === 'weekly' && tableElement.id === 'points-week') {
+                        addTop3Sorting(tableElement, data);
                     }
-                });
+                })
+                .catch(error => console.error('Error loading CSV file:', error));
         });
     }
 
@@ -64,13 +65,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 document.getElementById('player-table-container').innerHTML = csvToHtmlTable(data);
                 addSortFunctionality();
-            });
+            })
+            .catch(error => console.error('Error loading CSV file:', error));
     }
 
     function getPlayerTableUrl() {
         const league = document.getElementById('league-filter').value.toLowerCase();
         const statsType = document.getElementById('stats-type-filter').value.toLowerCase();
-        return `${league}_${statsType}.csv`;
+        return `https://github.com/Lurppi/nbblstats/${league}_${statsType}.csv`;
     }
 
     function addSortFunctionality() {
