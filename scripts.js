@@ -42,65 +42,84 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function csvToHtmlTable(csv) {
-        const rows = csv.split('\n').map(row => row.split(';'));
-        let html = '<table><thead><tr>';
-        rows[0].forEach(header => html += `<th>${header}</th>`);
-        html += '</tr></thead><tbody>';
-        rows.slice(1).forEach(row => {
-            html += '<tr>';
-            row.forEach(cell => html += `<td>${cell}</td>`);
-            html += '</tr>';
-        });
-        html += '</tbody></table>';
-        return html;
-    }
+        const rows = csv.split('\n');
+        const headers = rows[0].split(';');
+        let table = '<table><thead><tr>';
+        headers.forEach(header => table += `<th class="sortable">${header}</th>`);
+        table += '</tr></thead><tbody>';
 
-    function applyFilters() {
-        const filters = {
-            division: document.getElementById('division-filter').value,
-            position: document.getElementById('position-filter').value,
-            yearOfBirth: document.getElementById('year-of-birth-filter').value,
-            gamesPlayed: document.getElementById('games-played-filter').value,
-            minutesPlayed: document.getElementById('minutes-played-filter').value
-        };
-        const rows = document.querySelectorAll('#player-table-container table tbody tr');
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            const matches = {
-                division: filters.division === 'both' || cells[3].innerText.includes(filters.division),
-                position: filters.position === 'all' || cells[4].innerText.includes(filters.position),
-                yearOfBirth: filters.yearOfBirth === '' || cells[5].innerText.includes(filters.yearOfBirth),
-                gamesPlayed: filters.gamesPlayed === '' || parseInt(cells[6].innerText, 10) >= parseInt(filters.gamesPlayed, 10),
-                minutesPlayed: filters.minutesPlayed === '' || parseInt(cells[7].innerText, 10) >= parseInt(filters.minutesPlayed, 10)
-            };
-            row.style.display = Object.values(matches).every(match => match) ? '' : 'none';
+        rows.slice(1).forEach(row => {
+            if (row) {
+                const columns = row.split(';');
+                table += '<tr>';
+                columns.forEach(col => table += `<td>${col}</td>`);
+                table += '</tr>';
+            }
         });
+
+        table += '</tbody></table>';
+        return table;
     }
 
     function addSortFunctionality() {
-        const headers = document.querySelectorAll('#player-table-container table th');
-        headers.forEach((header, index) => {
-            header.addEventListener('click', () => sortTable(index));
+        const headers = document.querySelectorAll('th.sortable');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const table = header.closest('table');
+                const rows = Array.from(table.querySelectorAll('tbody tr'));
+                const index = Array.from(header.parentElement.children).indexOf(header);
+                const isAscending = header.classList.contains('asc');
+
+                rows.sort((a, b) => {
+                    const aText = a.children[index].textContent.trim();
+                    const bText = b.children[index].textContent.trim();
+
+                    if (!isNaN(aText) && !isNaN(bText)) {
+                        return isAscending ? aText - bText : bText - aText;
+                    }
+
+                    return isAscending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+                });
+
+                rows.forEach(row => table.querySelector('tbody').appendChild(row));
+                headers.forEach(h => h.classList.remove('asc', 'desc'));
+                header.classList.add(isAscending ? 'desc' : 'asc');
+            });
         });
     }
 
-    function sortTable(columnIndex) {
-        const table = document.querySelector('#player-table-container table');
-        const rows = Array.from(table.querySelectorAll('tbody tr'));
-        const isAscending = table.querySelectorAll('thead th')[columnIndex].classList.toggle('asc');
-        rows.sort((a, b) => {
-            const aText = a.children[columnIndex].innerText.trim();
-            const bText = b.children[columnIndex].innerText.trim();
-            const aValue = isNaN(aText) ? aText : parseFloat(aText);
-            const bValue = isNaN(bText) ? bText : parseFloat(bText);
-            return isAscending ? aValue > bValue ? 1 : -1 : aValue < bValue ? 1 : -1;
+    function applyFilters() {
+        const division = document.getElementById('division-filter').value;
+        const position = document.getElementById('position-filter').value;
+        const yearOfBirth = document.getElementById('year-of-birth-filter').value;
+        const minGamesPlayed = parseInt(document.getElementById('games-played-filter').value, 10) || 0;
+        const minMinutesPlayed = parseInt(document.getElementById('minutes-played-filter').value, 10) || 0;
+
+        document.querySelectorAll('#player-table-container table tbody tr').forEach(row => {
+            const cols = row.children;
+            const rowDivision = cols[cols.length - 5].textContent.trim();
+            const rowPosition = cols[cols.length - 4].textContent.trim();
+            const rowYearOfBirth = cols[cols.length - 3].textContent.trim();
+            const rowGamesPlayed = parseInt(cols[cols.length - 2].textContent.trim(), 10);
+            const rowMinutesPlayed = parseInt(cols[cols.length - 1].textContent.trim(), 10);
+
+            const matchesDivision = division === 'both' || rowDivision === division;
+            const matchesPosition = position === 'all' || rowPosition === position;
+            const matchesYearOfBirth = !yearOfBirth || rowYearOfBirth.includes(yearOfBirth);
+            const matchesGamesPlayed = rowGamesPlayed >= minGamesPlayed;
+            const matchesMinutesPlayed = rowMinutesPlayed >= minMinutesPlayed;
+
+            row.style.display = matchesDivision && matchesPosition && matchesYearOfBirth && matchesGamesPlayed && matchesMinutesPlayed ? '' : 'none';
         });
-        rows.forEach(row => table.querySelector('tbody').appendChild(row));
     }
 
-    // Event Listener für Filteränderungen
-    document.querySelectorAll('select, input').forEach(filter => filter.addEventListener('change', loadPlayerTable));
+    document.getElementById('league-filter').addEventListener('change', loadPlayerTable);
+    document.getElementById('stats-type-filter').addEventListener('change', loadPlayerTable);
+    document.getElementById('division-filter').addEventListener('change', applyFilters);
+    document.getElementById('position-filter').addEventListener('change', applyFilters);
+    document.getElementById('year-of-birth-filter').addEventListener('input', applyFilters);
+    document.getElementById('games-played-filter').addEventListener('input', applyFilters);
+    document.getElementById('minutes-played-filter').addEventListener('input', applyFilters);
 
-    // Initialer Ladevorgang
     loadPlayerTable();
 });
