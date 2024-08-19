@@ -25,41 +25,7 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Styles für die Tabellen */
-.table-container {
-    margin: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-    cursor: pointer;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-th.sort-asc::after {
-    content: "▲";
-}
-
-th.sort-desc::after {
-    content: "▼";
-}
-
-/* Styles für Filter */
+/* Styles für die Filter */
 .filter-container {
     margin: 20px 0;
 }
@@ -70,4 +36,61 @@ th.sort-desc::after {
 
 .filter-container select, .filter-container input {
     margin-right: 20px;
+    padding: 5px;
+}
+
+/* Styles für die Tabellen */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+    position: relative;
+}
+
+th.sort-asc::after {
+    content: "▲";
+    position: absolute;
+    right: 10px;
+}
+
+th.sort-desc::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styles für die Tabellen in der Home-Seite */
+.tables-container {
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row table {
+    flex: 1;
+    margin: 0 10px;
 }

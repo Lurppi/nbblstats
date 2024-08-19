@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 rows.slice(0, limit).forEach((row, index) => {
                     const tr = document.createElement('tr');
-                    row.forEach((cell) => {
+                    row.forEach((cell, cellIndex) => {
                         const td = document.createElement(index === 0 ? 'th' : 'td');
                         td.textContent = cell;
                         tr.appendChild(td);
@@ -51,30 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading table data:', error));
     }
 
-    // Tabellen auf der Home-Seite laden
-    const homeTables = [
-        'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
-        'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
-    ];
-    homeTables.forEach(key => {
-        if (document.getElementById(key)) {
-            loadTable(key, files[key], 4);
-        }
-    });
-
-    // Filter für die Players-Seite
-    const leagueFilter = document.getElementById('league-filter');
-    const statTypeFilter = document.getElementById('stat-type-filter');
-    const divisionFilter = document.getElementById('division-filter');
-    const positionFilter = document.getElementById('position-filter');
-    const yearFilter = document.getElementById('year-filter');
-    const gamesPlayedFilter = document.getElementById('games-played-filter');
-    const minutesPlayedFilter = document.getElementById('minutes-played-filter');
-    const teamFilter = document.getElementById('team-filter');
-
     function loadFilteredTable() {
-        const league = leagueFilter.value;
-        const statType = statTypeFilter.value;
+        const league = document.getElementById('league-filter').value;
+        const statType = document.getElementById('stat-type-filter').value;
         const url = files[`${league}-${statType}`];
 
         if (url) {
@@ -89,10 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     rows.forEach((row, index) => {
                         if (index === 0) {
-                            row.forEach((cell) => {
+                            row.forEach((cell, cellIndex) => {
                                 const th = document.createElement('th');
                                 th.textContent = cell;
-                                th.addEventListener('click', () => sortTable(thead, tbody, Array.from(th.parentElement.children).indexOf(th)));
+                                th.addEventListener('click', () => sortTable(thead, tbody, cellIndex));
                                 thead.appendChild(th);
                             });
                         } else {
@@ -130,12 +109,34 @@ document.addEventListener('DOMContentLoaded', function() {
         thead.rows[0].cells[columnIndex].classList.toggle('sort-desc', isAscending);
     }
 
-    leagueFilter.addEventListener('change', loadFilteredTable);
-    statTypeFilter.addEventListener('change', loadFilteredTable);
-    divisionFilter.addEventListener('change', loadFilteredTable);
-    positionFilter.addEventListener('change', loadFilteredTable);
-    yearFilter.addEventListener('input', loadFilteredTable);
-    gamesPlayedFilter.addEventListener('input', loadFilteredTable);
-    minutesPlayedFilter.addEventListener('input', loadFilteredTable);
-    teamFilter.addEventListener('change', loadFilteredTable);
+    function populateTeamFilter() {
+        const teamFilter = document.getElementById('team-filter');
+        fetch(files['regular-totals'])
+            .then(response => response.text())
+            .then(data => {
+                const teams = new Set(data.split('\n').slice(1).map(row => row.split(',')[2]));
+                teams.forEach(team => {
+                    const option = document.createElement('option');
+                    option.value = team;
+                    option.textContent = team;
+                    teamFilter.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error loading teams:', error));
+    }
+
+    // Initial load
+    document.getElementById('league-filter').value = 'regular';
+    document.getElementById('stat-type-filter').value = 'totals';
+    loadFilteredTable();
+    populateTeamFilter();
+
+    document.getElementById('league-filter').addEventListener('change', loadFilteredTable);
+    document.getElementById('stat-type-filter').addEventListener('change', loadFilteredTable);
+    document.getElementById('division-filter').addEventListener('change', loadFilteredTable);
+    document.getElementById('team-filter').addEventListener('change', loadFilteredTable);
+    document.getElementById('position-filter').addEventListener('change', loadFilteredTable);
+    document.getElementById('year-filter').addEventListener('input', loadFilteredTable);
+    document.getElementById('games-played-filter').addEventListener('input', loadFilteredTable);
+    document.getElementById('minutes-played-filter').addEventListener('input', loadFilteredTable);
 });
