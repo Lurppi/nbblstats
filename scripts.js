@@ -1,55 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const leagueTypeSelect = document.getElementById('league-type');
-  const statTypeSelect = document.getElementById('stat-type');
-  const playerNameInput = document.getElementById('player-name');
-  const loadDataButton = document.getElementById('load-data');
-  const dataTable = document.getElementById('data-table');
+    // CSV-Dateipfade auf GitHub
+    const files = {
+        'points-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-week.csv',
+        'rebounds-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-week.csv',
+        'assists-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/assists-week.csv',
+        'steals-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/steals-week.csv',
+        'blocks-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/blocks-week.csv',
+        'per-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/per-week.csv',
+        'points-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-regular.csv',
+        'rebounds-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-regular.csv',
+        'assists-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/assists-regular.csv',
+        'steals-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/steals-regular.csv',
+        'blocks-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/blocks-regular.csv',
+        'per-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/per-regular.csv',
+        'regular-totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Totals.csv',
+        'playoffs-totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Totals.csv',
+        'regular-averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Averages.csv',
+        'playoffs-averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Averages.csv',
+        'regular-shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Shooting.csv',
+        'playoffs-shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Shooting.csv',
+        'regular-advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced1.csv',
+        'playoffs-advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced1.csv',
+        'regular-advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced2.csv',
+        'playoffs-advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced2.csv',
+        'regular-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Four_Factors.csv',
+        'playoffs-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv'
+    };
 
-  const leagueTypeOptions = ['League1', 'League2']; // Example options
-  const statTypeFiles = {
-    totals: 'totals.csv',
-    averages: 'averages.csv',
-    shooting: 'shooting.csv',
-    advanced1: 'advanced1.csv',
-    advanced2: 'advanced2.csv',
-    four-factors: 'four-factors.csv'
-  };
+    function loadTable(id, url) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                const table = document.getElementById(id);
+                const rows = data.split('\n').map(row => row.split(','));
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
 
-  function populateLeagueOptions() {
-    leagueTypeOptions.forEach(option => {
-      const opt = document.createElement('option');
-      opt.value = option;
-      opt.textContent = option;
-      leagueTypeSelect.appendChild(opt);
+                rows.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    row.forEach((cell) => {
+                        const td = document.createElement(index === 0 ? 'th' : 'td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    (index === 0 ? thead : tbody).appendChild(tr);
+                });
+
+                table.appendChild(thead);
+                table.appendChild(tbody);
+            })
+            .catch(error => console.error('Error loading table data:', error));
+    }
+
+    // Tabellen auf der Home-Seite laden
+    Object.keys(files).forEach(key => {
+        if (document.getElementById(key)) {
+            loadTable(key, files[key]);
+        }
     });
-  }
 
-  function loadTableData() {
-    const leagueType = leagueTypeSelect.value;
-    const statType = statTypeSelect.value;
-    const playerName = playerNameInput.value.trim();
-    const csvFile = statTypeFiles[statType];
-    
-    // Assuming a function fetchCSVData exists that fetches CSV data based on the file name
-    fetchCSVData(csvFile, leagueType, playerName).then(data => {
-      dataTable.innerHTML = ''; // Clear previous data
-      // Populate the table with new data
-      renderTable(data);
-    }).catch(error => {
-      console.error('Error loading data:', error);
-    });
-  }
+    // Filter für die Players-Seite
+    const leagueFilter = document.getElementById('league-filter');
+    const statTypeFilter = document.getElementById('stat-type-filter');
+    const divisionFilter = document.getElementById('division-filter');
+    const positionFilter = document.getElementById('position-filter');
+    const yearFilter = document.getElementById('year-filter');
+    const gamesPlayedFilter = document.getElementById('games-played-filter');
+    const minutesPlayedFilter = document.getElementById('minutes-played-filter');
+    const teamFilter = document.getElementById('team-filter');
 
-  function fetchCSVData(file, league, player) {
-    // Implement CSV fetching and parsing logic
-    // Return a promise with the parsed data
-  }
+    function loadFilteredTable() {
+        const league = leagueFilter.value;
+        const statType = statTypeFilter.value;
 
-  function renderTable(data) {
-    // Implement table rendering logic
-  }
+        const url = files[`regular-${statType}`];
+        if (url) {
+            loadTable('regular-totals', url);
+        }
+    }
 
-  populateLeagueOptions();
-
-  loadDataButton.addEventListener('click', loadTableData);
+    leagueFilter.addEventListener('change', loadFilteredTable);
+    statTypeFilter.addEventListener('change', loadFilteredTable);
 });

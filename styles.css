@@ -1,120 +1,73 @@
-/* Allgemeine Stile für die gesamte Website */
-body {
-    font-family: Arial, sans-serif;
+/* Styles für das Hauptmenü */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-/* Container für den Inhalt der Website */
-.container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
+nav ul li {
+    display: inline;
+    margin-right: 20px;
 }
 
-/* Stile für die Abschnitte auf der Home-Seite */
-.section {
-    margin-bottom: 40px;
+nav ul li a {
+    color: white;
+    text-decoration: none;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+nav ul li a:hover {
+    text-decoration: underline;
 }
 
-/* Stile für die Tabellen auf der Home-Seite */
+/* Styles für die Tabellen */
 .table-container {
-    display: inline-block;
-    width: 30%;
-    vertical-align: top;
-    margin: 1%;
-    box-sizing: border-box;
+    margin: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
 }
 
-thead th {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
 }
 
-tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+th {
+    background-color: #f4f4f4;
+    cursor: pointer;
 }
 
-tbody tr:hover {
-    background-color: #f1f1f1;
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-/* Zeilen für die Home-Seite */
-.row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+th.sort-asc::after {
+    content: "▲";
 }
 
-/* Stile für die Filter auf der Players-Seite */
-.filters {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+th.sort-desc::after {
+    content: "▼";
 }
 
-.filters label {
+/* Styles für Filter */
+.filter-container {
+    margin: 20px 0;
+}
+
+.filter-container label {
     margin-right: 10px;
-    font-weight: bold;
 }
 
-.filters select {
-    padding: 5px;
+.filter-container select, .filter-container input {
     margin-right: 20px;
-}
-
-/* Stile für die Tabellen auf der Players-Seite */
-#player-stats {
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-#player-stats table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-#player-stats thead th {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    text-align: left;
-}
-
-#player-stats tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-#player-stats tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    .table-container {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    
-    .row {
-        flex-direction: column;
-    }
 }

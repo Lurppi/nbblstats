@@ -3,93 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Stats</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const files = {
-                totals: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Totals.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Totals.csv'
-                },
-                averages: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Averages.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Averages.csv'
-                },
-                shooting: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Shooting.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Shooting.csv'
-                },
-                advanced1: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Advanced1.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Advanced1.csv'
-                },
-                advanced2: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Advanced2.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Advanced2.csv'
-                },
-                four_factors: {
-                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Four_Factors.csv',
-                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Four_Factors.csv'
-                }
-            };
-
-            function loadTable(file, elementId) {
-                Papa.parse(file, {
-                    download: true,
-                    header: true,
-                    complete: function(results) {
-                        let data = results.data;
-                        let html = '<table><thead><tr><th>Player</th><th>Team</th><th>DIV</th><th>POS</th><th>BORN</th><th>Games</th><th>Minutes</th></tr></thead><tbody>';
-                        data.forEach(row => {
-                            html += `<tr><td>${row.Player}</td><td>${row.Team}</td><td>${row.DIV}</td><td>${row.POS}</td><td>${row.BORN}</td><td>${row.Games}</td><td>${row.Minutes}</td></tr>`;
-                        });
-                        html += '</tbody></table>';
-                        $(elementId).html(html);
-                    }
-                });
-            }
-
-            function updateTable() {
-                let league = $('#league').val();
-                let statsType = $('#stats-type').val();
-                let file = files[statsType][league];
-                loadTable(file, '#player-stats');
-            }
-
-            $('#league, #stats-type').change(updateTable);
-
-            // Set default filter
-            $('#league').val('regular');
-            $('#stats-type').val('totals');
-            updateTable();
-        });
-    </script>
+    <title>Basketball Stats - Players</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Filters -->
-        <div class="filters">
-            <label for="league">League:</label>
-            <select id="league">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="players.html">Players</a></li>
+        </ul>
+    </nav>
+    <div id="content">
+        <h1>Player Statistics</h1>
+        <div class="filter-container">
+            <label for="league-filter">League:</label>
+            <select id="league-filter">
                 <option value="regular">Regular Season</option>
                 <option value="playoffs">Playoffs</option>
             </select>
-            <label for="stats-type">Stats Type:</label>
-            <select id="stats-type">
+
+            <label for="stat-type-filter">Stats Type:</label>
+            <select id="stat-type-filter">
                 <option value="totals">Totals</option>
                 <option value="averages">Averages</option>
                 <option value="shooting">Shooting</option>
                 <option value="advanced1">Advanced1</option>
                 <option value="advanced2">Advanced2</option>
-                <option value="four_factors">Four Factors</option>
+                <option value="fourfactors">Four Factors</option>
+            </select>
+
+            <label for="division-filter">Division:</label>
+            <select id="division-filter">
+                <option value="both">Both</option>
+                <option value="east">East</option>
+                <option value="west">West</option>
+            </select>
+
+            <label for="position-filter">Position:</label>
+            <select id="position-filter">
+                <option value="all">All</option>
+                <option value="guard">Guard</option>
+                <option value="forward">Forward</option>
+                <option value="center">Center</option>
+            </select>
+
+            <label for="year-filter">Year of Birth:</label>
+            <input type="number" id="year-filter" min="1900" max="2024" />
+
+            <label for="games-played-filter">Games Played:</label>
+            <input type="number" id="games-played-filter" min="0" />
+
+            <label for="minutes-played-filter">Minutes Played:</label>
+            <input type="number" id="minutes-played-filter" min="0" />
+
+            <label for="team-filter">Team:</label>
+            <select id="team-filter">
+                <!-- Team-Optionen werden dynamisch hinzugefügt -->
             </select>
         </div>
-
-        <!-- Player Stats Table -->
-        <div id="player-stats"></div>
+        <div id="players-tables">
+            <table id="regular-totals"></table>
+            <table id="playoffs-totals"></table>
+            <table id="regular-averages"></table>
+            <table id="playoffs-averages"></table>
+            <table id="regular-shooting"></table>
+            <table id="playoffs-shooting"></table>
+            <table id="regular-advanced1"></table>
+            <table id="playoffs-advanced1"></table>
+            <table id="regular-advanced2"></table>
+            <table id="playoffs-advanced2"></table>
+            <table id="regular-fourfactors"></table>
+            <table id="playoffs-fourfactors"></table>
+        </div>
     </div>
 </body>
 </html>

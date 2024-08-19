@@ -3,94 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Performers</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            const files = {
-                weekly: {
-                    points: 'https://github.com/Lurppi/nbblstats/raw/main/csv/points-week.csv',
-                    rebounds: 'https://github.com/Lurppi/nbblstats/raw/main/csv/rebounds-week.csv',
-                    assists: 'https://github.com/Lurppi/nbblstats/raw/main/csv/assists-week.csv',
-                    steals: 'https://github.com/Lurppi/nbblstats/raw/main/csv/steals-week.csv',
-                    blocks: 'https://github.com/Lurppi/nbblstats/raw/main/csv/blocks-week.csv',
-                    per: 'https://github.com/Lurppi/nbblstats/raw/main/csv/per-week.csv'
-                },
-                regular: {
-                    points: 'https://github.com/Lurppi/nbblstats/raw/main/csv/points-regular.csv',
-                    rebounds: 'https://github.com/Lurppi/nbblstats/raw/main/csv/rebounds-regular.csv',
-                    assists: 'https://github.com/Lurppi/nbblstats/raw/main/csv/assists-regular.csv',
-                    steals: 'https://github.com/Lurppi/nbblstats/raw/main/csv/steals-regular.csv',
-                    blocks: 'https://github.com/Lurppi/nbblstats/raw/main/csv/blocks-regular.csv',
-                    per: 'https://github.com/Lurppi/nbblstats/raw/main/csv/per-regular.csv'
-                }
-            };
-
-            function loadTable(file, elementId) {
-                Papa.parse(file, {
-                    download: true,
-                    header: true,
-                    complete: function(results) {
-                        let data = results.data;
-                        let html = '<table><thead><tr><th>Player</th><th>Team</th><th>Stat</th></tr></thead><tbody>';
-                        data.forEach(row => {
-                            html += `<tr><td>${row.Player}</td><td>${row.Team}</td><td>${row.Stat}</td></tr>`;
-                        });
-                        html += '</tbody></table>';
-                        $(elementId).html(html);
-                    }
-                });
-            }
-
-            // Load weekly top 3
-            loadTable(files.weekly.points, '#weekly-points');
-            loadTable(files.weekly.rebounds, '#weekly-rebounds');
-            loadTable(files.weekly.assists, '#weekly-assists');
-            loadTable(files.weekly.steals, '#weekly-steals');
-            loadTable(files.weekly.blocks, '#weekly-blocks');
-            loadTable(files.weekly.per, '#weekly-per');
-
-            // Load regular season top 3
-            loadTable(files.regular.points, '#regular-points');
-            loadTable(files.regular.rebounds, '#regular-rebounds');
-            loadTable(files.regular.assists, '#regular-assists');
-            loadTable(files.regular.steals, '#regular-steals');
-            loadTable(files.regular.blocks, '#regular-blocks');
-            loadTable(files.regular.per, '#regular-per');
-        });
-    </script>
+    <title>Basketball Stats - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Weekly Top Performers -->
-        <div class="section">
-            <h2>Weekly Top Performers</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="players.html">Players</a></li>
+        </ul>
+    </nav>
+    <div id="content">
+        <h1>Top 3 Performer</h1>
+        <div class="tables-container">
+            <h2>Weekly Top 3</h2>
             <div class="row">
-                <div id="weekly-points" class="table-container"></div>
-                <div id="weekly-rebounds" class="table-container"></div>
-                <div id="weekly-assists" class="table-container"></div>
+                <table id="points-week"></table>
+                <table id="rebounds-week"></table>
+                <table id="assists-week"></table>
             </div>
             <div class="row">
-                <div id="weekly-steals" class="table-container"></div>
-                <div id="weekly-blocks" class="table-container"></div>
-                <div id="weekly-per" class="table-container"></div>
+                <table id="steals-week"></table>
+                <table id="blocks-week"></table>
+                <table id="per-week"></table>
             </div>
-        </div>
-
-        <!-- Regular Season Top Performers -->
-        <div class="section">
-            <h2>Regular Season Top Performers</h2>
+            <h2>Regular Season Top 3</h2>
             <div class="row">
-                <div id="regular-points" class="table-container"></div>
-                <div id="regular-rebounds" class="table-container"></div>
-                <div id="regular-assists" class="table-container"></div>
+                <table id="points-regular"></table>
+                <table id="rebounds-regular"></table>
+                <table id="assists-regular"></table>
             </div>
             <div class="row">
-                <div id="regular-steals" class="table-container"></div>
-                <div id="regular-blocks" class="table-container"></div>
-                <div id="regular-per" class="table-container"></div>
+                <table id="steals-regular"></table>
+                <table id="blocks-regular"></table>
+                <table id="per-regular"></table>
             </div>
         </div>
     </div>
