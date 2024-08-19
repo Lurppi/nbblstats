@@ -36,8 +36,8 @@
             <label for="division-filter">Division:</label>
             <select id="division-filter">
                 <option value="both">Both</option>
-                <option value="east">East</option>
-                <option value="west">West</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
             </select>
 
             <label for="team-filter">Team:</label>
@@ -47,23 +47,24 @@
 
             <label for="position-filter">Position:</label>
             <select id="position-filter">
-                <option value="all">All</option>
-                <option value="guard">Guard</option>
+                <option value="point">Point</option>
+                <option value="combo">Combo</option>
+                <option value="wing">Wing</option>
                 <option value="forward">Forward</option>
-                <option value="center">Center</option>
+                <option value="big">Big</option>
             </select>
 
             <label for="year-filter">Year of Birth:</label>
-            <input type="number" id="year-filter" min="1900" max="2024" />
+            <input type="number" id="year-filter" placeholder="e.g. 2005">
 
             <label for="games-played-filter">Games Played:</label>
-            <input type="number" id="games-played-filter" min="0" />
+            <input type="number" id="games-played-filter" placeholder="Minimum">
 
             <label for="minutes-played-filter">Minutes Played:</label>
-            <input type="number" id="minutes-played-filter" min="0" />
+            <input type="number" id="minutes-played-filter" placeholder="Minimum">
         </div>
         <div id="players-tables">
-            <!-- Die Tabellen werden hier durch JavaScript dynamisch hinzugefügt -->
+            <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
         </div>
     </div>
 </body>
