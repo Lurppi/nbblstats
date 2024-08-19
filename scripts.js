@@ -8,6 +8,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const minutesPlayedFilter = document.getElementById("minutes-played-filter");
     const tableContainer = document.getElementById("table-container");
 
+    const fileMapping = {
+        'regular': {
+            'totals': 'regular_totals.csv',
+            'averages': 'regular_averages.csv',
+            'shooting': 'regular_shooting.csv',
+            'advanced1': 'regular_advanced1.csv',
+            'advanced2': 'regular_advanced2.csv',
+            'fourfactors': 'regular_fourfactors.csv'
+        },
+        'playoffs': {
+            'totals': 'playoffs_totals.csv',
+            'averages': 'playoffs_averages.csv',
+            'shooting': 'playoffs_shooting.csv',
+            'advanced1': 'playoffs_advanced1.csv',
+            'advanced2': 'playoffs_advanced2.csv',
+            'fourfactors': 'playoffs_fourfactors.csv'
+        }
+    };
+
     function loadTable() {
         const league = leagueFilter.value;
         const statsType = statsTypeFilter.value;
@@ -17,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const gamesPlayed = gamesPlayedFilter.value;
         const minutesPlayed = minutesPlayedFilter.value;
 
-        const fileName = `${league}_${statsType}.csv`;
+        const fileName = fileMapping[league][statsType];
 
         fetch(fileName)
             .then(response => response.text())
@@ -70,13 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         const sortedRows = filteredRows.sort((a, b) => {
                             const cellA = a[index];
                             const cellB = b[index];
-                            if (!isNaN(cellA) && !isNaN(cellB)) {
-                                return parseFloat(cellA) - parseFloat(cellB);
-                            } else {
-                                return cellA.localeCompare(cellB);
-                            }
+                            return isNaN(cellA) ? cellA.localeCompare(cellB) : cellA - cellB;
                         });
-                        const sortedTableHTML = `
+                        tableContainer.innerHTML = `
                             <table>
                                 <thead>
                                     <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
@@ -86,14 +101,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </tbody>
                             </table>
                         `;
-                        tableContainer.innerHTML = sortedTableHTML;
                     });
                 });
             })
-            .catch(error => {
-                console.error('Error loading table:', error);
-                tableContainer.innerHTML = "<p>Error loading table.</p>";
-            });
+            .catch(error => console.error('Error loading the table data:', error));
     }
 
     leagueFilter.addEventListener("change", loadTable);
