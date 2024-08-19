@@ -23,66 +23,97 @@ document.addEventListener('DOMContentLoaded', () => {
         'Regular_Advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced2.csv',
         'Playoffs_Advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced2.csv',
         'Regular_Four_Factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Four_Factors.csv',
-        'Playoffs_Four_Factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv',
+        'Playoffs_Four_Factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv'
     };
 
-    Object.keys(tables).forEach(tableId => {
-        fetch(tables[tableId])
+    const fetchAndDisplayTable = (tableId, csvUrl) => {
+        fetch(csvUrl)
             .then(response => response.text())
-            .then(data => {
-                const tableContainer = document.getElementById(tableId);
+            .then(csvData => {
+                const rows = csvData.split('\n').map(row => row.split(','));
                 const table = document.createElement('table');
                 table.classList.add('sortable');
-                const rows = data.trim().split('\n');
-                const headers = rows[0].split(',');
-                
-                // Create thead
                 const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+
+                const headers = rows[0];
                 const headerRow = document.createElement('tr');
-                headers.forEach(headerText => {
+                headers.forEach(header => {
                     const th = document.createElement('th');
-                    th.textContent = headerText;
+                    th.textContent = header;
                     headerRow.appendChild(th);
                 });
                 thead.appendChild(headerRow);
-                table.appendChild(thead);
 
-                // Create tbody
-                const tbody = document.createElement('tbody');
-                rows.slice(1).forEach(row => {
-                    const tr = document.createElement('tr');
-                    row.split(',').forEach(cellText => {
+                for (let i = 1; i < rows.length; i++) {
+                    const row = document.createElement('tr');
+                    rows[i].forEach(cell => {
                         const td = document.createElement('td');
-                        td.textContent = cellText;
-                        tr.appendChild(td);
+                        td.textContent = cell;
+                        row.appendChild(td);
                     });
-                    tbody.appendChild(tr);
-                });
+                    tbody.appendChild(row);
+                }
+
+                table.appendChild(thead);
                 table.appendChild(tbody);
+                document.getElementById(tableId).appendChild(table);
 
-                tableContainer.appendChild(table);
-            })
-            .catch(error => console.error(`Error loading data for ${tableId}:`, error));
-    });
+                // Tabellen sortierbar machen
+                Array.from(table.querySelectorAll('th')).forEach(header => {
+                    header.addEventListener('click', () => {
+                        const index = Array.from(header.parentElement.children).indexOf(header);
+                        const ascending = header.classList.contains('ascending');
+                        const direction = ascending ? -1 : 1;
+                        header.classList.toggle('ascending', !ascending);
+                        header.classList.toggle('descending', ascending);
 
-    document.querySelectorAll('.sortable th').forEach(header => {
-        header.addEventListener('click', () => {
-            const table = header.closest('table');
-            const index = Array.from(header.parentElement.children).indexOf(header);
-            const ascending = header.classList.contains('ascending');
-            const direction = ascending ? -1 : 1;
-            header.classList.toggle('ascending', !ascending);
-            header.classList.toggle('descending', ascending);
-
-            const rows = Array.from(table.querySelector('tbody').rows);
-
-            rows.sort((a, b) => {
-                const aText = a.cells[index].textContent.trim();
-                const bText = b.cells[index].textContent.trim();
-                return (aText > bText ? 1 : -1) * direction;
+                        const rows = Array.from(table.querySelector('tbody').rows);
+                        rows.sort((a, b) => {
+                            const aText = a.cells[index].textContent.trim();
+                            const bText = b.cells[index].textContent.trim();
+                            return (aText > bText ? 1 : -1) * direction;
+                        });
+                        rows.forEach(row => table.querySelector('tbody').appendChild(row));
+                    });
+                });
             });
+    };
 
-            rows.forEach(row => table.querySelector('tbody').appendChild(row));
-        });
-    });
+    Object.keys(tables).forEach(tableId => fetchAndDisplayTable(tableId, tables[tableId]));
+
+    // Filter für die Players-Seite implementieren
+    if (window.location.pathname.includes('players.html')) {
+        const filters = {
+            division: document.getElementById('division-filter'),
+            position: document.getElementById('position-filter'),
+            year: document.getElementById('year-filter')
+        };
+
+        const filterTable = () => {
+            const division = filters.division.value;
+            const position = filters.position.value;
+            const year = filters.year.value;
+
+            document.querySelectorAll('.table-container table tbody tr').forEach(row => {
+                const divisionText = row.cells[0].textContent.trim(); // Anpassung an die richtige Spalte
+                const positionText = row.cells[1].textContent.trim(); // Anpassung an die richtige Spalte
+                const yearText = row.cells[2].textContent.trim(); // Anpassung an die richtige Spalte
+
+                const divisionMatch = division === 'Both' || divisionText === division;
+                const positionMatch = position === 'All' || positionText === position;
+                const yearMatch = year === 'All' || yearText === year;
+
+                if (divisionMatch && positionMatch && yearMatch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        };
+
+        filters.division.addEventListener('change', filterTable);
+        filters.position.addEventListener('change', filterTable);
+        filters.year.addEventListener('change', filterTable);
+    }
 });

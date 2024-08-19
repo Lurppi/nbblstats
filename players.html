@@ -10,14 +10,42 @@
     <nav class="main-menu">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="players.html">Players</a></li>
-            <!-- Weitere Menüpunkte -->
+            <li><a href="#">Stats</a>
+                <ul class="dropdown">
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="players.html">Players</a></li>
+                </ul>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
         </ul>
     </nav>
 
     <h1>Player Statistics</h1>
     <div class="filter-controls">
-        <!-- Filter Dropdowns für Division, Position, Year of Birth -->
+        <label for="division-filter">Division:</label>
+        <select id="division-filter">
+            <option value="Both">Both</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+        </select>
+
+        <label for="position-filter">Position:</label>
+        <select id="position-filter">
+            <option value="All">All</option>
+            <option value="Point">Point</option>
+            <option value="Combo">Combo</option>
+            <option value="Wing">Wing</option>
+            <option value="Big">Big</option>
+        </select>
+
+        <label for="year-filter">Year of Birth:</label>
+        <select id="year-filter">
+            <option value="All">All</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <!-- Weitere Jahrgänge hinzufügen -->
+        </select>
     </div>
     <div class="table-container">
         <div id="Regular_Totals"></div>
