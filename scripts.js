@@ -1,12 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const tables = {
-        'weekly': ['points-week.csv', 'rebounds-week.csv', 'assists-week.csv', 'steals-week.csv', 'blocks-week.csv', 'per-week.csv'],
-        'regular': ['points-regular.csv', 'rebounds-regular.csv', 'assists-regular.csv', 'steals-regular.csv', 'blocks-regular.csv', 'per-regular.csv']
-    };
     const tableIds = [
         'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
         'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
     ];
+
+    const tables = {
+        weekly: [
+            'https://github.com/Lurppi/nbblstats/points-week.csv',
+            'https://github.com/Lurppi/nbblstats/rebounds-week.csv',
+            'https://github.com/Lurppi/nbblstats/assists-week.csv',
+            'https://github.com/Lurppi/nbblstats/steals-week.csv',
+            'https://github.com/Lurppi/nbblstats/blocks-week.csv',
+            'https://github.com/Lurppi/nbblstats/per-week.csv'
+        ],
+        regular: [
+            'https://github.com/Lurppi/nbblstats/points-regular.csv',
+            'https://github.com/Lurppi/nbblstats/rebounds-regular.csv',
+            'https://github.com/Lurppi/nbblstats/assists-regular.csv',
+            'https://github.com/Lurppi/nbblstats/steals-regular.csv',
+            'https://github.com/Lurppi/nbblstats/blocks-regular.csv',
+            'https://github.com/Lurppi/nbblstats/per-regular.csv'
+        ]
+    };
 
     function loadTables() {
         tableIds.forEach((id, index) => {

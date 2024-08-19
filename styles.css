@@ -1,4 +1,3 @@
-/* Hintergrund des gesamten Körpers */
 body {
     font-family: Arial, sans-serif;
     background: rgba(255, 255, 255, 0.1); /* Transparentes Hintergrund für Glass-Effekt */
@@ -91,6 +90,27 @@ td {
 }
 
 /* Anpassungen für Tabellenüberschriften */
-th {
-    background-color: #333; /* Schwarz-gräulicher, matter Farbton */
+table thead th {
+    background-color: #333; /* Dunkelgrau */
+    color: #fff;
+    text-align: center;
+}
+
+/* Strukturierung für Home-Seite */
+.section {
+    margin-bottom: 40px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.col:last-child {
+    margin-right: 0;
 }
