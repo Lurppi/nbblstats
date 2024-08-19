@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers.forEach(header => {
                 const th = document.createElement('th');
                 th.textContent = header;
-                th.addEventListener('click', () => sortTable(table, headers.indexOf(header)));
+                th.addEventListener('click', () => {
+                    const index = headers.indexOf(header);
+                    sortTable(table, index);
+                });
                 trHead.appendChild(th);
             });
             thead.appendChild(trHead);
@@ -68,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rows.forEach(row => tbody.appendChild(row));
     }
 
-    // Event listener for filters
+    // Function to apply filters and load the correct CSV
     function applyFilters() {
         const league = leagueSelect.value;
         const statsType = statsTypeSelect.value;
