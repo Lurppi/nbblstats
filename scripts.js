@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // CSV-Dateipfade auf GitHub
     const files = {
         'points-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-week.csv',
         'rebounds-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-week.csv',
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'playoffs-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv'
     };
 
-    function loadTable(id, url) {
+    function loadTable(id, url, limit) {
         fetch(url)
             .then(response => response.text())
             .then(data => {
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const thead = document.createElement('thead');
                 const tbody = document.createElement('tbody');
 
-                rows.forEach((row, index) => {
+                rows.slice(0, limit).forEach((row, index) => {
                     const tr = document.createElement('tr');
                     row.forEach((cell) => {
                         const td = document.createElement(index === 0 ? 'th' : 'td');
@@ -53,9 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Tabellen auf der Home-Seite laden
-    Object.keys(files).forEach(key => {
+    const homeTables = [
+        'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
+        'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
+    ];
+    homeTables.forEach(key => {
         if (document.getElementById(key)) {
-            loadTable(key, files[key]);
+            loadTable(key, files[key], 4);
         }
     });
 
@@ -72,13 +75,67 @@ document.addEventListener('DOMContentLoaded', function() {
     function loadFilteredTable() {
         const league = leagueFilter.value;
         const statType = statTypeFilter.value;
+        const url = files[`${league}-${statType}`];
 
-        const url = files[`regular-${statType}`];
         if (url) {
-            loadTable('regular-totals', url);
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const tableContainer = document.getElementById('players-tables');
+                    tableContainer.innerHTML = '';
+                    const rows = data.split('\n').map(row => row.split(','));
+                    const thead = document.createElement('thead');
+                    const tbody = document.createElement('tbody');
+
+                    rows.forEach((row, index) => {
+                        if (index === 0) {
+                            row.forEach((cell) => {
+                                const th = document.createElement('th');
+                                th.textContent = cell;
+                                th.addEventListener('click', () => sortTable(thead, tbody, Array.from(th.parentElement.children).indexOf(th)));
+                                thead.appendChild(th);
+                            });
+                        } else {
+                            const tr = document.createElement('tr');
+                            row.forEach((cell) => {
+                                const td = document.createElement('td');
+                                td.textContent = cell;
+                                tr.appendChild(td);
+                            });
+                            tbody.appendChild(tr);
+                        }
+                    });
+
+                    const table = document.createElement('table');
+                    table.appendChild(thead);
+                    table.appendChild(tbody);
+                    tableContainer.appendChild(table);
+                })
+                .catch(error => console.error('Error loading table data:', error));
         }
+    }
+
+    function sortTable(thead, tbody, columnIndex) {
+        const rows = Array.from(tbody.rows);
+        const isAscending = thead.rows[0].cells[columnIndex].classList.contains('sort-asc');
+
+        rows.sort((a, b) => {
+            const aText = a.cells[columnIndex].textContent.trim();
+            const bText = b.cells[columnIndex].textContent.trim();
+            return isAscending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+        thead.rows[0].cells[columnIndex].classList.toggle('sort-asc', !isAscending);
+        thead.rows[0].cells[columnIndex].classList.toggle('sort-desc', isAscending);
     }
 
     leagueFilter.addEventListener('change', loadFilteredTable);
     statTypeFilter.addEventListener('change', loadFilteredTable);
+    divisionFilter.addEventListener('change', loadFilteredTable);
+    positionFilter.addEventListener('change', loadFilteredTable);
+    yearFilter.addEventListener('input', loadFilteredTable);
+    gamesPlayedFilter.addEventListener('input', loadFilteredTable);
+    minutesPlayedFilter.addEventListener('input', loadFilteredTable);
+    teamFilter.addEventListener('change', loadFilteredTable);
 });
