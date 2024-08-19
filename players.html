@@ -3,78 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Players</title>
+    <title>Players</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Basketball Stats</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="players.html">Players</a></li>
-            </ul>
-        </nav>
+        <h1>Player Statistics</h1>
     </header>
     <main>
-        <section>
-            <h2>Player Statistics</h2>
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="league-filter">League:</label>
-                    <select id="league-filter">
-                        <option value="regular">Regular Season</option>
-                        <option value="playoffs">Playoffs</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="stat-type-filter">Stats Type:</label>
-                    <select id="stat-type-filter">
-                        <option value="totals">Totals</option>
-                        <option value="averages">Averages</option>
-                        <option value="shooting">Shooting</option>
-                        <option value="advanced1">Advanced1</option>
-                        <option value="advanced2">Advanced2</option>
-                        <option value="fourfactors">Four Factors</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="division-filter">Division:</label>
-                    <select id="division-filter">
-                        <!-- Division filter options will be dynamically populated -->
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="team-filter">Team:</label>
-                    <select id="team-filter">
-                        <!-- Team filter options will be dynamically populated -->
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="position-filter">Position:</label>
-                    <select id="position-filter">
-                        <!-- Position filter options will be dynamically populated -->
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="year-filter">Year of Birth:</label>
-                    <select id="year-filter">
-                        <!-- Year filter options will be dynamically populated -->
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="games-filter">Games Played:</label>
-                    <input type="number" id="games-filter" min="0">
-                </div>
-                <div class="filter-group">
-                    <label for="minutes-filter">Minutes Played:</label>
-                    <input type="number" id="minutes-filter" min="0">
-                </div>
+        <div id="filters">
+            <div>
+                <label for="league">League:</label>
+                <select id="league" onchange="updateTable()">
+                    <option value="Regular Season">Regular Season</option>
+                    <option value="Playoffs">Playoffs</option>
+                </select>
             </div>
-            <div id="table-container">
-                <!-- Player statistics table will be inserted here based on filters -->
+            <div>
+                <label for="stats-type">Stats Type:</label>
+                <select id="stats-type" onchange="updateTable()">
+                    <option value="Totals">Totals</option>
+                    <option value="Averages">Averages</option>
+                    <option value="Shooting">Shooting</option>
+                    <option value="Advanced1">Advanced1</option>
+                    <option value="Advanced2">Advanced2</option>
+                    <option value="Four Factors">Four Factors</option>
+                </select>
             </div>
-        </section>
+            <div>
+                <label for="division">Division:</label>
+                <select id="division" onchange="updateTable()">
+                    <!-- Options will be dynamically populated -->
+                </select>
+            </div>
+            <div>
+                <label for="team">Team:</label>
+                <select id="team" onchange="updateTable()">
+                    <!-- Options will be dynamically populated -->
+                </select>
+            </div>
+            <div>
+                <label for="position">Position:</label>
+                <select id="position" onchange="updateTable()">
+                    <!-- Options will be dynamically populated -->
+                </select>
+            </div>
+            <div>
+                <label for="year-of-birth">Year of Birth:</label>
+                <input type="number" id="year-of-birth" onchange="updateTable()">
+            </div>
+            <div>
+                <label for="games-played">Games Played:</label>
+                <input type="number" id="games-played" onchange="updateTable()">
+            </div>
+            <div>
+                <label for="minutes-played">Minutes Played:</label>
+                <input type="number" id="minutes-played" onchange="updateTable()">
+            </div>
+        </div>
+        <div id="player-table-container"></div>
     </main>
     <script src="script.js"></script>
 </body>
