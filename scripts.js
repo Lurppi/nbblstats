@@ -29,12 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const type = id.includes('week') ? 'weekly' : 'regular';
             const file = tables[type][tableIds.indexOf(id) % 6];
             fetch(file)
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
                 .then(data => {
                     tableElement.innerHTML = csvToHtmlTable(data);
-                    if (type === 'weekly' && tableElement.id === 'points-week') {
-                        addTop3Sorting(tableElement, data);
-                    }
                 })
                 .catch(error => console.error('Error loading CSV file:', error));
         });
@@ -61,22 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return tableHtml;
     }
 
-    function addTop3Sorting(tableElement, data) {
-        const rows = data.split('\n').slice(1);
-        const sortedRows = rows.sort((a, b) => {
-            const aVal = parseFloat(a.split(';')[1]);
-            const bVal = parseFloat(b.split(';')[1]);
-            return bVal - aVal;
-        });
-        const top3Rows = sortedRows.slice(0, 3);
-        const newTableData = [data.split('\n')[0]].concat(top3Rows).join('\n');
-        tableElement.innerHTML = csvToHtmlTable(newTableData);
-    }
-
     function loadPlayerTable() {
         const url = getPlayerTableUrl();
         fetch(url)
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.text();
+            })
             .then(data => {
                 document.getElementById('player-table-container').innerHTML = csvToHtmlTable(data);
                 addSortFunctionality();
