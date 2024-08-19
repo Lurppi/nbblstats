@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - NBBL Stats</title>
+    <title>Home</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li>
-                    <a href="#">Stats</a>
-                    <ul>
-                        <li><a href="players.html">Players</a></li>
-                        <li><a href="#">Teams</a></li>
-                    </ul>
-                </li>
-                <li><a href="roster.html">Roster</a></li>
-            </ul>
+    <div class="container">
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="players.html">Stats</a>
+            <a href="roster.html">Roster</a>
         </nav>
-    </header>
-    <main>
-        <section>
+
+        <div id="home-tables">
             <h2>Weekly Top 3</h2>
-            <div id="weekly-top3-tables"></div>
-        </section>
-        <section>
+            <div class="table-container">
+                <!-- Top 3 Tables for Weekly Data -->
+                <div class="table-wrapper" id="weekly-top-1"></div>
+                <div class="table-wrapper" id="weekly-top-2"></div>
+                <div class="table-wrapper" id="weekly-top-3"></div>
+            </div>
+
             <h2>Regular Season Top 3</h2>
-            <div id="regular-season-top3-tables"></div>
-        </section>
-    </main>
-    <script src="scripts.js"></script>
+            <div class="table-container">
+                <!-- Top 3 Tables for Regular Season Data -->
+                <div class="table-wrapper" id="regular-season-top-1"></div>
+                <div class="table-wrapper" id="regular-season-top-2"></div>
+                <div class="table-wrapper" id="regular-season-top-3"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

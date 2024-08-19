@@ -1,109 +1,91 @@
-/* Allgemeine Stile */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background: rgba(255, 255, 255, 0.5); /* Transparent white */
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
-/* Header und Navigation */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.main-nav {
     text-align: center;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-nav ul li ul {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    padding: 0;
-}
-
-nav ul li:hover ul {
-    display: block;
-}
-
-/* Filter Container */
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 20px;
-}
-
-.filter-container div {
-    margin-right: 10px;
-}
-
-/* Tabellen Stile */
-table {
-    width: 100%;
-    border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+    display: inline-block;
 }
 
-table th, table td {
-    padding: 8px;
-}
-
-table th {
-    background-color: #333; /* Hintergrundfarbe der Tabellenüberschriften */
-    color: #fff;
-}
-
-table td {
-    text-align: left;
-}
-
-table th.sortable {
-    cursor: pointer;
-}
-
-table th.sortable.asc::after {
-    content: ' \2191'; /* Pfeil nach oben */
-}
-
-table th.sortable.desc::after {
-    content: ' \2193'; /* Pfeil nach unten */
-}
-
-/* Tabellen auf der Home-Seite */
-#weekly-top3-tables, #regular-season-top3-tables {
+.filters {
+    margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-#weekly-top3-tables > div, #regular-season-top3-tables > div {
-    flex: 1 1 30%;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.filters label {
+    margin-right: 10px;
 }
 
-/* Sichtbarkeit und Layout */
-#player-table-container {
-    padding: 20px;
+.filters select, .filters input {
+    margin-right: 20px;
+    max-width: 200px;
+}
+
+.table-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.table-wrapper {
+    flex: 1;
+    min-width: 300px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+th.sortable {
+    cursor: pointer;
+}
+
+th.sortable.asc::after {
+    content: ' ▲';
+}
+
+th.sortable.desc::after {
+    content: ' ▼';
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filters label, .filters select, .filters input {
+    margin-bottom: 10px;
 }
