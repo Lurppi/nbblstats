@@ -1,145 +1,141 @@
-document.addEventListener("DOMContentLoaded", function () {
-    function loadTable(csvFile, tableSelector, topN = null) {
-        fetch(csvFile)
+document.addEventListener('DOMContentLoaded', function() {
+    const tables = {
+        'weekly': ['points-week.csv', 'rebounds-week.csv', 'assists-week.csv', 'steals-week.csv', 'blocks-week.csv', 'per-week.csv'],
+        'regular': ['points-regular.csv', 'rebounds-regular.csv', 'assists-regular.csv', 'steals-regular.csv', 'blocks-regular.csv', 'per-regular.csv']
+    };
+    const tableIds = [
+        'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
+        'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
+    ];
+
+    function loadTables() {
+        tableIds.forEach((id, index) => {
+            const tableElement = document.getElementById(id);
+            const type = id.includes('week') ? 'weekly' : 'regular';
+            const file = tables[type][tableIds.indexOf(id) % 6];
+            fetch(file)
+                .then(response => response.text())
+                .then(data => {
+                    tableElement.innerHTML = csvToHtmlTable(data, id);
+                    if (type === 'weekly') {
+                        if (tableElement.id === 'points-week') addTop3Sorting(tableElement, data);
+                    }
+                });
+        });
+    }
+
+    function csvToHtmlTable(csv, id) {
+        const rows = csv.split('\n').map(row => row.split(';'));
+        const headers = rows[0];
+        const body = rows.slice(1);
+        let tableHtml = '<table>';
+
+        tableHtml += '<thead><tr>';
+        headers.forEach(header => tableHtml += `<th>${header}</th>`);
+        tableHtml += '</tr></thead>';
+
+        tableHtml += '<tbody>';
+        body.forEach(row => {
+            tableHtml += '<tr>';
+            row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+            tableHtml += '</tr>';
+        });
+        tableHtml += '</tbody></table>';
+
+        return tableHtml;
+    }
+
+    function addTop3Sorting(tableElement, data) {
+        const rows = data.split('\n').slice(1);
+        const sortedRows = rows.sort((a, b) => {
+            const aVal = parseFloat(a.split(';')[1]);
+            const bVal = parseFloat(b.split(';')[1]);
+            return bVal - aVal;
+        });
+        const top3Rows = sortedRows.slice(0, 3);
+        const newTableData = [data.split('\n')[0]].concat(top3Rows).join('\n');
+        tableElement.innerHTML = csvToHtmlTable(newTableData, tableElement.id);
+    }
+
+    function loadPlayerTable() {
+        const url = getPlayerTableUrl();
+        fetch(url)
             .then(response => response.text())
             .then(data => {
-                const rows = data.split("\n").map(row => row.split(";"));
-                const headers = rows[0];
-                let tableHTML = "<table><thead><tr>";
-                headers.forEach(header => tableHTML += `<th>${header}</th>`);
-                tableHTML += "</tr></thead><tbody>";
-
-                const dataRows = rows.slice(1).map(row => {
-                    const obj = {};
-                    headers.forEach((header, index) => obj[header] = row[index]);
-                    return obj;
-                });
-
-                // Sort and filter top N rows if needed
-                if (topN !== null) {
-                    dataRows.sort((a, b) => b["Points"] - a["Points"]);
-                    dataRows.slice(0, topN);
-                }
-
-                dataRows.forEach(row => {
-                    tableHTML += "<tr>";
-                    headers.forEach(header => {
-                        tableHTML += `<td>${row[header]}</td>`;
-                    });
-                    tableHTML += "</tr>";
-                });
-
-                tableHTML += "</tbody></table>";
-                document.querySelector(tableSelector).innerHTML = tableHTML;
-
-                // Enable sorting on table headers
-                document.querySelectorAll(`${tableSelector} th`).forEach(th => {
-                    th.addEventListener("click", () => sortTable(th));
-                });
+                document.getElementById('player-table-container').innerHTML = csvToHtmlTable(data);
+                addSortFunctionality();
             });
     }
 
-    function sortTable(th) {
-        const table = th.closest("table");
-        const rowsArray = Array.from(table.querySelector("tbody").rows);
-        const index = Array.from(th.parentNode.children).indexOf(th);
-        const isAscending = th.classList.toggle("ascending");
+    function getPlayerTableUrl() {
+        const league = document.getElementById('league-filter').value.toLowerCase();
+        const statsType = document.getElementById('stats-type-filter').value.toLowerCase();
+        return `${league}_${statsType}.csv`;
+    }
 
-        rowsArray.sort((rowA, rowB) => {
-            const cellA = rowA.cells[index].innerText;
-            const cellB = rowB.cells[index].innerText;
+    function addSortFunctionality() {
+        const tables = document.querySelectorAll('#player-table-container table');
+        tables.forEach(table => {
+            const headers = table.querySelectorAll('th');
+            headers.forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    sortTable(table, index);
+                });
+            });
+        });
+    }
 
-            return isAscending ? cellA.localeCompare(cellB, undefined, { numeric: true }) : cellB.localeCompare(cellA, undefined, { numeric: true });
+    function sortTable(table, columnIndex) {
+        const rowsArray = Array.from(table.querySelectorAll('tbody tr'));
+        const isNumericColumn = !isNaN(rowsArray[0].children[columnIndex].textContent.trim());
+
+        rowsArray.sort((a, b) => {
+            const aText = a.children[columnIndex].textContent.trim();
+            const bText = b.children[columnIndex].textContent.trim();
+
+            if (isNumericColumn) {
+                return parseFloat(aText) - parseFloat(bText);
+            } else {
+                return aText.localeCompare(bText);
+            }
         });
 
-        const tbody = table.querySelector("tbody");
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
         rowsArray.forEach(row => tbody.appendChild(row));
     }
 
-    function loadTablesForHomePage() {
-        // Weekly Top 3 Tables
-        const weeklyTopFiles = [
-            { file: "points-week.csv", top: 3 },
-            { file: "rebounds-week.csv", top: 3 },
-            { file: "assists-week.csv", top: 3 },
-            { file: "steals-week.csv", top: 3 },
-            { file: "blocks-week.csv", top: 3 },
-            { file: "per-week.csv", top: 3 }
-        ];
-
-        // Regular Season Top 3 Tables
-        const regularSeasonTopFiles = [
-            { file: "points-regular.csv", top: 3 },
-            { file: "rebounds-regular.csv", top: 3 },
-            { file: "assists-regular.csv", top: 3 },
-            { file: "steals-regular.csv", top: 3 },
-            { file: "blocks-regular.csv", top: 3 },
-            { file: "per-regular.csv", top: 3 }
-        ];
-
-        weeklyTopFiles.forEach((fileInfo, index) => {
-            loadTable(fileInfo.file, `#weekly-top3-tables table:nth-of-type(${index + 1})`, fileInfo.top);
-        });
-
-        regularSeasonTopFiles.forEach((fileInfo, index) => {
-            loadTable(fileInfo.file, `#regular-season-top3-tables table:nth-of-type(${index + 1})`, fileInfo.top);
-        });
-    }
-
-    function loadPlayersTables() {
-        // Filter for Player Tables
-        const statsType = document.getElementById("stats-type").value;
-        const league = document.getElementById("league").value;
-        const files = [
-            `stats-${statsType}-${league}-a.csv`,
-            `stats-${statsType}-${league}-b.csv`
-        ];
-
-        const container = document.getElementById("players-tables");
-        container.innerHTML = ""; // Clear previous content
-
-        files.forEach(file => {
-            loadTable(file, "#players-tables");
-        });
-    }
-
     function applyFilters() {
-        const division = document.getElementById("division").value;
-        const position = document.getElementById("position").value;
-        const yearOfBirth = parseInt(document.getElementById("year-of-birth").value) || null;
-        const gamesPlayed = parseInt(document.getElementById("games-played").value) || null;
-        const minutesPlayed = parseInt(document.getElementById("minutes-played").value) || null;
+        const table = document.querySelector('#player-table-container table');
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const cells = row.children;
+            const matchesFilters =
+                (filters.division.value === 'both' || cells[0].textContent.includes(filters.division.value)) &&
+                (filters.position.value === 'all' || cells[1].textContent.includes(filters.position.value)) &&
+                (filters.yearOfBirth.value === '' || cells[2].textContent === filters.yearOfBirth.value) &&
+                (filters.gamesPlayed.value === '' || parseInt(cells[3].textContent) >= parseInt(filters.gamesPlayed.value)) &&
+                (filters.minutesPlayed.value === '' || parseInt(cells[4].textContent) >= parseInt(filters.minutesPlayed.value));
 
-        const tables = document.querySelectorAll("#players-tables table");
-        tables.forEach(table => {
-            const rows = table.querySelectorAll("tbody tr");
-            rows.forEach(row => {
-                const cells = row.querySelectorAll("td");
-                const div = cells[0].innerText;
-                const pos = cells[1].innerText;
-                const birthYear = parseInt(cells[2].innerText);
-                const games = parseInt(cells[3].innerText);
-                const minutes = parseInt(cells[4].innerText);
-
-                if ((division === "both" || div === division) &&
-                    (position === "all" || pos === position) &&
-                    (yearOfBirth === null || birthYear === yearOfBirth) &&
-                    (gamesPlayed === null || games >= gamesPlayed) &&
-                    (minutesPlayed === null || minutes >= minutesPlayed)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
+            row.style.display = matchesFilters ? '' : 'none';
         });
     }
 
-    document.getElementById("apply-filters").addEventListener("click", () => {
-        loadPlayersTables();
+    function applyAllFilters() {
+        loadPlayerTable();
         applyFilters();
-    });
+    }
 
-    // Initial load
-    loadTablesForHomePage();
-    loadPlayersTables();
+    const filters = {
+        division: document.getElementById('division-filter'),
+        position: document.getElementById('position-filter'),
+        yearOfBirth: document.getElementById('year-of-birth-filter'),
+        gamesPlayed: document.getElementById('games-played-filter'),
+        minutesPlayed: document.getElementById('minutes-played-filter')
+    };
+
+    Object.values(filters).forEach(filter => filter.addEventListener('change', applyFilters));
+
+    loadTables();
+    loadPlayerTable();
 });

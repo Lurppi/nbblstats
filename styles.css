@@ -1,123 +1,96 @@
-/* Hauptmenü CSS */
-#main-menu {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-#main-menu ul {
-    list-style-type: none;
+/* Hintergrund des gesamten Körpers */
+body {
+    font-family: Arial, sans-serif;
+    background: rgba(255, 255, 255, 0.1); /* Transparentes Hintergrund für Glass-Effekt */
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
-#main-menu ul li {
-    display: inline-block;
-    position: relative;
-    margin-right: 20px;
-}
-
-#main-menu ul li a {
-    color: #fff;
-    text-decoration: none;
+/* Hauptmenü */
+header {
+    background: #333;
+    color: white;
     padding: 10px;
-    display: inline-block;
+    text-align: center;
 }
 
-#main-menu ul li ul.submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #444;
-    padding: 10px;
-    list-style-type: none;
-    width: 150px; /* Ensure enough width for submenu items */
-}
-
-#main-menu ul li:hover ul.submenu {
-    display: block;
-}
-
-#main-menu ul li ul.submenu li {
-    display: block;
+nav ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
 }
 
-#main-menu ul li ul.submenu li a {
+nav ul li {
+    display: inline-block;
+    position: relative;
     padding: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    background: #444;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li:hover ul {
     display: block;
-    color: #fff;
 }
 
-/* Home-Seite CSS */
-#home-content .section {
-    margin: 20px;
+nav ul li ul li {
+    display: block;
 }
 
-.table-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.table-container table {
-    width: 30%;
-    margin-right: 1.5%;
-    margin-bottom: 20px;
-}
-
-.table-container table:nth-child(3n) {
-    margin-right: 0;
-}
-
-/* Players-Seite CSS */
-#players-content {
-    margin: 20px;
-}
-
-#filters {
-    margin-bottom: 20px;
-}
-
-#filters label {
-    margin-right: 10px;
-}
-
-#players-tables table {
+/* Tabellen-Stile */
+table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.8); /* Transparentes Hintergrund für Glass-Effekt */
 }
 
-#players-tables th, td {
+th, td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#players-tables th {
-    background-color: #444; /* schwarz-gräulicher Farbton */
-    color: white;
+th {
+    background-color: #333; /* Dunkelgrau */
+    color: #fff;
     text-align: center;
 }
 
-#players-tables td.player, #players-tables td.team {
+td {
+    text-align: center;
+}
+
+/* Links für Player- und Team-Spalten */
+.player-column, .team-column {
     text-align: left;
 }
 
-#players-tables th, td {
-    text-align: right;
+/* Container für die Home-Seite */
+.container {
+    width: 100%;
+    padding: 20px;
 }
 
-#players-tables th.ascending::after {
-    content: "▲";
+/* Filter-Container */
+.filter-container {
+    margin: 20px 0;
 }
 
-#players-tables th.descending::after {
-    content: "▼";
+/* Anpassungen für Tabellenüberschriften */
+th {
+    background-color: #333; /* Schwarz-gräulicher, matter Farbton */
 }
