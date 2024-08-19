@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    function loadTable(csvFile, tableSelector) {
+    function loadTable(csvFile, tableSelector, topN = null) {
         fetch(csvFile)
             .then(response => response.text())
             .then(data => {
@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     return obj;
                 });
 
+                // Sort and filter top N rows if needed
+                if (topN !== null) {
+                    dataRows.sort((a, b) => b["Points"] - a["Points"]);
+                    dataRows.slice(0, topN);
+                }
+
                 dataRows.forEach(row => {
                     tableHTML += "<tr>";
                     headers.forEach(header => {
@@ -27,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector(tableSelector).innerHTML = tableHTML;
 
                 // Enable sorting on table headers
-                document.querySelectorAll("th").forEach(th => {
+                document.querySelectorAll(`${tableSelector} th`).forEach(th => {
                     th.addEventListener("click", () => sortTable(th));
                 });
             });
@@ -53,30 +59,30 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadTablesForHomePage() {
         // Weekly Top 3 Tables
         const weeklyTopFiles = [
-            "points-week.csv",
-            "rebounds-week.csv",
-            "assists-week.csv",
-            "steals-week.csv",
-            "blocks-week.csv",
-            "per-week.csv"
+            { file: "points-week.csv", top: 3 },
+            { file: "rebounds-week.csv", top: 3 },
+            { file: "assists-week.csv", top: 3 },
+            { file: "steals-week.csv", top: 3 },
+            { file: "blocks-week.csv", top: 3 },
+            { file: "per-week.csv", top: 3 }
         ];
 
         // Regular Season Top 3 Tables
         const regularSeasonTopFiles = [
-            "points-regular.csv",
-            "rebounds-regular.csv",
-            "assists-regular.csv",
-            "steals-regular.csv",
-            "blocks-regular.csv",
-            "per-regular.csv"
+            { file: "points-regular.csv", top: 3 },
+            { file: "rebounds-regular.csv", top: 3 },
+            { file: "assists-regular.csv", top: 3 },
+            { file: "steals-regular.csv", top: 3 },
+            { file: "blocks-regular.csv", top: 3 },
+            { file: "per-regular.csv", top: 3 }
         ];
 
-        weeklyTopFiles.forEach((file, index) => {
-            loadTable(file, `#weekly-top3-tables table:nth-of-type(${index + 1})`);
+        weeklyTopFiles.forEach((fileInfo, index) => {
+            loadTable(fileInfo.file, `#weekly-top3-tables table:nth-of-type(${index + 1})`, fileInfo.top);
         });
 
-        regularSeasonTopFiles.forEach((file, index) => {
-            loadTable(file, `#regular-season-top3-tables table:nth-of-type(${index + 1})`);
+        regularSeasonTopFiles.forEach((fileInfo, index) => {
+            loadTable(fileInfo.file, `#regular-season-top3-tables table:nth-of-type(${index + 1})`, fileInfo.top);
         });
     }
 
@@ -97,7 +103,41 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    document.getElementById("apply-filters").addEventListener("click", loadPlayersTables);
+    function applyFilters() {
+        const division = document.getElementById("division").value;
+        const position = document.getElementById("position").value;
+        const yearOfBirth = parseInt(document.getElementById("year-of-birth").value) || null;
+        const gamesPlayed = parseInt(document.getElementById("games-played").value) || null;
+        const minutesPlayed = parseInt(document.getElementById("minutes-played").value) || null;
+
+        const tables = document.querySelectorAll("#players-tables table");
+        tables.forEach(table => {
+            const rows = table.querySelectorAll("tbody tr");
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                const div = cells[0].innerText;
+                const pos = cells[1].innerText;
+                const birthYear = parseInt(cells[2].innerText);
+                const games = parseInt(cells[3].innerText);
+                const minutes = parseInt(cells[4].innerText);
+
+                if ((division === "both" || div === division) &&
+                    (position === "all" || pos === position) &&
+                    (yearOfBirth === null || birthYear === yearOfBirth) &&
+                    (gamesPlayed === null || games >= gamesPlayed) &&
+                    (minutesPlayed === null || minutes >= minutesPlayed)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    }
+
+    document.getElementById("apply-filters").addEventListener("click", () => {
+        loadPlayersTables();
+        applyFilters();
+    });
 
     // Initial load
     loadTablesForHomePage();

@@ -18,7 +18,8 @@
 }
 
 #main-menu ul li {
-    display: inline;
+    display: inline-block;
+    position: relative;
     margin-right: 20px;
 }
 
@@ -32,9 +33,12 @@
 #main-menu ul li ul.submenu {
     display: none;
     position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #444;
     padding: 10px;
     list-style-type: none;
+    width: 150px; /* Ensure enough width for submenu items */
 }
 
 #main-menu ul li:hover ul.submenu {
@@ -97,7 +101,7 @@
 }
 
 #players-tables th {
-    background-color: #333;
+    background-color: #444; /* schwarz-gräulicher Farbton */
     color: white;
     text-align: center;
 }
@@ -116,10 +120,4 @@
 
 #players-tables th.descending::after {
     content: "▼";
-}
-
-/* Tabellenheader-Farben */
-th {
-    background-color: #444; /* schwarz-gräulicher Farbton */
-    color: white;
 }
