@@ -1,45 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - NBBL Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <nav class="main-menu">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Stats</a>
-                <ul class="dropdown">
-                    <li><a href="teams.html">Teams</a></li>
-                    <li><a href="players.html">Players</a></li>
-                </ul>
-            </li>
-            <li><a href="roster.html">Roster</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <ul class="main-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Stats</a>
+                    <ul class="submenu">
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="players.html">Players</a></li>
+                    </ul>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h1>Weekly Top 3 Performers</h1>
-    <div class="table-container">
-        <div id="points-week"></div>
-        <div id="rebounds-week"></div>
-        <div id="assists-week"></div>
-        <div id="steals-week"></div>
-        <div id="blocks-week"></div>
-        <div id="per-week"></div>
-    </div>
+    <main>
+        <section id="weekly-top3">
+            <h2>Weekly Top 3 Performers</h2>
+            <div class="table-container">
+                <div id="weekly-points"></div>
+                <div id="weekly-rebounds"></div>
+                <div id="weekly-assists"></div>
+            </div>
+            <div class="table-container">
+                <div id="weekly-steals"></div>
+                <div id="weekly-blocks"></div>
+                <div id="weekly-per"></div>
+            </div>
+        </section>
 
-    <h1>Regular Season Top 3 Performers</h1>
-    <div class="table-container">
-        <div id="points-regular"></div>
-        <div id="rebounds-regular"></div>
-        <div id="assists-regular"></div>
-        <div id="steals-regular"></div>
-        <div id="blocks-regular"></div>
-        <div id="per-regular"></div>
-    </div>
-    
+        <section id="regular-top3">
+            <h2>Regular Season Top 3 Performers</h2>
+            <div class="table-container">
+                <div id="regular-points"></div>
+                <div id="regular-rebounds"></div>
+                <div id="regular-assists"></div>
+            </div>
+            <div class="table-container">
+                <div id="regular-steals"></div>
+                <div id="regular-blocks"></div>
+                <div id="regular-per"></div>
+            </div>
+        </section>
+    </main>
+
     <script src="scripts.js"></script>
 </body>
+
 </html>
