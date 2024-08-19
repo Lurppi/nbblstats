@@ -84,7 +84,6 @@ table {
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: center;
 }
 
 th {
@@ -97,11 +96,15 @@ td.player, td.team {
     text-align: left;
 }
 
-/* Einheitliche Spaltenbreiten für alle Tabellen */
 table th, table td {
     width: 120px; /* Einheitliche Breite für alle Spalten */
 }
 
 table th, table td {
     font-size: 14px; /* Schriftgröße für alle Daten */
+}
+
+/* Schrift linksbündig für Player und Team */
+td.player, td.team {
+    text-align: left;
 }

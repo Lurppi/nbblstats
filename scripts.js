@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const tableContainer = document.getElementById("table-container");
+    let tableData = [];
 
     function applyFilters(data) {
         const league = document.getElementById("league-select").value;
@@ -54,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 tableHTML += "</tbody></table>";
                 document.querySelector(tableSelector).innerHTML = tableHTML;
 
+                // Enable sorting on table headers
                 document.querySelectorAll("th").forEach(th => {
                     th.addEventListener("click", () => sortTable(th));
                 });
@@ -99,6 +101,26 @@ document.addEventListener("DOMContentLoaded", function () {
         const statsType = this.value;
         const csvFile = `${league === 'Regular Season' ? 'Regular' : 'Playoffs'}_${statsType}.csv`;
         loadTable(csvFile, "#table-container");
+    });
+
+    document.getElementById("division-select").addEventListener("change", function () {
+        applyFilters(tableData);
+    });
+
+    document.getElementById("position-select").addEventListener("change", function () {
+        applyFilters(tableData);
+    });
+
+    document.getElementById("year-select").addEventListener("change", function () {
+        applyFilters(tableData);
+    });
+
+    document.getElementById("games-played").addEventListener("input", function () {
+        applyFilters(tableData);
+    });
+
+    document.getElementById("minutes-played").addEventListener("input", function () {
+        applyFilters(tableData);
     });
 
     // Initialize with default filters
