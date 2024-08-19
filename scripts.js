@@ -63,6 +63,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 `;
 
                 tableContainer.innerHTML = tableHTML;
+
+                // Sortierfunktion für jede Spalte aktivieren
+                document.querySelectorAll('th').forEach((header, index) => {
+                    header.addEventListener('click', () => {
+                        const sortedRows = filteredRows.sort((a, b) => {
+                            const cellA = a[index];
+                            const cellB = b[index];
+                            if (!isNaN(cellA) && !isNaN(cellB)) {
+                                return parseFloat(cellA) - parseFloat(cellB);
+                            } else {
+                                return cellA.localeCompare(cellB);
+                            }
+                        });
+                        const sortedTableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
+                                </thead>
+                                <tbody>
+                                    ${sortedRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
+                                </tbody>
+                            </table>
+                        `;
+                        tableContainer.innerHTML = sortedTableHTML;
+                    });
+                });
             })
             .catch(error => {
                 console.error('Error loading table:', error);

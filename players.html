@@ -22,44 +22,61 @@
     <main>
         <h2>Player Statistics</h2>
         <div id="filters">
-            <select id="league-filter">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-
-            <select id="stats-type-filter">
-                <option value="points">Points</option>
-                <option value="rebounds">Rebounds</option>
-                <option value="assists">Assists</option>
-                <option value="steals">Steals</option>
-                <option value="blocks">Blocks</option>
-                <option value="turnovers">Turnovers</option>
-                <option value="fg_percent">FG%</option>
-                <option value="threep_percent">3P%</option>
-                <option value="ftp_percent">FT%</option>
-                <option value="plus_minus">+/-</option>
-                <option value="efficiency">Efficiency</option>
-                <option value="minutes">Minutes</option>
-            </select>
-
-            <select id="division-filter">
-                <option value="both">Both</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-            </select>
-
-            <select id="position-filter">
-                <option value="all">All</option>
-                <option value="Point">Point</option>
-                <option value="Combo">Combo</option>
-                <option value="Wing">Wing</option>
-                <option value="Forward">Forward</option>
-                <option value="Big">Big</option>
-            </select>
-
-            <input type="number" id="born-filter" placeholder="Year of Birth">
-            <input type="number" id="games-played-filter" placeholder="Games Played">
-            <input type="number" id="minutes-played-filter" placeholder="Minutes Played">
+            <div class="filter-container">
+                <label for="league-filter">League</label>
+                <select id="league-filter">
+                    <option value="regular">Regular Season</option>
+                    <option value="playoffs">Playoffs</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="stats-type-filter">Stats Type</label>
+                <select id="stats-type-filter">
+                    <option value="points">Points</option>
+                    <option value="rebounds">Rebounds</option>
+                    <option value="assists">Assists</option>
+                    <option value="steals">Steals</option>
+                    <option value="blocks">Blocks</option>
+                    <option value="turnovers">Turnovers</option>
+                    <option value="fg_percent">FG%</option>
+                    <option value="threep_percent">3P%</option>
+                    <option value="ftp_percent">FT%</option>
+                    <option value="plus_minus">+/-</option>
+                    <option value="efficiency">Efficiency</option>
+                    <option value="minutes">Minutes</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="division-filter">Division</label>
+                <select id="division-filter">
+                    <option value="both">Both</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="position-filter">Position</label>
+                <select id="position-filter">
+                    <option value="all">All</option>
+                    <option value="Point">Point</option>
+                    <option value="Combo">Combo</option>
+                    <option value="Wing">Wing</option>
+                    <option value="Forward">Forward</option>
+                    <option value="Big">Big</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="born-filter">Year of Birth</label>
+                <input type="number" id="born-filter" placeholder="Year of Birth">
+            </div>
+            <div class="filter-container">
+                <label for="games-played-filter">Games Played</label>
+                <input type="number" id="games-played-filter" placeholder="Games Played">
+            </div>
+            <div class="filter-container">
+                <label for="minutes-played-filter">Minutes Played</label>
+                <input type="number" id="minutes-played-filter" placeholder="Minutes Played">
+            </div>
         </div>
 
         <div id="table-container">
