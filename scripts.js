@@ -115,21 +115,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listeners for filters
-    document.querySelectorAll('#filters select, #filters input').forEach(input => {
-        input.addEventListener('input', applyFilters);
+    // Event listeners for filter changes
+    document.querySelectorAll('#filters select, #filters input').forEach(el => {
+        el.addEventListener('change', applyFilters);
     });
 
-    // Load tables based on filters
-    function loadTables() {
-        const league = leagueSelect.value;
-        const statsType = statsTypeSelect.value;
-        const filePath = `https://github.com/Lurppi/nbblstats/${league}_${statsType}.csv`; // Adjust path if needed
-        loadAndDisplayCSV(filePath, 'players-table');
+    // Load tables for Players page
+    const csvFiles = {
+        'totals': 'players_totals.csv',
+        'averages': 'players_averages.csv',
+        'shooting': 'players_shooting.csv',
+        'advanced1': 'players_advanced1.csv',
+        'advanced2': 'players_advanced2.csv',
+        'four_factors': 'players_four_factors.csv'
+    };
+
+    const leagueSelectValue = leagueSelect.value;
+    const statsTypeSelectValue = statsTypeSelect.value;
+    const csvFile = csvFiles[statsTypeSelectValue];
+
+    if (csvFile) {
+        loadAndDisplayCSV(`https://raw.githubusercontent.com/Lurppi/nbblstats/main/${csvFile}`, 'players-table');
     }
 
-    leagueSelect.addEventListener('change', loadTables);
-    statsTypeSelect.addEventListener('change', loadTables);
+    // Load tables for Home page (Top 3)
+    const homePageTables = [
+        'weekly_top3',
+        'regular_season_top3'
+    ];
 
-    loadTables(); // Initial load
+    homePageTables.forEach(tableId => {
+        loadAndDisplayCSV(`https://raw.githubusercontent.com/Lurppi/nbblstats/main/${tableId}.csv`, tableId);
+    });
 });
