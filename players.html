@@ -7,84 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav class="main-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="players.html">Players</a></li>
+            <!-- Weitere Menüpunkte -->
+        </ul>
+    </nav>
+
     <h1>Player Statistics</h1>
     <div class="filter-controls">
         <!-- Filter Dropdowns für Division, Position, Year of Birth -->
     </div>
     <div class="table-container">
-        <table id="Regular_Totals" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Totals" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Regular_Averages" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Averages" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>Points</th><th>Assists</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Regular_Shooting" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>FG%</th><th>3P%</th><th>FT%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Shooting" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>FG%</th><th>3P%</th><th>FT%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Regular_Advanced1" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>PER</th><th>TS%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Advanced1" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>PER</th><th>TS%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Regular_Advanced2" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>ORB%</th><th>DRB%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Advanced2" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>ORB%</th><th>DRB%</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Regular_Four_Factors" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>eFG%</th><th>FTR</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <table id="Playoffs_Four_Factors" class="sortable">
-            <thead>
-                <tr><th>Player</th><th>Team</th><th>eFG%</th><th>FTR</th><!-- Weitere Spalten hinzufügen --></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div id="Regular_Totals"></div>
+        <div id="Playoffs_Totals"></div>
+        <div id="Regular_Averages"></div>
+        <div id="Playoffs_Averages"></div>
+        <div id="Regular_Shooting"></div>
+        <div id="Playoffs_Shooting"></div>
+        <div id="Regular_Advanced1"></div>
+        <div id="Playoffs_Advanced1"></div>
+        <div id="Regular_Advanced2"></div>
+        <div id="Playoffs_Advanced2"></div>
+        <div id="Regular_Four_Factors"></div>
+        <div id="Playoffs_Four_Factors"></div>
     </div>
+    
     <script src="scripts.js"></script>
 </body>
 </html>

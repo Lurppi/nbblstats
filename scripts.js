@@ -30,23 +30,59 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(tables[tableId])
             .then(response => response.text())
             .then(data => {
-                const table = document.getElementById(tableId);
-                const rows = data.trim().split('\n').slice(1); // Überspringen der Kopfzeile
-                rows.forEach(row => {
-                    const cells = row.split(',');
+                const tableContainer = document.getElementById(tableId);
+                const table = document.createElement('table');
+                table.classList.add('sortable');
+                const rows = data.trim().split('\n');
+                const headers = rows[0].split(',');
+                
+                // Create thead
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+
+                // Create tbody
+                const tbody = document.createElement('tbody');
+                rows.slice(1).forEach(row => {
                     const tr = document.createElement('tr');
-                    cells.forEach(cell => {
+                    row.split(',').forEach(cellText => {
                         const td = document.createElement('td');
-                        td.textContent = cell;
+                        td.textContent = cellText;
                         tr.appendChild(td);
                     });
-                    table.querySelector('tbody').appendChild(tr);
+                    tbody.appendChild(tr);
                 });
+                table.appendChild(tbody);
+
+                tableContainer.appendChild(table);
             })
             .catch(error => console.error(`Error loading data for ${tableId}:`, error));
     });
 
     document.querySelectorAll('.sortable th').forEach(header => {
         header.addEventListener('click', () => {
-            const table = header.parentElement.parentElement.parentElement;
-            const
+            const table = header.closest('table');
+            const index = Array.from(header.parentElement.children).indexOf(header);
+            const ascending = header.classList.contains('ascending');
+            const direction = ascending ? -1 : 1;
+            header.classList.toggle('ascending', !ascending);
+            header.classList.toggle('descending', ascending);
+
+            const rows = Array.from(table.querySelector('tbody').rows);
+
+            rows.sort((a, b) => {
+                const aText = a.cells[index].textContent.trim();
+                const bText = b.cells[index].textContent.trim();
+                return (aText > bText ? 1 : -1) * direction;
+            });
+
+            rows.forEach(row => table.querySelector('tbody').appendChild(row));
+        });
+    });
+});
