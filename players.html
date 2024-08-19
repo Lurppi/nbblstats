@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,11 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="stats.html">Stats</a>
+                <li>
+                    <a href="#">Stats</a>
                     <ul>
                         <li><a href="players.html">Players</a></li>
-                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="#">Teams</a></li>
                     </ul>
                 </li>
                 <li><a href="roster.html">Roster</a></li>
@@ -22,52 +23,59 @@
         </nav>
     </header>
     <main>
-        <div class="filter-container">
-            <label for="league-filter">League:</label>
-            <select id="league-filter">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-            
-            <label for="stats-type-filter">Stats Type:</label>
-            <select id="stats-type-filter">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced1">Advanced1</option>
-                <option value="advanced2">Advanced2</option>
-                <option value="four-factors">Four Factors</option>
-            </select>
-            
-            <label for="division-filter">Division:</label>
-            <select id="division-filter">
-                <option value="both">Both</option>
-                <option value="a">A</option>
-                <option value="b">B</option>
-            </select>
-            
-            <label for="position-filter">Position:</label>
-            <select id="position-filter">
-                <option value="all">All</option>
-                <option value="point">Point</option>
-                <option value="combo">Combo</option>
-                <option value="wing">Wing</option>
-                <option value="big">Big</option>
-                <option value="forward">Forward</option>
-            </select>
-            
-            <label for="year-of-birth-filter">Year of Birth:</label>
-            <input type="number" id="year-of-birth-filter">
-            
-            <label for="games-played-filter">Games Played (minimum):</label>
-            <input type="number" id="games-played-filter">
-            
-            <label for="minutes-played-filter">Minutes Played (minimum):</label>
-            <input type="number" id="minutes-played-filter">
-        </div>
-        <div id="player-table-container">
+        <h1>Players</h1>
+        <section>
+            <div>
+                <label for="league-filter">League:</label>
+                <select id="league-filter">
+                    <option value="regular">Regular Season</option>
+                    <option value="playoffs">Playoffs</option>
+                </select>
+            </div>
+            <div>
+                <label for="stats-type-filter">Stats Type:</label>
+                <select id="stats-type-filter">
+                    <option value="totals">Totals</option>
+                    <option value="averages">Averages</option>
+                    <option value="shooting">Shooting</option>
+                    <option value="advanced1">Advanced 1</option>
+                    <option value="advanced2">Advanced 2</option>
+                    <option value="four_factors">Four Factors</option>
+                </select>
+            </div>
+            <div>
+                <label for="division-filter">Division:</label>
+                <select id="division-filter">
+                    <option value="both">Both</option>
+                    <option value="division1">Division 1</option>
+                    <option value="division2">Division 2</option>
+                </select>
+            </div>
+            <div>
+                <label for="position-filter">Position:</label>
+                <select id="position-filter">
+                    <option value="all">All</option>
+                    <option value="forward">Forward</option>
+                    <option value="guard">Guard</option>
+                    <option value="center">Center</option>
+                </select>
+            </div>
+            <div>
+                <label for="year-of-birth-filter">Year of Birth:</label>
+                <input type="text" id="year-of-birth-filter">
+            </div>
+            <div>
+                <label for="games-played-filter">Games Played:</label>
+                <input type="text" id="games-played-filter">
+            </div>
+            <div>
+                <label for="minutes-played-filter">Minutes Played:</label>
+                <input type="text" id="minutes-played-filter">
+            </div>
+        </section>
+        <section id="player-table-container">
             <!-- Tabellen werden hier geladen -->
-        </div>
+        </section>
     </main>
     <script src="scripts.js"></script>
 </body>

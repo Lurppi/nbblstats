@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const tableIds = [
-        'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
-        'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
-    ];
-
+    // URLs zu den CSV-Dateien
     const tables = {
         weekly: [
             'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-week.csv',
@@ -23,7 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-    function loadTables() {
+    function loadHomeTables() {
+        const tableIds = [
+            'points-week', 'rebounds-week', 'assists-week', 'steals-week', 'blocks-week', 'per-week',
+            'points-regular', 'rebounds-regular', 'assists-regular', 'steals-regular', 'blocks-regular', 'per-regular'
+        ];
         tableIds.forEach((id, index) => {
             const tableElement = document.getElementById(id);
             const type = id.includes('week') ? 'weekly' : 'regular';
@@ -145,6 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     Object.values(filters).forEach(filter => filter.addEventListener('change', applyFilters));
 
-    loadTables();
+    loadHomeTables();
     loadPlayerTable();
 });
