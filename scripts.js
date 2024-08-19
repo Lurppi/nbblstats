@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     const csvUrls = {
         'regular': {
-            'totals': 'https://github.com/Lurppi/nbblstats/Regular_Totals.csv',
-            'averages': 'https://github.com/Lurppi/nbblstats/Regular_Averages.csv',
-            'shooting': 'https://github.com/Lurppi/nbblstats/Regular_Shooting.csv',
-            'advanced1': 'https://github.com/Lurppi/nbblstats/Regular_Advanced1.csv',
-            'advanced2': 'https://github.com/Lurppi/nbblstats/Regular_Advanced2.csv',
-            'four_factors': 'https://github.com/Lurppi/nbblstats/Regular_Four_Factors.csv',
+            'totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Totals.csv',
+            'averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Averages.csv',
+            'shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Shooting.csv',
+            'advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced1.csv',
+            'advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced2.csv',
+            'four_factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Four_Factors.csv',
         },
         'playoffs': {
-            'totals': 'https://github.com/Lurppi/nbblstats/Playoffs_Totals.csv',
-            'averages': 'https://github.com/Lurppi/nbblstats/Playoffs_Averages.csv',
-            'shooting': 'https://github.com/Lurppi/nbblstats/Playoffs_Shooting.csv',
-            'advanced1': 'https://github.com/Lurppi/nbblstats/Playoffs_Advanced1.csv',
-            'advanced2': 'https://github.com/Lurppi/nbblstats/Playoffs_Advanced2.csv',
-            'four_factors': 'https://github.com/Lurppi/nbblstats/Playoffs_Four_Factors.csv',
+            'totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Totals.csv',
+            'averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Averages.csv',
+            'shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Shooting.csv',
+            'advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced1.csv',
+            'advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced2.csv',
+            'four_factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv',
         }
     };
 
