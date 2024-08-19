@@ -88,18 +88,8 @@ td {
     margin-bottom: 40px;
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.col {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.col:last-child {
-    margin-right: 0;
+.table-container {
+    margin-bottom: 20px;
 }
 
 /* Filter-Container */

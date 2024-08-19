@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(file)
                 .then(response => response.text())
                 .then(data => {
-                    tableElement.innerHTML = csvToHtmlTable(data, id);
+                    tableElement.innerHTML = csvToHtmlTable(data);
                     if (type === 'weekly' && tableElement.id === 'points-week') {
                         addTop3Sorting(tableElement, data);
                     }
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function csvToHtmlTable(csv, id) {
+    function csvToHtmlTable(csv) {
         const rows = csv.split('\n').map(row => row.split(';'));
         const headers = rows[0];
         const body = rows.slice(1);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         const top3Rows = sortedRows.slice(0, 3);
         const newTableData = [data.split('\n')[0]].concat(top3Rows).join('\n');
-        tableElement.innerHTML = csvToHtmlTable(newTableData, tableElement.id);
+        tableElement.innerHTML = csvToHtmlTable(newTableData);
     }
 
     function loadPlayerTable() {
