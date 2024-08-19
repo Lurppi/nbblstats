@@ -6,135 +6,95 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearOfBirthInput = document.getElementById('year-of-birth');
     const gamesPlayedInput = document.getElementById('games-played');
     const minutesPlayedInput = document.getElementById('minutes-played');
+    const tablesContainer = document.getElementById('tables-container');
 
-    // Function to parse CSV data into an array of objects
-    function parseCSV(text) {
-        const lines = text.split('\n').filter(line => line.trim() !== '');
-        const headers = lines[0].split(';');
-        const rows = lines.slice(1).map(line => line.split(';'));
-        return rows.map(row => {
-            return headers.reduce((acc, header, i) => {
-                acc[header] = row[i];
-                return acc;
-            }, {});
-        });
+    // Function to load CSV file and display data
+    function loadCSV(url, callback) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => callback(data))
+            .catch(error => console.error('Error loading CSV:', error));
     }
 
-    // Function to create a sortable table from CSV data
-    function createTable(data, tableId) {
+    // Function to parse CSV data and generate HTML table
+    function parseCSV(data) {
+        const rows = data.split('\n').filter(row => row);
         const table = document.createElement('table');
-        table.id = tableId;
-        
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
-        
-        const headers = Object.keys(data[0]);
-        const tr = document.createElement('tr');
-        
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.innerText = header;
-            th.addEventListener('click', () => sortTable(table, header));
-            tr.appendChild(th);
-        });
-        
-        thead.appendChild(tr);
-        table.appendChild(thead);
-        
-        data.forEach(row => {
-            const tr = document.createElement('tr');
+
+        if (rows.length > 0) {
+            const headers = rows[0].split(';');
+            const trHead = document.createElement('tr');
             headers.forEach(header => {
-                const td = document.createElement('td');
-                td.innerText = row[header];
-                tr.appendChild(td);
+                const th = document.createElement('th');
+                th.textContent = header;
+                th.addEventListener('click', () => sortTable(table, headers.indexOf(header)));
+                trHead.appendChild(th);
             });
-            tbody.appendChild(tr);
-        });
-        
-        table.appendChild(tbody);
+            thead.appendChild(trHead);
+
+            rows.slice(1).forEach(row => {
+                const tr = document.createElement('tr');
+                row.split(';').forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+        }
         return table;
     }
 
-    // Function to sort the table by column
-    function sortTable(table, header) {
-        const rows = Array.from(table.querySelectorAll('tbody tr'));
-        const headerIndex = Array.from(table.querySelectorAll('th')).findIndex(th => th.innerText === header);
-        
-        rows.sort((rowA, rowB) => {
-            const cellA = rowA.children[headerIndex].innerText;
-            const cellB = rowB.children[headerIndex].innerText;
-            
-            return isNaN(cellA) ? cellA.localeCompare(cellB) : Number(cellA) - Number(cellB);
+    // Function to sort table by column
+    function sortTable(table, colIndex) {
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const isAscending = table.getAttribute('data-sort-order') === 'asc';
+        table.setAttribute('data-sort-order', isAscending ? 'desc' : 'asc');
+
+        rows.sort((a, b) => {
+            const aText = a.children[colIndex].textContent.trim();
+            const bText = b.children[colIndex].textContent.trim();
+            return isAscending
+                ? aText.localeCompare(bText, undefined, { numeric: true })
+                : bText.localeCompare(aText, undefined, { numeric: true });
         });
-        
-        rows.forEach(row => table.querySelector('tbody').appendChild(row));
+
+        rows.forEach(row => tbody.appendChild(row));
     }
 
-    // Function to load and display CSV data
-    function loadAndDisplayCSV(url, tableId) {
-        fetch(url)
-            .then(response => response.text())
-            .then(text => {
-                const data = parseCSV(text);
-                const table = createTable(data, tableId);
-                document.getElementById('tables-container').innerHTML = ''; // Clear previous tables
-                document.getElementById('tables-container').appendChild(table);
-                applyFilters(); // Apply filters after table is loaded
-            });
-    }
-
-    // Apply filters to the table data
+    // Event listener for filters
     function applyFilters() {
-        const tables = document.querySelectorAll('#tables-container table');
-        tables.forEach(table => {
-            const rows = Array.from(table.querySelectorAll('tbody tr'));
-            rows.forEach(row => {
-                const data = {};
-                row.querySelectorAll('td').forEach((cell, index) => {
-                    data[table.querySelectorAll('th')[index].innerText] = cell.innerText;
-                });
+        const league = leagueSelect.value;
+        const statsType = statsTypeSelect.value;
+        const division = divisionSelect.value;
+        const position = positionSelect.value;
+        const yearOfBirth = yearOfBirthInput.value;
+        const gamesPlayed = gamesPlayedInput.value;
+        const minutesPlayed = minutesPlayedInput.value;
 
-                const yearOfBirth = parseInt(data['Year of Birth']);
-                const gamesPlayed = parseInt(data['Games Played']);
-                const minutesPlayed = parseInt(data['Minutes Played']);
-                const isVisible = (
-                    (divisionSelect.value === 'both' || data['Division'] === divisionSelect.value) &&
-                    (positionSelect.value === 'all' || data['Position'] === positionSelect.value) &&
-                    (!yearOfBirthInput.value || yearOfBirth === parseInt(yearOfBirthInput.value)) &&
-                    (!gamesPlayedInput.value || gamesPlayed === parseInt(gamesPlayedInput.value)) &&
-                    (!minutesPlayedInput.value || minutesPlayed === parseInt(minutesPlayedInput.value))
-                );
-
-                row.style.display = isVisible ? '' : 'none';
-            });
+        const csvFile = `${statsType}_${league}_${division}_${position}.csv`;
+        loadCSV(csvFile, data => {
+            tablesContainer.innerHTML = '';  // Clear previous tables
+            const table = parseCSV(data);
+            tablesContainer.appendChild(table);
         });
     }
 
     // Event listeners for filter changes
-    document.querySelectorAll('#filters select, #filters input').forEach(el => {
-        el.addEventListener('change', applyFilters);
-    });
-
-    // Load tables for Players page
-    const csvFiles = {
-        'totals': 'players_totals.csv',
-        'averages': 'players_averages.csv',
-        'shooting': 'players_shooting.csv',
-        'advanced1': 'players_advanced1.csv',
-        'advanced2': 'players_advanced2.csv',
-        'four_factors': 'players_four_factors.csv'
-    };
-
-    function updateTable() {
-        const league = leagueSelect.value;
-        const statsType = statsTypeSelect.value;
-        const csvFile = csvFiles[statsType];
-
-        if (csvFile) {
-            loadAndDisplayCSV(`https://raw.githubusercontent.com/Lurppi/nbblstats/main/${csvFile}`, 'players-table');
-        }
-    }
+    leagueSelect.addEventListener('change', applyFilters);
+    statsTypeSelect.addEventListener('change', applyFilters);
+    divisionSelect.addEventListener('change', applyFilters);
+    positionSelect.addEventListener('change', applyFilters);
+    yearOfBirthInput.addEventListener('input', applyFilters);
+    gamesPlayedInput.addEventListener('input', applyFilters);
+    minutesPlayedInput.addEventListener('input', applyFilters);
 
     // Initial load
-    updateTable();
+    applyFilters();
 });
