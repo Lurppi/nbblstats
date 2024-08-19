@@ -29,6 +29,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
 }
 
 .filters label {
@@ -84,6 +85,7 @@ th.sortable.desc::after {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    justify-content: center;
 }
 
 .filters label, .filters select, .filters input {

@@ -42,21 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function csvToHtmlTable(csv) {
-        const rows = csv.split('\n');
-        const headers = rows[0].split(';');
+        const rows = csv.split('\n').map(row => row.split(','));
         let table = '<table><thead><tr>';
-        headers.forEach(header => table += `<th class="sortable">${header}</th>`);
+        table += rows[0].map(header => `<th class="sortable">${header}</th>`).join('');
         table += '</tr></thead><tbody>';
-
-        rows.slice(1).forEach(row => {
-            if (row) {
-                const columns = row.split(';');
-                table += '<tr>';
-                columns.forEach(col => table += `<td>${col}</td>`);
-                table += '</tr>';
-            }
-        });
-
+        for (let i = 1; i < rows.length; i++) {
+            table += '<tr>';
+            table += rows[i].map(cell => `<td>${cell}</td>`).join('');
+            table += '</tr>';
+        }
         table += '</tbody></table>';
         return table;
     }
