@@ -1,118 +1,135 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const csvUrls = {
-        'regular': {
-            'totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Totals.csv',
-            'averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Averages.csv',
-            'shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Shooting.csv',
-            'advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced1.csv',
-            'advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced2.csv',
-            'four_factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Four_Factors.csv',
-        },
-        'playoffs': {
-            'totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Totals.csv',
-            'averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Averages.csv',
-            'shooting': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Shooting.csv',
-            'advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced1.csv',
-            'advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced2.csv',
-            'four_factors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv',
-        }
-    };
+document.addEventListener('DOMContentLoaded', () => {
+    const leagueSelect = document.getElementById('league');
+    const statsTypeSelect = document.getElementById('stats-type');
+    const divisionSelect = document.getElementById('division');
+    const positionSelect = document.getElementById('position');
+    const yearOfBirthMin = document.getElementById('year-of-birth-min');
+    const yearOfBirthMax = document.getElementById('year-of-birth-max');
+    const gamesPlayedMin = document.getElementById('games-played-min');
+    const gamesPlayedMax = document.getElementById('games-played-max');
+    const minutesPlayedMin = document.getElementById('minutes-played-min');
+    const minutesPlayedMax = document.getElementById('minutes-played-max');
 
-    function loadPlayerTable() {
-        const url = getPlayerTableUrl();
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('player-table-container').innerHTML = csvToHtmlTable(data);
-                addSortFunctionality();
-                applyFilters(); // Apply filters after table is loaded
-            })
-            .catch(error => console.error('Error loading CSV file:', error));
+    // Function to parse CSV data into an array of objects
+    function parseCSV(text) {
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        const headers = lines[0].split(';');
+        const rows = lines.slice(1).map(line => line.split(';'));
+        return rows.map(row => {
+            return headers.reduce((acc, header, i) => {
+                acc[header] = row[i];
+                return acc;
+            }, {});
+        });
     }
 
-    function getPlayerTableUrl() {
-        const league = document.getElementById('league-filter').value;
-        const statsType = document.getElementById('stats-type-filter').value;
-        return csvUrls[league][statsType];
-    }
-
-    function csvToHtmlTable(csv) {
-        const rows = csv.split('\n').map(row => row.split(','));
-        let table = '<table><thead><tr>';
-        table += rows[0].map(header => `<th class="sortable">${header}</th>`).join('');
-        table += '</tr></thead><tbody>';
-        for (let i = 1; i < rows.length; i++) {
-            table += '<tr>';
-            table += rows[i].map(cell => `<td>${cell}</td>`).join('');
-            table += '</tr>';
-        }
-        table += '</tbody></table>';
+    // Function to create a sortable table from CSV data
+    function createTable(data, tableId) {
+        const table = document.createElement('table');
+        table.id = tableId;
+        
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+        
+        const headers = Object.keys(data[0]);
+        const tr = document.createElement('tr');
+        
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.innerText = header;
+            th.addEventListener('click', () => sortTable(table, header));
+            tr.appendChild(th);
+        });
+        
+        thead.appendChild(tr);
+        table.appendChild(thead);
+        
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            headers.forEach(header => {
+                const td = document.createElement('td');
+                td.innerText = row[header];
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+        
+        table.appendChild(tbody);
         return table;
     }
 
-    function addSortFunctionality() {
-        document.querySelectorAll('th.sortable').forEach(th => {
-            th.addEventListener('click', () => {
-                const table = th.closest('table');
-                const tbody = table.querySelector('tbody');
-                const rows = Array.from(tbody.querySelectorAll('tr'));
-                const index = Array.from(th.parentNode.children).indexOf(th);
-                const ascending = !th.classList.contains('asc');
-                rows.sort((rowA, rowB) => {
-                    const cellA = rowA.children[index].innerText;
-                    const cellB = rowB.children[index].innerText;
-                    if (isNaN(cellA) || isNaN(cellB)) {
-                        return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-                    } else {
-                        return ascending ? cellA - cellB : cellB - cellA;
-                    }
-                });
-                tbody.innerHTML = '';
-                rows.forEach(row => tbody.appendChild(row));
-                document.querySelectorAll('th.sortable').forEach(th => th.classList.remove('asc', 'desc'));
-                th.classList.add(ascending ? 'asc' : 'desc');
-            });
-        });
-    }
-
-    function applyFilters() {
-        const filters = {
-            'DIV': document.getElementById('division-filter').value,
-            'POS': document.getElementById('position-filter').value,
-            'BORN': document.getElementById('year-of-birth-filter').value,
-            'GP': document.getElementById('games-played-filter').value,
-            'MP': document.getElementById('minutes-played-filter').value,
-        };
-
-        const table = document.querySelector('#player-table-container table');
-        if (!table) return;
-
+    // Function to sort the table by column
+    function sortTable(table, header) {
         const rows = Array.from(table.querySelectorAll('tbody tr'));
-        rows.forEach(row => {
-            const cells = Array.from(row.children);
-            const isVisible = Object.keys(filters).every((key, index) => {
-                const cellValue = cells[index].innerText;
-                if (!filters[key] || filters[key] === 'all') return true;
-                if (key === 'GP' || key === 'MP') return parseFloat(cellValue) >= parseFloat(filters[key]);
-                return cellValue.toLowerCase().includes(filters[key].toLowerCase());
-            });
+        const headerIndex = Array.from(table.querySelectorAll('th')).findIndex(th => th.innerText === header);
+        
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.children[headerIndex].innerText;
+            const cellB = rowB.children[headerIndex].innerText;
+            
+            return isNaN(cellA) ? cellA.localeCompare(cellB) : Number(cellA) - Number(cellB);
+        });
+        
+        rows.forEach(row => table.querySelector('tbody').appendChild(row));
+    }
 
-            row.style.display = isVisible ? '' : 'none';
+    // Function to load and display CSV data
+    function loadAndDisplayCSV(url, tableId) {
+        fetch(url)
+            .then(response => response.text())
+            .then(text => {
+                const data = parseCSV(text);
+                const table = createTable(data, tableId);
+                document.getElementById('tables-container').appendChild(table);
+                applyFilters(); // Apply filters after table is loaded
+            });
+    }
+
+    // Apply filters to the table data
+    function applyFilters() {
+        const tables = document.querySelectorAll('#tables-container table');
+        tables.forEach(table => {
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            rows.forEach(row => {
+                const data = {};
+                row.querySelectorAll('td').forEach((cell, index) => {
+                    data[table.querySelectorAll('th')[index].innerText] = cell.innerText;
+                });
+
+                const yearOfBirth = parseInt(data['Year of Birth']);
+                const gamesPlayed = parseInt(data['Games Played']);
+                const minutesPlayed = parseInt(data['Minutes Played']);
+                const isVisible = (
+                    (divisionSelect.value === 'both' || data['Division'] === divisionSelect.value) &&
+                    (positionSelect.value === 'all' || data['Position'] === positionSelect.value) &&
+                    (!yearOfBirthMin.value || yearOfBirth >= parseInt(yearOfBirthMin.value)) &&
+                    (!yearOfBirthMax.value || yearOfBirth <= parseInt(yearOfBirthMax.value)) &&
+                    (!gamesPlayedMin.value || gamesPlayed >= parseInt(gamesPlayedMin.value)) &&
+                    (!gamesPlayedMax.value || gamesPlayed <= parseInt(gamesPlayedMax.value)) &&
+                    (!minutesPlayedMin.value || minutesPlayed >= parseInt(minutesPlayedMin.value)) &&
+                    (!minutesPlayedMax.value || minutesPlayed <= parseInt(minutesPlayedMax.value))
+                );
+
+                row.style.display = isVisible ? '' : 'none';
+            });
         });
     }
 
-    document.getElementById('league-filter').addEventListener('change', loadPlayerTable);
-    document.getElementById('stats-type-filter').addEventListener('change', loadPlayerTable);
-    document.getElementById('division-filter').addEventListener('change', applyFilters);
-    document.getElementById('position-filter').addEventListener('change', applyFilters);
-    document.getElementById('year-of-birth-filter').addEventListener('input', applyFilters);
-    document.getElementById('games-played-filter').addEventListener('input', applyFilters);
-    document.getElementById('minutes-played-filter').addEventListener('input', applyFilters);
+    // Event listeners for filters
+    document.querySelectorAll('#filters select, #filters input').forEach(input => {
+        input.addEventListener('input', applyFilters);
+    });
 
-    loadPlayerTable(); // Load the initial table
+    // Load tables based on filters
+    function loadTables() {
+        const league = leagueSelect.value;
+        const statsType = statsTypeSelect.value;
+        const filePath = `https://github.com/Lurppi/nbblstats/${league}_${statsType}.csv`; // Adjust path if needed
+        loadAndDisplayCSV(filePath, 'players-table');
+    }
+
+    leagueSelect.addEventListener('change', loadTables);
+    statsTypeSelect.addEventListener('change', loadTables);
+
+    loadTables(); // Initial load
 });

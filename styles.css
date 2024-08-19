@@ -1,46 +1,84 @@
-/* Hauptmenü-Styles */
-.main-nav {
-    text-align: center;
-    margin-bottom: 20px;
+/* Style for the header and navigation */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 1rem;
     position: relative;
 }
 
-.main-nav a {
+nav ul li a {
+    color: #fff;
     text-decoration: none;
-    color: #333;
-    padding: 10px 20px;
-    display: inline-block;
 }
 
-.main-nav .dropdown {
-    display: inline-block;
-    position: relative;
-}
-
-.main-nav .dropdown-content {
+nav ul li ul {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    background-color: #333;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.main-nav .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
+nav ul li:hover ul {
     display: block;
 }
 
-.main-nav .dropdown-content a:hover {
-    background-color: #f1f1f1;
+/* Style for filters and tables */
+#filters {
+    margin-bottom: 20px;
 }
 
-.main-nav .dropdown:hover .dropdown-content {
-    display: block;
+#filters label {
+    margin-right: 10px;
 }
 
-.main-nav .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+#filters select, #filters input {
+    margin-right: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    position: relative;
+    z-index: 1; /* Ensure tables are in the foreground */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+}
+
+th:hover {
+    background-color: #555;
+}
+
+thead th {
+    text-align: center;
+}
+
+tbody td {
+    text-align: center;
+}
+
+#filters input {
+    width: 80px;
 }

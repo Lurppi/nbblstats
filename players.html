@@ -7,26 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <nav class="main-nav">
-            <a href="index.html">Home</a>
-            <div class="dropdown">
-                <a href="#" class="dropbtn">Stats</a>
-                <div class="dropdown-content">
-                    <a href="teams.html">Teams</a>
-                    <a href="players.html">Players</a>
-                </div>
-            </div>
-            <a href="roster.html">Roster</a>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li>
+                    <a href="#">Stats</a>
+                    <ul>
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="players.html">Players</a></li>
+                    </ul>
+                </li>
+                <li><a href="roster.html">Roster</a></li>
+            </ul>
         </nav>
-        <div class="filters">
-            <label for="league-filter">League:</label>
-            <select id="league-filter">
+    </header>
+    <main>
+        <div id="filters">
+            <label for="league">League:</label>
+            <select id="league">
                 <option value="regular">Regular Season</option>
                 <option value="playoffs">Playoffs</option>
             </select>
-            <label for="stats-type-filter">Stats Type:</label>
-            <select id="stats-type-filter">
+
+            <label for="stats-type">Stats Type:</label>
+            <select id="stats-type">
                 <option value="totals">Totals</option>
                 <option value="averages">Averages</option>
                 <option value="shooting">Shooting</option>
@@ -34,32 +39,39 @@
                 <option value="advanced2">Advanced2</option>
                 <option value="four_factors">Four Factors</option>
             </select>
-            <label for="division-filter">Division:</label>
-            <select id="division-filter">
-                <option value="all">All</option>
+
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="both">Both</option>
                 <option value="A">A</option>
                 <option value="B">B</option>
             </select>
-            <label for="position-filter">Position:</label>
-            <select id="position-filter">
-                <option value="all">All</option>
-                <option value="Point">Point</option>
-                <option value="Combo">Combo</option>
-                <option value="Wing">Wing</option>
-                <option value="Forward">Forward</option>
-                <option value="Big">Big</option>
+
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="point">Point</option>
+                <option value="combo">Combo</option>
+                <option value="wing">Wing</option>
+                <option value="forward">Forward</option>
+                <option value="big">Big</option>
             </select>
-            <label for="year-of-birth-filter">Year of Birth:</label>
-            <input type="number" id="year-of-birth-filter" placeholder="Year of Birth">
-            <label for="games-played-filter">Games Played:</label>
-            <input type="number" id="games-played-filter" placeholder="Min Games Played">
-            <label for="minutes-played-filter">Minutes Played:</label>
-            <input type="number" id="minutes-played-filter" placeholder="Min Minutes Played">
+
+            <label for="year-of-birth">Year of Birth:</label>
+            <input type="number" id="year-of-birth-min" placeholder="Min" />
+            <input type="number" id="year-of-birth-max" placeholder="Max" />
+
+            <label for="games-played">Games Played:</label>
+            <input type="number" id="games-played-min" placeholder="Min" />
+            <input type="number" id="games-played-max" placeholder="Max" />
+
+            <label for="minutes-played">Minutes Played:</label>
+            <input type="number" id="minutes-played-min" placeholder="Min" />
+            <input type="number" id="minutes-played-max" placeholder="Max" />
         </div>
-        <div id="player-table-container">
-            <!-- Player tables will be injected here -->
+        <div id="tables-container">
+            <!-- Tables will be dynamically inserted here -->
         </div>
-    </div>
+    </main>
     <script src="scripts.js"></script>
 </body>
 </html>
