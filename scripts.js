@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 document.getElementById('player-table-container').innerHTML = csvToHtmlTable(data);
                 addSortFunctionality();
+                applyFilters(); // Filters should be applied after table is loaded
             })
             .catch(error => console.error('Error loading CSV file:', error));
     }
@@ -136,11 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             row.style.display = matchesFilters ? '' : 'none';
         });
-    }
-
-    function applyAllFilters() {
-        loadPlayerTable();
-        applyFilters();
     }
 
     const filters = {

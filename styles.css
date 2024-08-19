@@ -80,20 +80,7 @@ td {
 
 /* Container für die Home-Seite */
 .container {
-    width: 100%;
     padding: 20px;
-}
-
-/* Filter-Container */
-.filter-container {
-    margin: 20px 0;
-}
-
-/* Anpassungen für Tabellenüberschriften */
-table thead th {
-    background-color: #333; /* Dunkelgrau */
-    color: #fff;
-    text-align: center;
 }
 
 /* Strukturierung für Home-Seite */
