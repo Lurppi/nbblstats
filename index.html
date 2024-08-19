@@ -1,43 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
-  <title>Basketball Stats</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Performers</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const files = {
+                weekly: {
+                    points: 'https://github.com/Lurppi/nbblstats/raw/main/csv/points-week.csv',
+                    rebounds: 'https://github.com/Lurppi/nbblstats/raw/main/csv/rebounds-week.csv',
+                    assists: 'https://github.com/Lurppi/nbblstats/raw/main/csv/assists-week.csv',
+                    steals: 'https://github.com/Lurppi/nbblstats/raw/main/csv/steals-week.csv',
+                    blocks: 'https://github.com/Lurppi/nbblstats/raw/main/csv/blocks-week.csv',
+                    per: 'https://github.com/Lurppi/nbblstats/raw/main/csv/per-week.csv'
+                },
+                regular: {
+                    points: 'https://github.com/Lurppi/nbblstats/raw/main/csv/points-regular.csv',
+                    rebounds: 'https://github.com/Lurppi/nbblstats/raw/main/csv/rebounds-regular.csv',
+                    assists: 'https://github.com/Lurppi/nbblstats/raw/main/csv/assists-regular.csv',
+                    steals: 'https://github.com/Lurppi/nbblstats/raw/main/csv/steals-regular.csv',
+                    blocks: 'https://github.com/Lurppi/nbblstats/raw/main/csv/blocks-regular.csv',
+                    per: 'https://github.com/Lurppi/nbblstats/raw/main/csv/per-regular.csv'
+                }
+            };
+
+            function loadTable(file, elementId) {
+                Papa.parse(file, {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        let data = results.data;
+                        let html = '<table><thead><tr><th>Player</th><th>Team</th><th>Stat</th></tr></thead><tbody>';
+                        data.forEach(row => {
+                            html += `<tr><td>${row.Player}</td><td>${row.Team}</td><td>${row.Stat}</td></tr>`;
+                        });
+                        html += '</tbody></table>';
+                        $(elementId).html(html);
+                    }
+                });
+            }
+
+            // Load weekly top 3
+            loadTable(files.weekly.points, '#weekly-points');
+            loadTable(files.weekly.rebounds, '#weekly-rebounds');
+            loadTable(files.weekly.assists, '#weekly-assists');
+            loadTable(files.weekly.steals, '#weekly-steals');
+            loadTable(files.weekly.blocks, '#weekly-blocks');
+            loadTable(files.weekly.per, '#weekly-per');
+
+            // Load regular season top 3
+            loadTable(files.regular.points, '#regular-points');
+            loadTable(files.regular.rebounds, '#regular-rebounds');
+            loadTable(files.regular.assists, '#regular-assists');
+            loadTable(files.regular.steals, '#regular-steals');
+            loadTable(files.regular.blocks, '#regular-blocks');
+            loadTable(files.regular.per, '#regular-per');
+        });
+    </script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Basketball Stats</h1>
-    </header>
-    <main>
-      <div class="filter-container">
-        <label for="league-type">League Type</label>
-        <select id="league-type">
-          <!-- League options will be added dynamically -->
-        </select>
+    <div class="container">
+        <!-- Weekly Top Performers -->
+        <div class="section">
+            <h2>Weekly Top Performers</h2>
+            <div class="row">
+                <div id="weekly-points" class="table-container"></div>
+                <div id="weekly-rebounds" class="table-container"></div>
+                <div id="weekly-assists" class="table-container"></div>
+            </div>
+            <div class="row">
+                <div id="weekly-steals" class="table-container"></div>
+                <div id="weekly-blocks" class="table-container"></div>
+                <div id="weekly-per" class="table-container"></div>
+            </div>
+        </div>
 
-        <label for="stat-type">Stat Type</label>
-        <select id="stat-type">
-          <option value="totals">Totals</option>
-          <option value="averages">Averages</option>
-          <option value="shooting">Shooting</option>
-          <option value="advanced1">Advanced 1</option>
-          <option value="advanced2">Advanced 2</option>
-          <option value="four-factors">Four Factors</option>
-        </select>
-
-        <label for="player-name">Player Name</label>
-        <input type="text" id="player-name" placeholder="Search by player name">
-
-        <button id="load-data">Load Data</button>
-      </div>
-      <div id="data-table">
-        <!-- Table will be dynamically loaded here -->
-      </div>
-    </main>
-    <script src="script.js"></script>
-  </div>
+        <!-- Regular Season Top Performers -->
+        <div class="section">
+            <h2>Regular Season Top Performers</h2>
+            <div class="row">
+                <div id="regular-points" class="table-container"></div>
+                <div id="regular-rebounds" class="table-container"></div>
+                <div id="regular-assists" class="table-container"></div>
+            </div>
+            <div class="row">
+                <div id="regular-steals" class="table-container"></div>
+                <div id="regular-blocks" class="table-container"></div>
+                <div id="regular-per" class="table-container"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

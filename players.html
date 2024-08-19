@@ -1,32 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
-  <title>Players</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const files = {
+                totals: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Totals.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Totals.csv'
+                },
+                averages: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Averages.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Averages.csv'
+                },
+                shooting: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Shooting.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Shooting.csv'
+                },
+                advanced1: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Advanced1.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Advanced1.csv'
+                },
+                advanced2: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Advanced2.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Advanced2.csv'
+                },
+                four_factors: {
+                    regular: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Regular_Four_Factors.csv',
+                    playoffs: 'https://github.com/Lurppi/nbblstats/raw/main/csv/Playoffs_Four_Factors.csv'
+                }
+            };
+
+            function loadTable(file, elementId) {
+                Papa.parse(file, {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        let data = results.data;
+                        let html = '<table><thead><tr><th>Player</th><th>Team</th><th>DIV</th><th>POS</th><th>BORN</th><th>Games</th><th>Minutes</th></tr></thead><tbody>';
+                        data.forEach(row => {
+                            html += `<tr><td>${row.Player}</td><td>${row.Team}</td><td>${row.DIV}</td><td>${row.POS}</td><td>${row.BORN}</td><td>${row.Games}</td><td>${row.Minutes}</td></tr>`;
+                        });
+                        html += '</tbody></table>';
+                        $(elementId).html(html);
+                    }
+                });
+            }
+
+            function updateTable() {
+                let league = $('#league').val();
+                let statsType = $('#stats-type').val();
+                let file = files[statsType][league];
+                loadTable(file, '#player-stats');
+            }
+
+            $('#league, #stats-type').change(updateTable);
+
+            // Set default filter
+            $('#league').val('regular');
+            $('#stats-type').val('totals');
+            updateTable();
+        });
+    </script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Players</h1>
-    </header>
-    <main>
-      <table id="players-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>Stats</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Player rows will be added dynamically -->
-        </tbody>
-      </table>
-    </main>
-    <script src="players.js"></script>
-  </div>
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <label for="league">League:</label>
+            <select id="league">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
+            </select>
+            <label for="stats-type">Stats Type:</label>
+            <select id="stats-type">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced1">Advanced1</option>
+                <option value="advanced2">Advanced2</option>
+                <option value="four_factors">Four Factors</option>
+            </select>
+        </div>
+
+        <!-- Player Stats Table -->
+        <div id="player-stats"></div>
+    </div>
 </body>
 </html>
