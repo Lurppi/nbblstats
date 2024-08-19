@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Home-Seite
-    const csvUrls = {
+    // URLs für CSV-Dateien auf der Home-Seite
+    const homeCsvUrls = {
         'points-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-week.csv',
         'rebounds-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-week.csv',
         'assists-week': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/assists-week.csv',
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'per-regular': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/per-regular.csv'
     };
 
+    // Funktion zum Laden und Anzeigen der Top 3 Performer
     function loadTop3(id, url) {
         fetch(url)
             .then(response => response.text())
@@ -23,27 +24,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 const rows = data.split('\n').map(row => row.split(';'));
                 const thead = document.createElement('thead');
                 const tbody = document.createElement('tbody');
+                const uniqueRows = new Set(); // Verfolgt einzigartige Zeilen
+
                 rows.slice(0, 4).forEach((row, index) => {
-                    const tr = document.createElement('tr');
-                    row.forEach(cell => {
-                        const element = document.createElement(index === 0 ? 'th' : 'td');
-                        element.textContent = cell;
-                        tr.appendChild(element);
-                    });
-                    (index === 0 ? thead : tbody).appendChild(tr);
+                    if (!uniqueRows.has(row.join(';'))) {
+                        uniqueRows.add(row.join(';'));
+                        const tr = document.createElement('tr');
+                        row.forEach(cell => {
+                            const element = document.createElement(index === 0 ? 'th' : 'td');
+                            element.textContent = cell;
+                            tr.appendChild(element);
+                        });
+                        (index === 0 ? thead : tbody).appendChild(tr);
+                    }
                 });
+
                 table.appendChild(thead);
                 table.appendChild(tbody);
             })
-            .catch(error => console.error('Error loading table data:', error));
+            .catch(error => console.error('Fehler beim Laden der Tabellendaten:', error));
     }
 
-    for (const [id, url] of Object.entries(csvUrls)) {
-        loadTop3(id, url);
-    }
-
-    // Players-Seite
-    const files = {
+    // CSV-Dateien für die Players-Seite
+    const playersCsvUrls = {
         'regular-totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Totals.csv',
         'playoffs-totals': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Totals.csv',
         'regular-averages': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Averages.csv',
@@ -54,90 +57,64 @@ document.addEventListener('DOMContentLoaded', function() {
         'playoffs-advanced1': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced1.csv',
         'regular-advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Advanced2.csv',
         'playoffs-advanced2': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Advanced2.csv',
-        'regular-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_Four_Factors.csv',
-        'playoffs-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_Four_Factors.csv'
+        'regular-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Regular_FourFactors.csv',
+        'playoffs-fourfactors': 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/Playoffs_FourFactors.csv'
     };
 
-    function loadTable(url, containerId) {
+    function populateTeamFilter(teams) {
+        const teamFilter = document.getElementById('team-filter');
+        teamFilter.innerHTML = '';
+
+        teams.forEach(team => {
+            const option = document.createElement('option');
+            option.value = team;
+            option.textContent = team;
+            teamFilter.appendChild(option);
+        });
+    }
+
+    function updateTeamsBasedOnFilter() {
+        const league = document.getElementById('league-filter').value;
+        const statType = document.getElementById('stat-type-filter').value;
+        const division = document.getElementById('division-filter').value;
+        
+        const key = `${league}-${statType}`.toLowerCase();
+        const url = playersCsvUrls[key];
+
         fetch(url)
             .then(response => response.text())
             .then(data => {
-                const tableContainer = document.getElementById(containerId);
-                tableContainer.innerHTML = '';
                 const rows = data.split('\n').map(row => row.split(';'));
-                const table = document.createElement('table');
-                const thead = document.createElement('thead');
-                const tbody = document.createElement('tbody');
+                const teams = new Set();
 
-                rows.forEach((row, index) => {
-                    const tr = document.createElement('tr');
-                    row.forEach((cell, cellIndex) => {
-                        const element = document.createElement(index === 0 ? 'th' : 'td');
-                        element.textContent = cell;
-                        tr.appendChild(element);
-                    });
-                    (index === 0 ? thead : tbody).appendChild(tr);
-                });
+                rows.slice(1).forEach(row => {
+                    const rowDivision = row[1]; // Annahme: Division ist in Spalte 2
+                    const team = row[2]; // Annahme: Team ist in Spalte 3
 
-                table.appendChild(thead);
-                table.appendChild(tbody);
-                tableContainer.appendChild(table);
-            })
-            .catch(error => console.error('Error loading table data:', error));
-    }
-
-    function loadFilteredTable() {
-        const league = document.getElementById('league-filter').value;
-        const statType = document.getElementById('stat-type-filter').value;
-        const url = files[`${league}-${statType}`];
-        if (url) {
-            loadTable(url, 'players-tables');
-        }
-    }
-
-    function populateFilter(filterId, columnIndex, isTeamFilter = false) {
-        const filter = document.getElementById(filterId);
-        fetch(files['regular-totals']) // Use any CSV file to get filter data
-            .then(response => response.text())
-            .then(data => {
-                const items = new Set(data.split('\n').slice(1).map(row => row.split(';')[columnIndex]));
-                items.forEach(item => {
-                    if (item) {
-                        const option = document.createElement('option');
-                        option.value = item;
-                        option.textContent = item;
-                        filter.appendChild(option);
+                    if (division === 'both' || rowDivision === division) {
+                        teams.add(team);
                     }
                 });
 
-                if (isTeamFilter) {
-                    const sortedOptions = Array.from(filter.options).sort((a, b) => a.text.localeCompare(b.text));
-                    filter.innerHTML = ''; // Clear existing options
-                    sortedOptions.forEach(option => filter.appendChild(option));
-                }
+                populateTeamFilter(Array.from(teams).sort());
             })
-            .catch(error => console.error('Error loading filter data:', error));
+            .catch(error => console.error('Fehler beim Laden der Teamdaten:', error));
     }
 
-    // Initial load for Home Page
-    for (const [id, url] of Object.entries(csvUrls)) {
+    function loadPlayerStats() {
+        // Logik zum Laden und Anzeigen der Spielerstatistiken basierend auf den Filtern
+    }
+
+    // Event-Listener für Filteränderungen
+    document.getElementById('league-filter').addEventListener('change', updateTeamsBasedOnFilter);
+    document.getElementById('stat-type-filter').addEventListener('change', updateTeamsBasedOnFilter);
+    document.getElementById('division-filter').addEventListener('change', updateTeamsBasedOnFilter);
+
+    // Laden der Top 3 Performer für die Home-Seite
+    for (const [id, url] of Object.entries(homeCsvUrls)) {
         loadTop3(id, url);
     }
 
-    // Initial load for Players Page
-    document.getElementById('league-filter').value = 'regular';
-    document.getElementById('stat-type-filter').value = 'totals';
-    loadFilteredTable();
-    populateFilter('division-filter', 0); // Division filter from index 0 of CSV
-    populateFilter('position-filter', 1); // Position filter from index 1 of CSV
-    populateFilter('team-filter', 2, true); // Team filter from index 2 of CSV and sort
-
-    document.getElementById('league-filter').addEventListener('change', loadFilteredTable);
-    document.getElementById('stat-type-filter').addEventListener('change', loadFilteredTable);
-    document.getElementById('division-filter').addEventListener('change', loadFilteredTable);
-    document.getElementById('team-filter').addEventListener('change', loadFilteredTable);
-    document.getElementById('position-filter').addEventListener('change', loadFilteredTable);
-    document.getElementById('year-filter').addEventListener('input', loadFilteredTable);
-    document.getElementById('games-played-filter').addEventListener('input', loadFilteredTable);
-    document.getElementById('minutes-played-filter').addEventListener('input', loadFilteredTable);
+    // Initiales Laden der Teams basierend auf den Standardfiltern
+    updateTeamsBasedOnFilter();
 });

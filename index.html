@@ -1,104 +1,49 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basketball Stats - Home</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="players.html">Players</a></li>
-        </ul>
-    </nav>
-    <div id="content">
-        <h1>Top 3 Performers</h1>
-        <div class="tables-container">
-            <!-- Tabellen für Weekly Top 3 -->
-            <div class="row">
-                <div class="table-container">
-                    <h2>Weekly Points</h2>
-                    <table id="points-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Weekly Rebounds</h2>
-                    <table id="rebounds-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Weekly Assists</h2>
-                    <table id="assists-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
+    <header>
+        <h1>Basketball Stats</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="players.html">Players</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Weekly Top 3 Performers</h2>
+            <div class="table-container">
+                <table id="points-week"></table>
+                <table id="rebounds-week"></table>
+                <table id="assists-week"></table>
             </div>
-            <div class="row">
-                <div class="table-container">
-                    <h2>Weekly Steals</h2>
-                    <table id="steals-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Weekly Blocks</h2>
-                    <table id="blocks-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Weekly PER</h2>
-                    <table id="per-week">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
+            <div class="table-container">
+                <table id="steals-week"></table>
+                <table id="blocks-week"></table>
+                <table id="per-week"></table>
             </div>
-            <div class="row">
-                <div class="table-container">
-                    <h2>Regular Points</h2>
-                    <table id="points-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Regular Rebounds</h2>
-                    <table id="rebounds-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Regular Assists</h2>
-                    <table id="assists-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
+        </section>
+        <section>
+            <h2>Regular Season Top 3 Performers</h2>
+            <div class="table-container">
+                <table id="points-regular"></table>
+                <table id="rebounds-regular"></table>
+                <table id="assists-regular"></table>
             </div>
-            <div class="row">
-                <div class="table-container">
-                    <h2>Regular Steals</h2>
-                    <table id="steals-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Regular Blocks</h2>
-                    <table id="blocks-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
-                <div class="table-container">
-                    <h2>Regular PER</h2>
-                    <table id="per-regular">
-                        <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-                    </table>
-                </div>
+            <div class="table-container">
+                <table id="steals-regular"></table>
+                <table id="blocks-regular"></table>
+                <table id="per-regular"></table>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+    <script src="scripts.js"></script>
 </body>
 </html>

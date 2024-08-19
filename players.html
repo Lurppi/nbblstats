@@ -1,71 +1,83 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basketball Stats - Players</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="players.html">Players</a></li>
-        </ul>
-    </nav>
-    <div id="content">
-        <h1>Player Statistics</h1>
-        <div class="filter-container">
-            <label for="league-filter">League:</label>
-            <select id="league-filter">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-
-            <label for="stat-type-filter">Stats Type:</label>
-            <select id="stat-type-filter">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced1">Advanced1</option>
-                <option value="advanced2">Advanced2</option>
-                <option value="fourfactors">Four Factors</option>
-            </select>
-
-            <label for="division-filter">Division:</label>
-            <select id="division-filter">
-                <option value="both">Both</option>
-                <option value="a">A</option>
-                <option value="b">B</option>
-            </select>
-
-            <label for="team-filter">Team:</label>
-            <select id="team-filter">
-                <!-- Team-Optionen werden dynamisch hinzugefügt -->
-            </select>
-
-            <label for="position-filter">Position:</label>
-            <select id="position-filter">
-                <option value="point">Point</option>
-                <option value="combo">Combo</option>
-                <option value="wing">Wing</option>
-                <option value="forward">Forward</option>
-                <option value="big">Big</option>
-            </select>
-
-            <label for="year-filter">Year of Birth:</label>
-            <input type="number" id="year-filter" placeholder="e.g. 2005">
-
-            <label for="games-played-filter">Games Played:</label>
-            <input type="number" id="games-played-filter" placeholder="Minimum">
-
-            <label for="minutes-played-filter">Minutes Played:</label>
-            <input type="number" id="minutes-played-filter" placeholder="Minimum">
-        </div>
-        <div id="players-tables">
-            <!-- Tabelleninhalt wird hier durch JavaScript eingefügt -->
-        </div>
-    </div>
+    <header>
+        <h1>Basketball Stats</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="players.html">Players</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Player Statistics</h2>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="league-filter">League:</label>
+                    <select id="league-filter">
+                        <option value="regular">Regular Season</option>
+                        <option value="playoffs">Playoffs</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="stat-type-filter">Stats Type:</label>
+                    <select id="stat-type-filter">
+                        <option value="totals">Totals</option>
+                        <option value="averages">Averages</option>
+                        <option value="shooting">Shooting</option>
+                        <option value="advanced1">Advanced1</option>
+                        <option value="advanced2">Advanced2</option>
+                        <option value="fourfactors">Four Factors</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="division-filter">Division:</label>
+                    <select id="division-filter">
+                        <option value="both">Both</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="team-filter">Team:</label>
+                    <select id="team-filter">
+                        <!-- Optionen werden dynamisch geladen -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="position-filter">Position:</label>
+                    <select id="position-filter">
+                        <option value="point">Point</option>
+                        <option value="combo">Combo</option>
+                        <option value="wing">Wing</option>
+                        <option value="forward">Forward</option>
+                        <option value="big">Big</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-filter">Year of Birth:</label>
+                    <input type="number" id="year-filter" placeholder="e.g. 2005">
+                </div>
+                <div class="filter-group">
+                    <label for="games-played-filter">Games Played:</label>
+                    <input type="number" id="games-played-filter" placeholder="e.g. 10">
+                </div>
+                <div class="filter-group">
+                    <label for="minutes-played-filter">Minutes Played:</label>
+                    <input type="number" id="minutes-played-filter" placeholder="e.g. 20">
+                </div>
+            </div>
+            <div id="players-tables"></div>
+        </section>
+    </main>
+    <script src="scripts.js"></script>
 </body>
 </html>
