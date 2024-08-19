@@ -1,22 +1,25 @@
+/* Allgemeine Stile für die Website */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 header {
-    background: #333;
+    background-color: #333;
     color: #fff;
-    padding: 10px;
+    padding: 10px 0;
+    text-align: center;
 }
 
 header nav ul {
     list-style-type: none;
-    margin: 0;
     padding: 0;
 }
 
 header nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin: 0 10px;
 }
 
 header nav ul li a {
@@ -28,41 +31,52 @@ main {
     padding: 20px;
 }
 
-.tables-container {
+.table-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.tables-container table {
+.table-container table {
     border-collapse: collapse;
     width: 100%;
-    margin-bottom: 20px;
+    max-width: 300px;
 }
 
-.tables-container table th, .tables-container table td {
+.table-container th, .table-container td {
     border: 1px solid #ddd;
     padding: 8px;
+    text-align: left;
 }
 
-.tables-container table th {
+.table-container th {
     background-color: #f4f4f4;
 }
 
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Stile für Filter */
 #filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
     margin-bottom: 20px;
 }
 
-#filters label {
+.filter-group {
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 200px;
+}
+
+.filter-group label {
     display: block;
     margin-bottom: 5px;
 }
 
-#filters select, #filters input {
-    width: 150px;
-    padding: 5px;
-    margin-bottom: 10px;
+.filter-group select, .filter-group input {
+    width: 100%;
+    padding: 8px;
 }

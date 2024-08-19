@@ -1,102 +1,135 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const BASE_URL = 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/';
-    const FILES = {
-        pointsWeek: 'points-week.csv',
-        reboundsWeek: 'rebounds-week.csv',
-        assistsWeek: 'assists-week.csv',
-        stealsWeek: 'steals-week.csv',
-        blocksWeek: 'blocks-week.csv',
-        perWeek: 'per-week.csv',
-        pointsRegular: 'points-regular.csv',
-        reboundsRegular: 'rebounds-regular.csv',
-        assistsRegular: 'assists-regular.csv',
-        stealsRegular: 'steals-regular.csv',
-        blocksRegular: 'blocks-regular.csv',
-        perRegular: 'per-regular.csv',
-        regularTotals: 'Regular_Totals.csv',
-        regularAverages: 'Regular_Averages.csv',
-        regularShooting: 'Regular_Shooting.csv',
-        regularAdvanced1: 'Regular_Advanced1.csv',
-        regularAdvanced2: 'Regular_Advanced2.csv',
-        regularFourFactors: 'Regular_Four_Factors.csv',
-        playoffsTotals: 'Playoffs_Totals.csv',
-        playoffsAverages: 'Playoffs_Averages.csv',
-        playoffsShooting: 'Playoffs_Shooting.csv',
-        playoffsAdvanced1: 'Playoffs_Advanced1.csv',
-        playoffsAdvanced2: 'Playoffs_Advanced2.csv',
-        playoffsFourFactors: 'Playoffs_Four_Factors.csv'
-    };
+document.addEventListener('DOMContentLoaded', function() {
+    // Helper function to fetch CSV data and convert it to an array of objects
+    async function fetchCSV(url) {
+        const response = await fetch(url);
+        const text = await response.text();
+        const rows = text.split('\n').map(row => row.split(';'));
+        const headers = rows[0];
+        return rows.slice(1).map(row => {
+            return headers.reduce((acc, header, i) => {
+                acc[header] = row[i];
+                return acc;
+            }, {});
+        });
+    }
 
-    // Function to fetch CSV data and convert it to table
-    async function fetchAndDisplayData(url, tableId) {
-        try {
-            const response = await fetch(url);
-            const data = await response.text();
-            const rows = data.split('\n').filter(row => row.trim() !== '');
-            const table = document.getElementById(tableId);
-            let html = '<thead><tr>';
-            const headers = rows[0].split(';');
-            headers.forEach(header => {
-                html += `<th>${header}</th>`;
+    // Function to render tables on index.html
+    async function renderIndexTables() {
+        const files = {
+            'Weekly Points': 'points-week.csv',
+            'Weekly Rebounds': 'rebounds-week.csv',
+            'Weekly Assists': 'assists-week.csv',
+            'Weekly Steals': 'steals-week.csv',
+            'Weekly Blocks': 'blocks-week.csv',
+            'Weekly PER': 'per-week.csv',
+            'Season Points': 'points-regular.csv',
+            'Season Rebounds': 'rebounds-regular.csv',
+            'Season Assists': 'assists-regular.csv',
+            'Season Steals': 'steals-regular.csv',
+            'Season Blocks': 'blocks-regular.csv',
+            'Season PER': 'per-regular.csv',
+        };
+
+        const weeklyContainer = document.getElementById('weekly-tables');
+        const seasonContainer = document.getElementById('season-tables');
+
+        for (const [title, file] of Object.entries(files)) {
+            const data = await fetchCSV(file);
+            const top3 = data.slice(0, 3);
+
+            const table = document.createElement('table');
+            const headerRow = document.createElement('tr');
+            headerRow.innerHTML = '<th>Player</th><th>Team</th><th>Value</th>';
+            table.appendChild(headerRow);
+
+            top3.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${item.Player}</td><td>${item.Team}</td><td>${item.Value}</td>`;
+                table.appendChild(row);
             });
-            html += '</tr></thead><tbody>';
-            rows.slice(1, 4).forEach(row => {
-                const columns = row.split(';');
-                html += '<tr>';
-                columns.forEach(col => {
-                    html += `<td>${col}</td>`;
-                });
-                html += '</tr>';
-            });
-            html += '</tbody>';
-            table.innerHTML = html;
-        } catch (error) {
-            console.error('Error fetching or displaying data:', error);
+
+            const section = file.includes('week') ? weeklyContainer : seasonContainer;
+            const heading = document.createElement('h3');
+            heading.textContent = title;
+            section.appendChild(heading);
+            section.appendChild(table);
         }
     }
 
-    // Load data for index.html
-    const tables = [
-        { file: FILES.pointsWeek, id: 'points-week' },
-        { file: FILES.reboundsWeek, id: 'rebounds-week' },
-        { file: FILES.assistsWeek, id: 'assists-week' },
-        { file: FILES.stealsWeek, id: 'steals-week' },
-        { file: FILES.blocksWeek, id: 'blocks-week' },
-        { file: FILES.perWeek, id: 'per-week' },
-        { file: FILES.pointsRegular, id: 'points-regular' },
-        { file: FILES.reboundsRegular, id: 'rebounds-regular' },
-        { file: FILES.assistsRegular, id: 'assists-regular' },
-        { file: FILES.stealsRegular, id: 'steals-regular' },
-        { file: FILES.blocksRegular, id: 'blocks-regular' },
-        { file: FILES.perRegular, id: 'per-regular' }
-    ];
-
-    // Load all tables
-    tables.forEach(table => fetchAndDisplayData(`${BASE_URL}${table.file}`, table.id));
-
-    // Filter logic for players.html
-    function updateFilters() {
+    // Function to render player tables on players.html
+    async function renderPlayerTables() {
         const league = document.getElementById('league').value;
-        const statsType = document.getElementById('statsType').value;
-        const file = FILES[`${league}${statsType}`] || '';
+        const statsType = document.getElementById('stats-type').value;
+        const file = `data/${league}-${statsType}.csv`;
+        const data = await fetchCSV(file);
 
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-totals');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-averages');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-shooting');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-advanced1');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-advanced2');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'regular-fourfactors');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-totals');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-averages');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-shooting');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-advanced1');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-advanced2');
-        fetchAndDisplayData(`${BASE_URL}${file}`, 'playoffs-fourfactors');
+        // Filtering logic
+        const filters = {
+            division: document.getElementById('division').value,
+            team: document.getElementById('team').value,
+            position: document.getElementById('position').value,
+            yearOfBirth: document.getElementById('year-of-birth').value,
+            gamesPlayed: document.getElementById('games-played').value,
+            minutesPlayed: document.getElementById('minutes-played').value,
+        };
+
+        const filteredData = data.filter(row => {
+            return (filters.division === 'All' || row.DIV === filters.division) &&
+                   (filters.team === 'All' || row.TEAM === filters.team) &&
+                   (filters.position === 'All' || row.POS === filters.position) &&
+                   (filters.yearOfBirth === '' || row.BORN === filters.yearOfBirth) &&
+                   (filters.gamesPlayed === '' || parseInt(row.GP, 10) >= parseInt(filters.gamesPlayed, 10)) &&
+                   (filters.minutesPlayed === '' || parseInt(row.MIN, 10) >= parseInt(filters.minutesPlayed, 10));
+        });
+
+        // Update filter options
+        function updateFilterOptions() {
+            const uniqueValues = (array, key) => [...new Set(array.map(item => item[key]))];
+            const divOptions = ['All', ...uniqueValues(data, 'DIV')];
+            const teamOptions = ['All', ...uniqueValues(data, 'TEAM')].sort();
+            const posOptions = ['All', ...uniqueValues(data, 'POS')];
+            const yearOptions = ['All', ...uniqueValues(data, 'BORN')];
+
+            const filtersMap = {
+                'division': divOptions,
+                'team': teamOptions,
+                'position': posOptions,
+                'year-of-birth': yearOptions
+            };
+
+            Object.keys(filtersMap).forEach(filterId => {
+                const select = document.getElementById(filterId);
+                select.innerHTML = filtersMap[filterId].map(value => `<option value="${value}">${value}</option>`).join('');
+            });
+        }
+        updateFilterOptions();
+
+        // Render player table
+        const playerTablesContainer = document.getElementById('player-tables');
+        playerTablesContainer.innerHTML = ''; // Clear previous tables
+
+        const table = document.createElement('table');
+        const headers = Object.keys(filteredData[0] || {}).map(key => `<th>${key}</th>`).join('');
+        const headerRow = document.createElement('tr');
+        headerRow.innerHTML = headers;
+        table.appendChild(headerRow);
+
+        filteredData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = Object.values(row).map(value => `<td>${value}</td>`).join('');
+            table.appendChild(tr);
+        });
+
+        playerTablesContainer.appendChild(table);
     }
 
-    document.getElementById('league').addEventListener('change', updateFilters);
-    document.getElementById('statsType').addEventListener('change', updateFilters);
+    // Event listeners for filter changes
+    document.getElementById('filter-form').addEventListener('change', renderPlayerTables);
 
-    // Initial load for Players Page
-    updateFilters();
+    // Initial rendering based on page
+    if (document.body.classList.contains('home-page')) {
+        renderIndexTables();
+    } else if (document.body.classList.contains('players-page')) {
+        renderPlayerTables();
+    }
 });

@@ -1,57 +1,39 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBA Stats Home</title>
+    <title>Basketball Stats - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
     <header>
+        <h1>Basketball Stats</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="players.html">Players</a></li>
+                <li><a href="team-stats.html">Team Stats</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Top 3 Performer</h1>
-        <section id="weekly">
-            <h2>Weekly Top 3</h2>
-            <div class="tables-container">
-                <h3>Points</h3>
-                <table id="points-week"></table>
-                <h3>Rebounds</h3>
-                <table id="rebounds-week"></table>
-                <h3>Assists</h3>
-                <table id="assists-week"></table>
-                <h3>Steals</h3>
-                <table id="steals-week"></table>
-                <h3>Blocks</h3>
-                <table id="blocks-week"></table>
-                <h3>PER</h3>
-                <table id="per-week"></table>
+        <section id="weekly-leaders">
+            <h2>Weekly Top Performers</h2>
+            <div class="table-container" id="weekly-tables">
+                <!-- Tabellen werden hier durch JavaScript hinzugefügt -->
             </div>
         </section>
-        <section id="regular">
-            <h2>Regular Season Top 3</h2>
-            <div class="tables-container">
-                <h3>Points</h3>
-                <table id="points-regular"></table>
-                <h3>Rebounds</h3>
-                <table id="rebounds-regular"></table>
-                <h3>Assists</h3>
-                <table id="assists-regular"></table>
-                <h3>Steals</h3>
-                <table id="steals-regular"></table>
-                <h3>Blocks</h3>
-                <table id="blocks-regular"></table>
-                <h3>PER</h3>
-                <table id="per-regular"></table>
+        <section id="season-leaders">
+            <h2>Regular Season Top Performers</h2>
+            <div class="table-container" id="season-tables">
+                <!-- Tabellen werden hier durch JavaScript hinzugefügt -->
             </div>
         </section>
     </main>
+    <footer>
+        <p>Basketball Stats &copy; 2024</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

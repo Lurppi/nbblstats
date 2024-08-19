@@ -1,65 +1,85 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBA Players Stats</title>
+    <title>Basketball Stats - Players</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="players-page">
     <header>
+        <h1>Basketball Stats - Players</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="players.html">Players</a></li>
+                <li><a href="team-stats.html">Team Stats</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Players Stats</h1>
-        <div id="filters">
-            <label for="league">League</label>
-            <select id="league">
-                <option value="regular">Regular Season</option>
-                <option value="playoffs">Playoffs</option>
-            </select>
-            <label for="statsType">Stats Type</label>
-            <select id="statsType">
-                <option value="totals">Totals</option>
-                <option value="averages">Averages</option>
-                <option value="shooting">Shooting</option>
-                <option value="advanced1">Advanced1</option>
-                <option value="advanced2">Advanced2</option>
-                <option value="fourfactors">Four Factors</option>
-            </select>
-            <label for="division">Division</label>
-            <select id="division"></select>
-            <label for="team">Team</label>
-            <select id="team"></select>
-            <label for="position">Position</label>
-            <select id="position"></select>
-            <label for="yearOfBirth">Year of Birth</label>
-            <input type="number" id="yearOfBirth" placeholder="e.g. 2005">
-            <label for="gamesPlayed">Games Played</label>
-            <input type="number" id="gamesPlayed" placeholder="e.g. 10">
-            <label for="minutesPlayed">Minutes Played</label>
-            <input type="number" id="minutesPlayed" placeholder="e.g. 100">
-        </div>
-        <div id="tables-container">
-            <table id="regular-totals"></table>
-            <table id="regular-averages"></table>
-            <table id="regular-shooting"></table>
-            <table id="regular-advanced1"></table>
-            <table id="regular-advanced2"></table>
-            <table id="regular-fourfactors"></table>
-            <table id="playoffs-totals"></table>
-            <table id="playoffs-averages"></table>
-            <table id="playoffs-shooting"></table>
-            <table id="playoffs-advanced1"></table>
-            <table id="playoffs-advanced2"></table>
-            <table id="playoffs-fourfactors"></table>
-        </div>
+        <section id="filters">
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label for="league">League:</label>
+                    <select id="league" name="league">
+                        <option value="regular">Regular Season</option>
+                        <option value="playoffs">Playoffs</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="stats-type">Stats Type:</label>
+                    <select id="stats-type" name="stats-type">
+                        <option value="totals">Totals</option>
+                        <option value="averages">Averages</option>
+                        <option value="shooting">Shooting</option>
+                        <option value="advanced1">Advanced1</option>
+                        <option value="advanced2">Advanced2</option>
+                        <option value="four-factors">Four Factors</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="division">Division:</label>
+                    <select id="division" name="division">
+                        <!-- Optionen werden durch JavaScript hinzugefügt -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="team">Team:</label>
+                    <select id="team" name="team">
+                        <!-- Optionen werden durch JavaScript hinzugefügt -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="position">Position:</label>
+                    <select id="position" name="position">
+                        <!-- Optionen werden durch JavaScript hinzugefügt -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-of-birth">Year of Birth:</label>
+                    <input type="number" id="year-of-birth" name="year-of-birth">
+                </div>
+                <div class="filter-group">
+                    <label for="games-played">Games Played (>=):</label>
+                    <input type="number" id="games-played" name="games-played">
+                </div>
+                <div class="filter-group">
+                    <label for="minutes-played">Minutes Played (>=):</label>
+                    <input type="number" id="minutes-played" name="minutes-played">
+                </div>
+            </form>
+        </section>
+        <section id="player-stats">
+            <h2>Player Stats</h2>
+            <div class="table-container" id="player-tables">
+                <!-- Tabellen werden hier durch JavaScript hinzugefügt -->
+            </div>
+        </section>
     </main>
+    <footer>
+        <p>Basketball Stats &copy; 2024</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
