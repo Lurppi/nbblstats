@@ -6,20 +6,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tables = {
         weekly: [
-            'https://github.com/Lurppi/nbblstats/points-week.csv',
-            'https://github.com/Lurppi/nbblstats/rebounds-week.csv',
-            'https://github.com/Lurppi/nbblstats/assists-week.csv',
-            'https://github.com/Lurppi/nbblstats/steals-week.csv',
-            'https://github.com/Lurppi/nbblstats/blocks-week.csv',
-            'https://github.com/Lurppi/nbblstats/per-week.csv'
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-week.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-week.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/assists-week.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/steals-week.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/blocks-week.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/per-week.csv'
         ],
         regular: [
-            'https://github.com/Lurppi/nbblstats/points-regular.csv',
-            'https://github.com/Lurppi/nbblstats/rebounds-regular.csv',
-            'https://github.com/Lurppi/nbblstats/assists-regular.csv',
-            'https://github.com/Lurppi/nbblstats/steals-regular.csv',
-            'https://github.com/Lurppi/nbblstats/blocks-regular.csv',
-            'https://github.com/Lurppi/nbblstats/per-regular.csv'
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/points-regular.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/rebounds-regular.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/assists-regular.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/steals-regular.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/blocks-regular.csv',
+            'https://raw.githubusercontent.com/Lurppi/nbblstats/main/per-regular.csv'
         ]
     };
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function getPlayerTableUrl() {
         const league = document.getElementById('league-filter').value.toLowerCase();
         const statsType = document.getElementById('stats-type-filter').value.toLowerCase();
-        return `https://github.com/Lurppi/nbblstats/${league}_${statsType}.csv`;
+        return `https://raw.githubusercontent.com/Lurppi/nbblstats/main/${league}_${statsType}.csv`;
     }
 
     function addSortFunctionality() {

@@ -101,3 +101,8 @@ td {
 .col:last-child {
     margin-right: 0;
 }
+
+/* Filter-Container */
+.filter-container {
+    margin: 20px 0;
+}
