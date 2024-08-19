@@ -1,84 +1,50 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: #f1f1f1;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.container {
+  margin: 50px auto 40px auto;
+  width: 600px;
+  text-align: center;
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+  margin-bottom: 20px;
 }
 
-nav ul.menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+h1 {
+  font-size: 2.5em;
+  margin: 0;
 }
 
-nav ul.menu li {
-    display: inline;
-    margin-right: 15px;
+.filter-container {
+  margin-bottom: 20px;
 }
 
-nav ul.menu li a {
-    color: #fff;
-    text-decoration: none;
+label {
+  display: block;
+  margin-top: 10px;
 }
 
-main {
-    padding: 20px;
+select, input {
+  margin: 5px 0;
+  padding: 5px;
 }
 
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+button {
+  padding: 10px 20px;
+  background-color: #4183c4;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-.filter {
-    margin: 10px;
+button:hover {
+  background-color: #357ab8;
 }
 
-.table-container {
-    overflow-x: auto;
-    margin-bottom: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-th.sortable:hover {
-    cursor: pointer;
-    background-color: #e2e2e2;
-}
-
-th, td {
-    text-align: center;
-}
-
-td.player, td.team {
-    text-align: left;
-}
-
-td, th {
-    min-width: 80px;
-}
-
-.filter-label {
-    font-weight: bold;
-    display: block;
+#data-table {
+  margin-top: 20px;
 }

@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - NBBL Stats</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+  <title>Basketball Stats</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
     <header>
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="teams.html">Teams</a></li>
-                <li><a href="players.html">Players</a></li>
-                <li><a href="roster.html">Roster</a></li>
-            </ul>
-        </nav>
+      <h1>Basketball Stats</h1>
     </header>
     <main>
-        <h1>Welcome to NBBL Stats</h1>
-        <!-- Top 3 tables code here -->
-        <div id="top3-tables"></div>
-        <!-- Additional content for Home page -->
+      <div class="filter-container">
+        <label for="league-type">League Type</label>
+        <select id="league-type">
+          <!-- League options will be added dynamically -->
+        </select>
+
+        <label for="stat-type">Stat Type</label>
+        <select id="stat-type">
+          <option value="totals">Totals</option>
+          <option value="averages">Averages</option>
+          <option value="shooting">Shooting</option>
+          <option value="advanced1">Advanced 1</option>
+          <option value="advanced2">Advanced 2</option>
+          <option value="four-factors">Four Factors</option>
+        </select>
+
+        <label for="player-name">Player Name</label>
+        <input type="text" id="player-name" placeholder="Search by player name">
+
+        <button id="load-data">Load Data</button>
+      </div>
+      <div id="data-table">
+        <!-- Table will be dynamically loaded here -->
+      </div>
     </main>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
+  </div>
 </body>
 </html>

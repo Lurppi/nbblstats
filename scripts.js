@@ -1,98 +1,55 @@
-const tables = {
-    "totals": {
-        "regular": "path/to/regular_totals.csv",
-        "playoffs": "path/to/playoffs_totals.csv"
-    },
-    "averages": {
-        "regular": "path/to/regular_averages.csv",
-        "playoffs": "path/to/playoffs_averages.csv"
-    },
-    "shooting": {
-        "regular": "path/to/regular_shooting.csv",
-        "playoffs": "path/to/playoffs_shooting.csv"
-    },
-    "advanced1": {
-        "regular": "path/to/regular_advanced1.csv",
-        "playoffs": "path/to/playoffs_advanced1.csv"
-    },
-    "advanced2": {
-        "regular": "path/to/regular_advanced2.csv",
-        "playoffs": "path/to/playoffs_advanced2.csv"
-    },
-    "fourfactors": {
-        "regular": "path/to/regular_fourfactors.csv",
-        "playoffs": "path/to/playoffs_fourfactors.csv"
-    }
-};
+document.addEventListener('DOMContentLoaded', function() {
+  const leagueTypeSelect = document.getElementById('league-type');
+  const statTypeSelect = document.getElementById('stat-type');
+  const playerNameInput = document.getElementById('player-name');
+  const loadDataButton = document.getElementById('load-data');
+  const dataTable = document.getElementById('data-table');
 
-function loadTables() {
-    const league = document.getElementById('league').value;
-    const statType = document.getElementById('stat-type').value;
-    const url = tables[statType][league];
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            const rows = data.split('\n').map(row => row.split(';'));
-            displayTables(rows);
-        })
-        .catch(error => console.error('Error loading data:', error));
-}
+  const leagueTypeOptions = ['League1', 'League2']; // Example options
+  const statTypeFiles = {
+    totals: 'totals.csv',
+    averages: 'averages.csv',
+    shooting: 'shooting.csv',
+    advanced1: 'advanced1.csv',
+    advanced2: 'advanced2.csv',
+    four-factors: 'four-factors.csv'
+  };
 
-function displayTables(data) {
-    const container = document.getElementById('player-tables');
-    container.innerHTML = '';
-
-    const headers = data[0];
-    const rows = data.slice(1);
-
-    if (rows.length === 0) return;
-
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-
-    const headerRow = document.createElement('tr');
-    headers.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        th.classList.add('sortable');
-        th.addEventListener('click', () => sortTable(table, headers.indexOf(header)));
-        headerRow.appendChild(th);
+  function populateLeagueOptions() {
+    leagueTypeOptions.forEach(option => {
+      const opt = document.createElement('option');
+      opt.value = option;
+      opt.textContent = option;
+      leagueTypeSelect.appendChild(opt);
     });
-    thead.appendChild(headerRow);
+  }
 
-    rows.forEach(row => {
-        const tr = document.createElement('tr');
-        row.forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell;
-            tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
+  function loadTableData() {
+    const leagueType = leagueTypeSelect.value;
+    const statType = statTypeSelect.value;
+    const playerName = playerNameInput.value.trim();
+    const csvFile = statTypeFiles[statType];
+    
+    // Assuming a function fetchCSVData exists that fetches CSV data based on the file name
+    fetchCSVData(csvFile, leagueType, playerName).then(data => {
+      dataTable.innerHTML = ''; // Clear previous data
+      // Populate the table with new data
+      renderTable(data);
+    }).catch(error => {
+      console.error('Error loading data:', error);
     });
+  }
 
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    container.appendChild(table);
-}
+  function fetchCSVData(file, league, player) {
+    // Implement CSV fetching and parsing logic
+    // Return a promise with the parsed data
+  }
 
-function sortTable(table, columnIndex) {
-    const rows = Array.from(table.querySelectorAll('tbody tr'));
-    const isNumeric = !isNaN(rows[0].cells[columnIndex].textContent.trim());
-    rows.sort((a, b) => {
-        const aText = a.cells[columnIndex].textContent.trim();
-        const bText = b.cells[columnIndex].textContent.trim();
-        return isNumeric
-            ? parseFloat(aText) - parseFloat(bText)
-            : aText.localeCompare(bText);
-    });
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-}
+  function renderTable(data) {
+    // Implement table rendering logic
+  }
 
-function filterTable() {
-    // Implement the filtering logic here
-}
+  populateLeagueOptions();
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadTables();
+  loadDataButton.addEventListener('click', loadTableData);
 });
