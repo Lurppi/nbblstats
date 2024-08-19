@@ -24,52 +24,54 @@
     </header>
     <main>
         <section>
-            <div>
-                <label for="league-filter">League:</label>
-                <select id="league-filter">
-                    <option value="regular">Regular Season</option>
-                    <option value="playoffs">Playoffs</option>
-                </select>
-            </div>
-            <div>
-                <label for="stats-type-filter">Stats Type:</label>
-                <select id="stats-type-filter">
-                    <option value="totals">Totals</option>
-                    <option value="averages">Averages</option>
-                    <option value="shooting">Shooting</option>
-                    <option value="advanced1">Advanced 1</option>
-                    <option value="advanced2">Advanced 2</option>
-                    <option value="four_factors">Four Factors</option>
-                </select>
-            </div>
-            <div>
-                <label for="division-filter">Division:</label>
-                <select id="division-filter">
-                    <option value="both">Both</option>
-                    <option value="division1">Division 1</option>
-                    <option value="division2">Division 2</option>
-                </select>
-            </div>
-            <div>
-                <label for="position-filter">Position:</label>
-                <select id="position-filter">
-                    <option value="all">All</option>
-                    <option value="forward">Forward</option>
-                    <option value="guard">Guard</option>
-                    <option value="center">Center</option>
-                </select>
-            </div>
-            <div>
-                <label for="year-of-birth-filter">Year of Birth:</label>
-                <input type="text" id="year-of-birth-filter">
-            </div>
-            <div>
-                <label for="games-played-filter">Games Played:</label>
-                <input type="text" id="games-played-filter">
-            </div>
-            <div>
-                <label for="minutes-played-filter">Minutes Played:</label>
-                <input type="text" id="minutes-played-filter">
+            <div class="filter-container">
+                <div>
+                    <label for="league-filter">League:</label>
+                    <select id="league-filter">
+                        <option value="regular">Regular Season</option>
+                        <option value="playoffs">Playoffs</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="stats-type-filter">Stats Type:</label>
+                    <select id="stats-type-filter">
+                        <option value="totals">Totals</option>
+                        <option value="averages">Averages</option>
+                        <option value="shooting">Shooting</option>
+                        <option value="advanced1">Advanced 1</option>
+                        <option value="advanced2">Advanced 2</option>
+                        <option value="four_factors">Four Factors</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="division-filter">Division:</label>
+                    <select id="division-filter">
+                        <option value="both">Both</option>
+                        <option value="division1">Division 1</option>
+                        <option value="division2">Division 2</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="position-filter">Position:</label>
+                    <select id="position-filter">
+                        <option value="all">All</option>
+                        <option value="forward">Forward</option>
+                        <option value="guard">Guard</option>
+                        <option value="center">Center</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="year-of-birth-filter">Year of Birth:</label>
+                    <input type="text" id="year-of-birth-filter">
+                </div>
+                <div>
+                    <label for="games-played-filter">Games Played:</label>
+                    <input type="text" id="games-played-filter">
+                </div>
+                <div>
+                    <label for="minutes-played-filter">Minutes Played:</label>
+                    <input type="text" id="minutes-played-filter">
+                </div>
             </div>
         </section>
         <section id="player-table-container">
