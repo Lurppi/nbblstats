@@ -1,6 +1,6 @@
 // script.js
 
-const csvBaseUrl = 'https://lurppi.github.io/nbblstats/';
+const csvBaseUrl = 'https://github.com/Lurppi/nbblstats/raw/main/';
 
 let currentFile = 'Regular Season Totals.csv'; // Default file
 
@@ -11,21 +11,29 @@ async function loadCSV(file) {
 }
 
 async function updateHomePage() {
-    const top3Files = [
+    const weeklyFiles = [
         'points-week.csv', 'rebounds-week.csv', 'assists-week.csv',
-        'steals-week.csv', 'blocks-week.csv', 'per-week.csv',
+        'steals-week.csv', 'blocks-week.csv', 'per-week.csv'
+    ];
+    const regularFiles = [
         'points-regular.csv', 'rebounds-regular.csv', 'assists-regular.csv',
         'steals-regular.csv', 'blocks-regular.csv', 'per-regular.csv'
     ];
 
-    const container = document.getElementById('top3-container');
-    container.innerHTML = ''; // Clear existing content
+    const weeklyContainer = document.getElementById('weekly-tables');
+    const regularContainer = document.getElementById('regular-season-tables');
+    weeklyContainer.innerHTML = '';
+    regularContainer.innerHTML = '';
 
-    for (let i = 0; i < top3Files.length; i++) {
-        const data = await loadCSV(top3Files[i]);
-        const table = createTable(data.slice(1, 4)); // Show only top 3 rows
-        container.appendChild(table);
-        if ((i + 1) % 3 === 0) container.appendChild(document.createElement('br')); // New line after every 3 tables
+    for (let file of [...weeklyFiles, ...regularFiles]) {
+        const data = await loadCSV(file);
+        const top3Data = data.slice(1, 4); // Show only top 3 rows
+        const table = createTable(top3Data);
+        if (weeklyFiles.includes(file)) {
+            weeklyContainer.appendChild(table);
+        } else {
+            regularContainer.appendChild(table);
+        }
     }
 }
 
@@ -91,5 +99,5 @@ function updateTable() {
 }
 
 // Initial load for home and players page
-if (document.getElementById('top3-container')) updateHomePage();
+if (document.getElementById('weekly-tables')) updateHomePage();
 if (document.getElementById('player-table-container')) updatePlayersPage();
