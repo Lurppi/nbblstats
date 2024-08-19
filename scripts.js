@@ -39,9 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const tbody = document.createElement('tbody');
 
         const headerRow = document.createElement('tr');
-        headers.forEach(header => {
+        headers.forEach((header, index) => {
             const th = document.createElement('th');
             th.textContent = header;
+            th.dataset.index = index; // Add index for sorting
+            th.addEventListener('click', () => sortTable(index));
             headerRow.appendChild(th);
         });
         thead.appendChild(headerRow);
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadCSV(file).then(lines => {
                 const headers = lines[0];
                 const data = lines.slice(1);
-                
+
                 // Clear existing tables
                 tablesContainer.innerHTML = '';
 
@@ -91,6 +93,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 tablesContainer.appendChild(table);
             });
         }
+    }
+
+    function sortTable(index) {
+        const rows = Array.from(tablesContainer.querySelectorAll('tbody tr'));
+        const isNumeric = !isNaN(rows[0].cells[index].textContent.trim());
+        const sortedRows = rows.sort((a, b) => {
+            const aValue = a.cells[index].textContent.trim();
+            const bValue = b.cells[index].textContent.trim();
+            if (isNumeric) {
+                return parseFloat(aValue) - parseFloat(bValue);
+            } else {
+                return aValue.localeCompare(bValue);
+            }
+        });
+
+        const tbody = tablesContainer.querySelector('tbody');
+        sortedRows.forEach(row => tbody.appendChild(row));
     }
 
     // Event listeners for filters

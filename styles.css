@@ -60,7 +60,7 @@ nav ul li a:hover {
     border: 1px solid #ddd;
 }
 
-/* Tables */
+/* Table styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -74,8 +74,15 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+    cursor: pointer;
 }
 
 th, td {
     text-align: left;
+}
+
+/* Adjust column widths */
+table th:nth-child(1), table td:nth-child(1),
+table th:nth-child(2), table td:nth-child(2) {
+    width: 150px; /* Adjust width for Player and Team columns */
 }
