@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - NBBL Stats</title>
+    <title>Players - NBBL Stats</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,23 +22,51 @@
         </nav>
     </header>
     <main>
-        <div class="container">
-            <div id="weekly-top3" class="section">
-                <div id="points-week" class="table-container"></div>
-                <div id="rebounds-week" class="table-container"></div>
-                <div id="assists-week" class="table-container"></div>
-                <div id="steals-week" class="table-container"></div>
-                <div id="blocks-week" class="table-container"></div>
-                <div id="per-week" class="table-container"></div>
-            </div>
-            <div id="regular-season-top3" class="section">
-                <div id="points-regular" class="table-container"></div>
-                <div id="rebounds-regular" class="table-container"></div>
-                <div id="assists-regular" class="table-container"></div>
-                <div id="steals-regular" class="table-container"></div>
-                <div id="blocks-regular" class="table-container"></div>
-                <div id="per-regular" class="table-container"></div>
-            </div>
+        <div class="filter-container">
+            <label for="league-filter">League:</label>
+            <select id="league-filter">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
+            </select>
+            
+            <label for="stats-type-filter">Stats Type:</label>
+            <select id="stats-type-filter">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced1">Advanced1</option>
+                <option value="advanced2">Advanced2</option>
+                <option value="four-factors">Four Factors</option>
+            </select>
+            
+            <label for="division-filter">Division:</label>
+            <select id="division-filter">
+                <option value="both">Both</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
+            </select>
+            
+            <label for="position-filter">Position:</label>
+            <select id="position-filter">
+                <option value="all">All</option>
+                <option value="point">Point</option>
+                <option value="combo">Combo</option>
+                <option value="wing">Wing</option>
+                <option value="big">Big</option>
+                <option value="forward">Forward</option>
+            </select>
+            
+            <label for="year-of-birth-filter">Year of Birth:</label>
+            <input type="number" id="year-of-birth-filter">
+            
+            <label for="games-played-filter">Games Played (minimum):</label>
+            <input type="number" id="games-played-filter">
+            
+            <label for="minutes-played-filter">Minutes Played (minimum):</label>
+            <input type="number" id="minutes-played-filter">
+        </div>
+        <div id="player-table-container">
+            <!-- Tabellen werden hier geladen -->
         </div>
     </main>
     <script src="scripts.js"></script>

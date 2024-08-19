@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function applyFilters() {
         const table = document.querySelector('#player-table-container table');
+        if (!table) return;
         const rows = table.querySelectorAll('tbody tr');
         rows.forEach(row => {
             const cells = row.children;
