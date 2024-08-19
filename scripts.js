@@ -1,126 +1,106 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const leagueSelect = document.getElementById('league');
-    const statsTypeSelect = document.getElementById('stats-type');
-    const divisionSelect = document.getElementById('division');
-    const positionSelect = document.getElementById('position');
-    const yearOfBirthInput = document.getElementById('year-of-birth');
-    const gamesPlayedInput = document.getElementById('games-played');
-    const minutesPlayedInput = document.getElementById('minutes-played');
-    const tablesContainer = document.getElementById('tables-container');
+document.addEventListener('DOMContentLoaded', function () {
+    loadTables();
 
-    const csvFiles = {
-        regular: {
-            totals: 'Regular_Totals.csv',
-            averages: 'Regular_Averages.csv',
-            shooting: 'Regular_Shooting.csv',
-            advanced1: 'Regular_Advanced1.csv',
-            advanced2: 'Regular_Advanced2.csv',
-            four_factors: 'Regular_Four_Factors.csv'
-        },
-        playoffs: {
-            totals: 'Playoffs_Totals.csv',
-            averages: 'Playoffs_Averages.csv',
-            shooting: 'Playoffs_Shooting.csv',
-            advanced1: 'Playoffs_Advanced1.csv',
-            advanced2: 'Playoffs_Advanced2.csv',
-            four_factors: 'Playoffs_Four_Factors.csv'
-        }
-    };
-
-    function loadCSV(url) {
-        return fetch(url)
-            .then(response => response.text())
-            .then(text => text.split('\n').map(line => line.split(';')));
-    }
-
-    function renderTable(headers, data) {
-        const table = document.createElement('table');
-        const thead = document.createElement('thead');
-        const tbody = document.createElement('tbody');
-
-        const headerRow = document.createElement('tr');
-        headers.forEach((header, index) => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            th.dataset.index = index; // Add index for sorting
-            th.addEventListener('click', () => sortTable(index));
-            headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            row.forEach(cell => {
-                const td = document.createElement('td');
-                td.textContent = cell;
-                tr.appendChild(td);
-            });
-            tbody.appendChild(tr);
-        });
-
-        table.appendChild(thead);
-        table.appendChild(tbody);
-
-        return table;
-    }
-
-    function updateTables() {
-        const league = leagueSelect.value;
-        const statsType = statsTypeSelect.value;
-        const file = csvFiles[league][statsType];
-
-        if (file) {
-            loadCSV(file).then(lines => {
-                const headers = lines[0];
-                const data = lines.slice(1);
-
-                // Clear existing tables
-                tablesContainer.innerHTML = '';
-
-                // Filter data based on the filter values
-                const filteredData = data.filter(row => {
-                    return (
-                        (divisionSelect.value === 'both' || row[2] === divisionSelect.value) &&
-                        (positionSelect.value === 'all' || row[3] === positionSelect.value) &&
-                        (!yearOfBirthInput.value || row[4] === yearOfBirthInput.value) &&
-                        (!gamesPlayedInput.value || row[5] >= gamesPlayedInput.value) &&
-                        (!minutesPlayedInput.value || row[6] >= minutesPlayedInput.value)
-                    );
-                });
-
-                // Render the table
-                const table = renderTable(headers, filteredData);
-                tablesContainer.appendChild(table);
-            });
-        }
-    }
-
-    function sortTable(index) {
-        const rows = Array.from(tablesContainer.querySelectorAll('tbody tr'));
-        const isNumeric = !isNaN(rows[0].cells[index].textContent.trim());
-        const sortedRows = rows.sort((a, b) => {
-            const aValue = a.cells[index].textContent.trim();
-            const bValue = b.cells[index].textContent.trim();
-            if (isNumeric) {
-                return parseFloat(aValue) - parseFloat(bValue);
-            } else {
-                return aValue.localeCompare(bValue);
-            }
-        });
-
-        const tbody = tablesContainer.querySelector('tbody');
-        sortedRows.forEach(row => tbody.appendChild(row));
-    }
-
-    // Event listeners for filters
-    leagueSelect.addEventListener('change', updateTables);
-    statsTypeSelect.addEventListener('change', updateTables);
-    divisionSelect.addEventListener('change', updateTables);
-    positionSelect.addEventListener('change', updateTables);
-    yearOfBirthInput.addEventListener('input', updateTables);
-    gamesPlayedInput.addEventListener('input', updateTables);
-    minutesPlayedInput.addEventListener('input', updateTables);
-
-    // Initialize tables on page load
-    updateTables();
+    document.getElementById('league-filter').addEventListener('change', loadTables);
+    document.getElementById('stats-type-filter').addEventListener('change', loadTables);
+    document.getElementById('division-filter').addEventListener('change', filterTables);
+    document.getElementById('position-filter').addEventListener('change', filterTables);
+    document.getElementById('year-filter').addEventListener('input', filterTables);
+    document.getElementById('games-filter').addEventListener('input', filterTables);
+    document.getElementById('minutes-filter').addEventListener('input', filterTables);
 });
+
+function loadTables() {
+    const league = document.getElementById('league-filter').value;
+    const statsType = document.getElementById('stats-type-filter').value;
+    const tableContainer = document.getElementById('player-tables');
+    tableContainer.innerHTML = '';
+
+    const fileName = `${league}_${statsType}.csv`;
+
+    fetch(fileName)
+        .then(response => response.text())
+        .then(csvText => {
+            const table = document.createElement('table');
+            const rows = csvText.split('\n');
+            const headerRow = rows[0].split(';');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            const header = document.createElement('tr');
+            headerRow.forEach(headerCell => {
+                const th = document.createElement('th');
+                th.textContent = headerCell;
+                th.classList.add('sortable');
+                th.addEventListener('click', () => sortTable(table, th.cellIndex));
+                header.appendChild(th);
+            });
+            thead.appendChild(header);
+            table.appendChild(thead);
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i].split(';');
+                if (row.length > 1) {
+                    const tr = document.createElement('tr');
+                    row.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                }
+            }
+            table.appendChild(tbody);
+            tableContainer.appendChild(table);
+
+            filterTables();
+        });
+}
+
+function filterTables() {
+    const division = document.getElementById('division-filter').value;
+    const position = document.getElementById('position-filter').value;
+    const year = parseInt(document.getElementById('year-filter').value);
+    const games = parseInt(document.getElementById('games-filter').value);
+    const minutes = parseInt(document.getElementById('minutes-filter').value);
+
+    const rows = document.querySelectorAll('#player-tables table tbody tr');
+
+    rows.forEach(row => {
+        const div = row.cells[3].textContent;
+        const pos = row.cells[2].textContent;
+        const born = parseInt(row.cells[4].textContent);
+        const gp = parseInt(row.cells[5].textContent);
+        const mp = parseInt(row.cells[6].textContent);
+
+        let showRow = true;
+
+        if (division !== 'both' && div !== division) showRow = false;
+        if (position !== 'all' && pos !== position) showRow = false;
+        if (year && born !== year) showRow = false;
+        if (games && gp < games) showRow = false;
+        if (minutes && mp < minutes) showRow = false;
+
+        row.style.display = showRow ? '' : 'none';
+    });
+}
+
+function sortTable(table, columnIndex) {
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+    const isNumeric = !isNaN(rows[0].cells[columnIndex].textContent.trim());
+    const direction = table.querySelector('th').classList.contains('asc') ? -1 : 1;
+
+    rows.sort((a, b) => {
+        const aText = a.cells[columnIndex].textContent.trim();
+        const bText = b.cells[columnIndex].textContent.trim();
+
+        return isNumeric
+            ? direction * (parseFloat(aText) - parseFloat(bText))
+            : direction * aText.localeCompare(bText);
+    });
+
+    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+
+    table.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
+    table.querySelector(`th:nth-child(${columnIndex + 1})`).classList.add(direction === 1 ? 'asc' : 'desc');
+}
