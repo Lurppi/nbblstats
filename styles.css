@@ -1,56 +1,78 @@
+/* Allgemeine Styles */
 body {
     font-family: Arial, sans-serif;
-    background: rgba(255, 255, 255, 0.8);
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #333;
-    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
     text-align: center;
 }
 
-.main-menu {
+nav ul.main-menu {
     list-style-type: none;
-    margin: 0;
     padding: 0;
 }
 
-.main-menu > li {
-    display: inline-block;
-    margin: 0 15px;
-    position: relative;
+nav ul.main-menu li {
+    display: inline;
+    margin-right: 20px;
 }
 
-.main-menu a {
+nav ul.main-menu li a {
     color: #fff;
     text-decoration: none;
-    font-size: 18px;
 }
 
-.main-menu .submenu {
-    display: none;
-    position: absolute;
-    background-color: #444;
+nav ul.submenu {
     list-style-type: none;
-    padding: 10px;
-    top: 100%;
-    left: 0;
+    padding: 0;
+    position: absolute;
+    background: #333;
+    display: none;
 }
 
-.main-menu li:hover .submenu {
+nav ul.main-menu li:hover ul.submenu {
     display: block;
 }
 
-.submenu li {
-    margin-bottom: 5px;
+main {
+    padding: 2rem;
 }
 
+/* Home-Seite */
 .table-container {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.table-container > div {
+    flex: 1;
+    margin: 10px;
+    min-width: 300px;
+}
+
+/* Players-Seite */
+#filters {
     margin-bottom: 20px;
+}
+
+#filters label {
+    margin-right: 10px;
+}
+
+#filters select, #filters input {
+    margin-right: 15px;
+    padding: 5px;
+}
+
+#player-tables {
+    margin-top: 20px;
 }
 
 table {
@@ -60,35 +82,26 @@ table {
 }
 
 th, td {
-    padding: 8px 12px;
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: center;
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #333; /* Hintergrundfarbe für Tabellenüberschriften */
     color: white;
     cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+td.player, td.team {
+    text-align: left;
 }
 
-/* Glassmorphism Background */
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    z-index: -1;
-    filter: blur(8px);
+/* Einheitliche Spaltenbreiten für alle Tabellen */
+table th, table td {
+    width: 120px; /* Einheitliche Breite für alle Spalten */
 }
 
-body {
-    position: relative;
-    z-index: 0;
+table th, table td {
+    font-size: 14px; /* Schriftgröße für alle Daten */
 }
