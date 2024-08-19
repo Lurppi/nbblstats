@@ -1,33 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tableContainer = document.getElementById("table-container");
-    let tableData = [];
-
-    function applyFilters(data) {
-        const league = document.getElementById("league-select").value;
-        const statsType = document.getElementById("stats-type-select").value;
-        const division = document.getElementById("division-select").value;
-        const position = document.getElementById("position-select").value;
-        const year = document.getElementById("year-select").value;
-        const minGames = document.getElementById("games-played").value;
-        const minMinutes = document.getElementById("minutes-played").value;
-
-        const filteredRows = data.filter(row => {
-            const div = row['DIV'];
-            const pos = row['POS'];
-            const birthYear = row['BORN'];
-            const gamesPlayed = parseInt(row['GP'], 10);
-            const minutesPlayed = parseInt(row['MP'], 10);
-
-            return (division === 'Both' || div === division) &&
-                   (position === 'All' || pos === position) &&
-                   (year === 'All' || birthYear === year) &&
-                   (minGames === '' || gamesPlayed >= minGames) &&
-                   (minMinutes === '' || minutesPlayed >= minMinutes);
-        });
-
-        renderTable(filteredRows);
-    }
-
     function loadTable(csvFile, tableSelector) {
         fetch(csvFile)
             .then(response => response.text())
@@ -62,15 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function renderTable(data) {
-        tableContainer.innerHTML = "";
-        const tableHTML = data.map(row => {
-            const rowHTML = Object.values(row).map(val => `<td>${val}</td>`).join('');
-            return `<tr>${rowHTML}</tr>`;
-        }).join('');
-        tableContainer.innerHTML = `<table><thead><tr>${Object.keys(data[0]).map(header => `<th>${header}</th>`).join('')}</tr></thead><tbody>${tableHTML}</tbody></table>`;
-    }
-
     function sortTable(th) {
         const table = th.closest("table");
         const rowsArray = Array.from(table.querySelector("tbody").rows);
@@ -88,41 +50,56 @@ document.addEventListener("DOMContentLoaded", function () {
         rowsArray.forEach(row => tbody.appendChild(row));
     }
 
-    // Event listeners for filters
-    document.getElementById("league-select").addEventListener("change", function () {
-        const league = this.value;
-        const statsType = document.getElementById("stats-type-select").value;
-        const csvFile = `${league === 'Regular Season' ? 'Regular' : 'Playoffs'}_${statsType}.csv`;
-        loadTable(csvFile, "#table-container");
-    });
+    function loadTablesForHomePage() {
+        // Weekly Top 3 Tables
+        const weeklyTopFiles = [
+            "points-week.csv",
+            "rebounds-week.csv",
+            "assists-week.csv",
+            "steals-week.csv",
+            "blocks-week.csv",
+            "per-week.csv"
+        ];
 
-    document.getElementById("stats-type-select").addEventListener("change", function () {
-        const league = document.getElementById("league-select").value;
-        const statsType = this.value;
-        const csvFile = `${league === 'Regular Season' ? 'Regular' : 'Playoffs'}_${statsType}.csv`;
-        loadTable(csvFile, "#table-container");
-    });
+        // Regular Season Top 3 Tables
+        const regularSeasonTopFiles = [
+            "points-regular.csv",
+            "rebounds-regular.csv",
+            "assists-regular.csv",
+            "steals-regular.csv",
+            "blocks-regular.csv",
+            "per-regular.csv"
+        ];
 
-    document.getElementById("division-select").addEventListener("change", function () {
-        applyFilters(tableData);
-    });
+        weeklyTopFiles.forEach((file, index) => {
+            loadTable(file, `#weekly-top3-tables table:nth-of-type(${index + 1})`);
+        });
 
-    document.getElementById("position-select").addEventListener("change", function () {
-        applyFilters(tableData);
-    });
+        regularSeasonTopFiles.forEach((file, index) => {
+            loadTable(file, `#regular-season-top3-tables table:nth-of-type(${index + 1})`);
+        });
+    }
 
-    document.getElementById("year-select").addEventListener("change", function () {
-        applyFilters(tableData);
-    });
+    function loadPlayersTables() {
+        // Filter for Player Tables
+        const statsType = document.getElementById("stats-type").value;
+        const league = document.getElementById("league").value;
+        const files = [
+            `stats-${statsType}-${league}-a.csv`,
+            `stats-${statsType}-${league}-b.csv`
+        ];
 
-    document.getElementById("games-played").addEventListener("input", function () {
-        applyFilters(tableData);
-    });
+        const container = document.getElementById("players-tables");
+        container.innerHTML = ""; // Clear previous content
 
-    document.getElementById("minutes-played").addEventListener("input", function () {
-        applyFilters(tableData);
-    });
+        files.forEach(file => {
+            loadTable(file, "#players-tables");
+        });
+    }
 
-    // Initialize with default filters
-    loadTable("Regular_Totals.csv", "#table-container");
+    document.getElementById("apply-filters").addEventListener("click", loadPlayersTables);
+
+    // Initial load
+    loadTablesForHomePage();
+    loadPlayersTables();
 });

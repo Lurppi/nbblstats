@@ -1,79 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Players - NBBL Stats</title>
+    <title>Players</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul class="main-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Stats</a>
-                    <ul class="submenu">
-                        <li><a href="teams.html">Teams</a></li>
-                        <li><a href="players.html">Players</a></li>
-                    </ul>
-                </li>
-                <li><a href="roster.html">Roster</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav id="main-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="#">Stats</a>
+                <ul class="submenu">
+                    <li><a href="players.html">Players</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                </ul>
+            </li>
+            <li><a href="roster.html">Roster</a></li>
+        </ul>
+    </nav>
 
-    <main>
-        <section id="filters">
-            <label for="league-select">League:</label>
-            <select id="league-select">
-                <option value="Regular Season">Regular Season</option>
-                <option value="Playoffs">Playoffs</option>
+    <div id="players-content">
+        <div id="filters">
+            <label for="league">League:</label>
+            <select id="league">
+                <option value="regular">Regular Season</option>
+                <option value="playoffs">Playoffs</option>
             </select>
 
-            <label for="stats-type-select">Stats Type:</label>
-            <select id="stats-type-select">
-                <option value="Totals">Totals</option>
-                <option value="Averages">Averages</option>
-                <option value="Shooting">Shooting</option>
-                <option value="Advanced1">Advanced1</option>
-                <option value="Advanced2">Advanced2</option>
-                <option value="Four Factors">Four Factors</option>
+            <label for="stats-type">Stats Type:</label>
+            <select id="stats-type">
+                <option value="totals">Totals</option>
+                <option value="averages">Averages</option>
+                <option value="shooting">Shooting</option>
+                <option value="advanced1">Advanced1</option>
+                <option value="advanced2">Advanced2</option>
+                <option value="four-factors">Four Factors</option>
             </select>
 
-            <label for="division-select">Division:</label>
-            <select id="division-select">
-                <option value="Both">Both</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
+            <label for="division">Division:</label>
+            <select id="division">
+                <option value="both">Both</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
             </select>
 
-            <label for="position-select">Position:</label>
-            <select id="position-select">
-                <option value="All">All</option>
-                <option value="Point">Point</option>
-                <option value="Combo">Combo</option>
-                <option value="Wing">Wing</option>
-                <option value="Big">Big</option>
-                <option value="Forward">Forward</option>
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="all">All</option>
+                <option value="point">Point</option>
+                <option value="combo">Combo</option>
+                <option value="wing">Wing</option>
+                <option value="big">Big</option>
+                <option value="forward">Forward</option>
             </select>
 
-            <label for="year-select">Year of Birth:</label>
-            <select id="year-select">
-                <option value="All">All</option>
-                <!-- Options to be dynamically populated -->
-            </select>
+            <label for="year-of-birth">Year of Birth:</label>
+            <input type="number" id="year-of-birth" placeholder="e.g., 1990">
 
-            <label for="games-played">Min Games Played:</label>
-            <input type="number" id="games-played" min="0">
+            <label for="games-played">Games Played:</label>
+            <input type="number" id="games-played" placeholder="e.g., 10">
 
-            <label for="minutes-played">Min Minutes Played:</label>
-            <input type="number" id="minutes-played" min="0">
-        </section>
+            <label for="minutes-played">Minutes Played:</label>
+            <input type="number" id="minutes-played" placeholder="e.g., 100">
 
-        <section id="player-tables">
-            <div id="table-container"></div>
-        </section>
-    </main>
-    <script src="scripts.js"></script>
+            <button id="apply-filters">Apply Filters</button>
+        </div>
+
+        <div id="players-tables">
+            <!-- Tabellen werden hier geladen -->
+        </div>
+    </div>
 </body>
 </html>

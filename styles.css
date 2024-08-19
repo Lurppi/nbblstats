@@ -1,63 +1,82 @@
-/* Allgemeine Styles */
-body {
-    font-family: Arial, sans-serif;
+/* Hauptmenü CSS */
+#main-menu {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#main-menu ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-header {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-nav ul.main-menu {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul.main-menu li {
+#main-menu ul li {
     display: inline;
     margin-right: 20px;
 }
 
-nav ul.main-menu li a {
+#main-menu ul li a {
     color: #fff;
     text-decoration: none;
+    padding: 10px;
+    display: inline-block;
 }
 
-nav ul.submenu {
-    list-style-type: none;
-    padding: 0;
-    position: absolute;
-    background: #333;
+#main-menu ul li ul.submenu {
     display: none;
+    position: absolute;
+    background-color: #444;
+    padding: 10px;
+    list-style-type: none;
 }
 
-nav ul.main-menu li:hover ul.submenu {
+#main-menu ul li:hover ul.submenu {
     display: block;
 }
 
-main {
-    padding: 2rem;
+#main-menu ul li ul.submenu li {
+    display: block;
+    margin: 0;
 }
 
-/* Home-Seite */
+#main-menu ul li ul.submenu li a {
+    padding: 10px;
+    display: block;
+    color: #fff;
+}
+
+/* Home-Seite CSS */
+#home-content .section {
+    margin: 20px;
+}
+
 .table-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
-.table-container > div {
-    flex: 1;
-    margin: 10px;
-    min-width: 300px;
+.table-container table {
+    width: 30%;
+    margin-right: 1.5%;
+    margin-bottom: 20px;
 }
 
-/* Players-Seite */
+.table-container table:nth-child(3n) {
+    margin-right: 0;
+}
+
+/* Players-Seite CSS */
+#players-content {
+    margin: 20px;
+}
+
 #filters {
     margin-bottom: 20px;
 }
@@ -66,45 +85,41 @@ main {
     margin-right: 10px;
 }
 
-#filters select, #filters input {
-    margin-right: 15px;
-    padding: 5px;
-}
-
-#player-tables {
-    margin-top: 20px;
-}
-
-table {
+#players-tables table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-th, td {
+#players-tables th, td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-th {
-    background-color: #333; /* Hintergrundfarbe für Tabellenüberschriften */
+#players-tables th {
+    background-color: #333;
     color: white;
-    cursor: pointer;
+    text-align: center;
 }
 
-td.player, td.team {
+#players-tables td.player, #players-tables td.team {
     text-align: left;
 }
 
-table th, table td {
-    width: 120px; /* Einheitliche Breite für alle Spalten */
+#players-tables th, td {
+    text-align: right;
 }
 
-table th, table td {
-    font-size: 14px; /* Schriftgröße für alle Daten */
+#players-tables th.ascending::after {
+    content: "▲";
 }
 
-/* Schrift linksbündig für Player und Team */
-td.player, td.team {
-    text-align: left;
+#players-tables th.descending::after {
+    content: "▼";
+}
+
+/* Tabellenheader-Farben */
+th {
+    background-color: #444; /* schwarz-gräulicher Farbton */
+    color: white;
 }
