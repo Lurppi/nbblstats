@@ -1,22 +1,22 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
 }
 
 header {
     background-color: #333;
     padding: 10px 0;
+    text-align: center;
 }
 
 .menu {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .menu li {
@@ -24,7 +24,7 @@ header {
 }
 
 .menu a {
-    color: #fff;
+    color: white;
     text-decoration: none;
     font-weight: bold;
 }
@@ -37,80 +37,52 @@ h2 {
 #filters {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
     margin-bottom: 20px;
 }
 
-#player-tables {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+#filters select, #filters input {
+    margin: 0 10px;
+    padding: 5px;
+}
+
+#table-container {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 table {
+    width: 100%;
     border-collapse: collapse;
-    width: 90%;
-    margin-bottom: 20px;
-    background-color: #fff;
+    margin-top: 20px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
 th {
     background-color: #555;
-    color: #fff;
-    cursor: pointer;
+    color: white;
 }
 
-th:first-child,
-td:first-child {
+td {
+    text-align: center;
+}
+
+td:nth-child(1), td:nth-child(2) {
     text-align: left;
 }
 
-th.sortable:hover {
-    background-color: #444;
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-#weekly-tables, #regular-tables {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.table-container {
-    width: 30%;
-}
-
-table th:nth-child(1),
-table td:nth-child(1),
-table th:nth-child(2),
-table td:nth-child(2) {
-    width: 150px;
-    text-align: left;
-}
-
-table th:nth-child(3),
-table td:nth-child(3) {
-    width: 80px;
-}
-
-table th:nth-child(4),
-table td:nth-child(4),
-table th:nth-child(5),
-table td:nth-child(5),
-table th:nth-child(6),
-table td:nth-child(6) {
-    width: 60px;
-}
-
-table th, table td {
-    height: 40px;
-    vertical-align: middle;
+tr:hover {
+    background-color: #e0e0e0;
 }

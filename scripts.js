@@ -1,106 +1,82 @@
-document.addEventListener('DOMContentLoaded', function () {
-    loadTables();
+document.addEventListener("DOMContentLoaded", function () {
+    const leagueFilter = document.getElementById("league-filter");
+    const statsTypeFilter = document.getElementById("stats-type-filter");
+    const divisionFilter = document.getElementById("division-filter");
+    const positionFilter = document.getElementById("position-filter");
+    const bornFilter = document.getElementById("born-filter");
+    const gamesPlayedFilter = document.getElementById("games-played-filter");
+    const minutesPlayedFilter = document.getElementById("minutes-played-filter");
+    const tableContainer = document.getElementById("table-container");
 
-    document.getElementById('league-filter').addEventListener('change', loadTables);
-    document.getElementById('stats-type-filter').addEventListener('change', loadTables);
-    document.getElementById('division-filter').addEventListener('change', filterTables);
-    document.getElementById('position-filter').addEventListener('change', filterTables);
-    document.getElementById('year-filter').addEventListener('input', filterTables);
-    document.getElementById('games-filter').addEventListener('input', filterTables);
-    document.getElementById('minutes-filter').addEventListener('input', filterTables);
-});
+    function loadTable() {
+        const league = leagueFilter.value;
+        const statsType = statsTypeFilter.value;
+        const division = divisionFilter.value;
+        const position = positionFilter.value;
+        const born = bornFilter.value;
+        const gamesPlayed = gamesPlayedFilter.value;
+        const minutesPlayed = minutesPlayedFilter.value;
 
-function loadTables() {
-    const league = document.getElementById('league-filter').value;
-    const statsType = document.getElementById('stats-type-filter').value;
-    const tableContainer = document.getElementById('player-tables');
-    tableContainer.innerHTML = '';
+        const fileName = `${league}_${statsType}.csv`;
 
-    const fileName = `${league}_${statsType}.csv`;
+        fetch(fileName)
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n').map(row => row.split(';'));
+                const headers = rows[0];
+                let filteredRows = rows.slice(1);
 
-    fetch(fileName)
-        .then(response => response.text())
-        .then(csvText => {
-            const table = document.createElement('table');
-            const rows = csvText.split('\n');
-            const headerRow = rows[0].split(';');
-            const thead = document.createElement('thead');
-            const tbody = document.createElement('tbody');
-
-            const header = document.createElement('tr');
-            headerRow.forEach(headerCell => {
-                const th = document.createElement('th');
-                th.textContent = headerCell;
-                th.classList.add('sortable');
-                th.addEventListener('click', () => sortTable(table, th.cellIndex));
-                header.appendChild(th);
-            });
-            thead.appendChild(header);
-            table.appendChild(thead);
-
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i].split(';');
-                if (row.length > 1) {
-                    const tr = document.createElement('tr');
-                    row.forEach(cell => {
-                        const td = document.createElement('td');
-                        td.textContent = cell;
-                        tr.appendChild(td);
-                    });
-                    tbody.appendChild(tr);
+                // Division filter
+                if (division !== "both") {
+                    filteredRows = filteredRows.filter(row => row[headers.indexOf("DIV")] === division);
                 }
-            }
-            table.appendChild(tbody);
-            tableContainer.appendChild(table);
 
-            filterTables();
-        });
-}
+                // Position filter
+                if (position !== "all") {
+                    filteredRows = filteredRows.filter(row => row[headers.indexOf("POS")] === position);
+                }
 
-function filterTables() {
-    const division = document.getElementById('division-filter').value;
-    const position = document.getElementById('position-filter').value;
-    const year = parseInt(document.getElementById('year-filter').value);
-    const games = parseInt(document.getElementById('games-filter').value);
-    const minutes = parseInt(document.getElementById('minutes-filter').value);
+                // Year of Birth filter
+                if (born) {
+                    filteredRows = filteredRows.filter(row => parseInt(row[headers.indexOf("BORN")]) >= parseInt(born));
+                }
 
-    const rows = document.querySelectorAll('#player-tables table tbody tr');
+                // Games Played filter
+                if (gamesPlayed) {
+                    filteredRows = filteredRows.filter(row => parseInt(row[headers.indexOf("GP")]) >= parseInt(gamesPlayed));
+                }
 
-    rows.forEach(row => {
-        const div = row.cells[3].textContent;
-        const pos = row.cells[2].textContent;
-        const born = parseInt(row.cells[4].textContent);
-        const gp = parseInt(row.cells[5].textContent);
-        const mp = parseInt(row.cells[6].textContent);
+                // Minutes Played filter
+                if (minutesPlayed) {
+                    filteredRows = filteredRows.filter(row => parseInt(row[headers.indexOf("MP")]) >= parseInt(minutesPlayed));
+                }
 
-        let showRow = true;
+                const tableHTML = `
+                    <table>
+                        <thead>
+                            <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${filteredRows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
+                        </tbody>
+                    </table>
+                `;
 
-        if (division !== 'both' && div !== division) showRow = false;
-        if (position !== 'all' && pos !== position) showRow = false;
-        if (year && born !== year) showRow = false;
-        if (games && gp < games) showRow = false;
-        if (minutes && mp < minutes) showRow = false;
+                tableContainer.innerHTML = tableHTML;
+            })
+            .catch(error => {
+                console.error('Error loading table:', error);
+                tableContainer.innerHTML = "<p>Error loading table.</p>";
+            });
+    }
 
-        row.style.display = showRow ? '' : 'none';
-    });
-}
+    leagueFilter.addEventListener("change", loadTable);
+    statsTypeFilter.addEventListener("change", loadTable);
+    divisionFilter.addEventListener("change", loadTable);
+    positionFilter.addEventListener("change", loadTable);
+    bornFilter.addEventListener("input", loadTable);
+    gamesPlayedFilter.addEventListener("input", loadTable);
+    minutesPlayedFilter.addEventListener("input", loadTable);
 
-function sortTable(table, columnIndex) {
-    const rows = Array.from(table.querySelectorAll('tbody tr'));
-    const isNumeric = !isNaN(rows[0].cells[columnIndex].textContent.trim());
-    const direction = table.querySelector('th').classList.contains('asc') ? -1 : 1;
-
-    rows.sort((a, b) => {
-        const aText = a.cells[columnIndex].textContent.trim();
-        const bText = b.cells[columnIndex].textContent.trim();
-
-        return isNumeric
-            ? direction * (parseFloat(aText) - parseFloat(bText))
-            : direction * aText.localeCompare(bText);
-    });
-
-    rows.forEach(row => table.querySelector('tbody').appendChild(row));
-
-    table.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
-    table.querySelector(`th:nth-child(${columnIndex + 1})`).classList.add(direction === 1 ? 'asc' : 'desc');
-}
+    loadTable();
+});
