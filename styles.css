@@ -1,83 +1,68 @@
-/* styles.css */
-
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
 }
 
 header {
-    background-color: #333;
+    background: #333;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px;
 }
 
-nav ul {
+header nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-nav ul li {
+header nav ul li {
     display: inline;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: #fff;
     text-decoration: none;
-}
-
-h1 {
-    margin: 0;
 }
 
 main {
     padding: 20px;
 }
 
-#top3-container {
+.tables-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.data-table {
+.tables-container table {
     border-collapse: collapse;
     width: 100%;
-    margin: 10px 0;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-.data-table th, .data-table td {
+.tables-container table th, .tables-container table td {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-.data-table th {
-    background-color: #f2f2f2;
-    text-align: left;
+.tables-container table th {
+    background-color: #f4f4f4;
 }
 
 #filters {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-#filters div {
-    flex: 1;
-    min-width: 200px;
-}
-
-label {
+#filters label {
     display: block;
     margin-bottom: 5px;
 }
 
-select, input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+#filters select, #filters input {
+    width: 150px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
