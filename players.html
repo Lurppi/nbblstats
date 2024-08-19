@@ -41,43 +41,41 @@
                 <div class="filter-group">
                     <label for="division-filter">Division:</label>
                     <select id="division-filter">
-                        <option value="both">Both</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
+                        <!-- Division filter options will be dynamically populated -->
                     </select>
                 </div>
                 <div class="filter-group">
                     <label for="team-filter">Team:</label>
                     <select id="team-filter">
-                        <!-- Optionen werden dynamisch geladen -->
+                        <!-- Team filter options will be dynamically populated -->
                     </select>
                 </div>
                 <div class="filter-group">
                     <label for="position-filter">Position:</label>
                     <select id="position-filter">
-                        <option value="point">Point</option>
-                        <option value="combo">Combo</option>
-                        <option value="wing">Wing</option>
-                        <option value="forward">Forward</option>
-                        <option value="big">Big</option>
+                        <!-- Position filter options will be dynamically populated -->
                     </select>
                 </div>
                 <div class="filter-group">
                     <label for="year-filter">Year of Birth:</label>
-                    <input type="number" id="year-filter" placeholder="e.g. 2005">
+                    <select id="year-filter">
+                        <!-- Year filter options will be dynamically populated -->
+                    </select>
                 </div>
                 <div class="filter-group">
-                    <label for="games-played-filter">Games Played:</label>
-                    <input type="number" id="games-played-filter" placeholder="e.g. 10">
+                    <label for="games-filter">Games Played:</label>
+                    <input type="number" id="games-filter" min="0">
                 </div>
                 <div class="filter-group">
-                    <label for="minutes-played-filter">Minutes Played:</label>
-                    <input type="number" id="minutes-played-filter" placeholder="e.g. 20">
+                    <label for="minutes-filter">Minutes Played:</label>
+                    <input type="number" id="minutes-filter" min="0">
                 </div>
             </div>
-            <div id="players-tables"></div>
+            <div id="table-container">
+                <!-- Player statistics table will be inserted here based on filters -->
+            </div>
         </section>
     </main>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
