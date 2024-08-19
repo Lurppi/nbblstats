@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // URLs zu den CSV-Dateien
     const csvUrls = {
         regular: {
             totals: 'https://raw.githubusercontent.com/Lurppi/nbblstats/main/regular_totals.csv',
