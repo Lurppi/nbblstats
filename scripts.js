@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return [];
         }
         const text = await response.text();
-        const rows = text.trim().split('\n').map(row => row.split(','));
+        const rows = text.trim().split('\n').map(row => row.split(';'));
         const headers = rows[0];
         return rows.slice(1).map(row => {
             return headers.reduce((acc, header, i) => {
@@ -60,10 +60,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to render player tables on players.html
     async function renderPlayerTables() {
-        const league = document.getElementById('league').value;
-        const statsType = document.getElementById('stats-type').value;
+        const league = document.getElementById('league').value.toLowerCase();
+        const statsType = document.getElementById('stats-type').value.toLowerCase();
         const fileName = `${league}-${statsType}.csv`;
         const data = await fetchCSV(fileName);
+
+        // Populating filter options dynamically
+        const divisions = [...new Set(data.map(row => row.DIV))];
+        const teams = [...new Set(data.map(row => row.TEAM))];
+        const positions = [...new Set(data.map(row => row.POS))];
+        const yearsOfBirth = [...new Set(data.map(row => row.BORN))];
+
+        populateSelect('division', divisions);
+        populateSelect('team', teams);
+        populateSelect('position', positions);
+        populateSelect('year-of-birth', yearsOfBirth);
 
         // Filtering logic
         const filters = {
@@ -80,58 +91,55 @@ document.addEventListener('DOMContentLoaded', function () {
                    (filters.team === 'All' || row.TEAM === filters.team) &&
                    (filters.position === 'All' || row.POS === filters.position) &&
                    (filters.yearOfBirth === '' || row.BORN === filters.yearOfBirth) &&
-                   (filters.gamesPlayed === '' || parseInt(row.GP, 10) >= parseInt(filters.gamesPlayed, 10)) &&
-                   (filters.minutesPlayed === '' || parseInt(row.MIN, 10) >= parseInt(filters.minutesPlayed, 10));
+                   (filters.gamesPlayed === '' || parseInt(row.GP) >= parseInt(filters.gamesPlayed)) &&
+                   (filters.minutesPlayed === '' || parseInt(row.MIN) >= parseInt(filters.minutesPlayed));
         });
 
-        // Update filter options
-        function updateFilterOptions() {
-            const uniqueValues = (array, key) => [...new Set(array.map(item => item[key]))];
-            const divOptions = ['All', ...uniqueValues(data, 'DIV')];
-            const teamOptions = ['All', ...uniqueValues(data, 'TEAM')].sort();
-            const posOptions = ['All', ...uniqueValues(data, 'POS')];
-            const yearOptions = ['All', ...uniqueValues(data, 'BORN')];
+        renderTable(filteredData);
+    }
 
-            const filtersMap = {
-                'division': divOptions,
-                'team': teamOptions,
-                'position': posOptions,
-                'year-of-birth': yearOptions
-            };
+    function populateSelect(id, options) {
+        const select = document.getElementById(id);
+        select.innerHTML = `<option value="All">All</option>`;
+        options.forEach(option => {
+            select.innerHTML += `<option value="${option}">${option}</option>`;
+        });
+    }
 
-            Object.keys(filtersMap).forEach(filterId => {
-                const select = document.getElementById(filterId);
-                select.innerHTML = filtersMap[filterId].map(value => `<option value="${value}">${value}</option>`).join('');
-            });
-        }
-        updateFilterOptions();
-
-        // Render player table
-        const playerTablesContainer = document.getElementById('player-tables');
-        playerTablesContainer.innerHTML = ''; // Clear previous tables
+    function renderTable(data) {
+        const tableContainer = document.getElementById('table-container');
+        tableContainer.innerHTML = '';
 
         const table = document.createElement('table');
-        const headers = Object.keys(filteredData[0] || {}).map(key => `<th>${key}</th>`).join('');
         const headerRow = document.createElement('tr');
-        headerRow.innerHTML = headers;
+        headerRow.innerHTML = Object.keys(data[0]).map(key => `<th>${key}</th>`).join('');
         table.appendChild(headerRow);
 
-        filteredData.forEach(row => {
+        data.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = Object.values(row).map(value => `<td>${value}</td>`).join('');
             table.appendChild(tr);
         });
 
-        playerTablesContainer.appendChild(table);
+        tableContainer.appendChild(table);
     }
 
-    // Event listeners for filter changes
-    document.getElementById('filter-form').addEventListener('change', renderPlayerTables);
-
-    // Initial rendering based on page
-    if (document.body.classList.contains('home-page')) {
+    // Initial load for index.html
+    if (document.getElementById('weekly-tables') && document.getElementById('season-tables')) {
         renderIndexTables();
-    } else if (document.body.classList.contains('players-page')) {
+    }
+
+    // Event listeners for players.html
+    if (document.getElementById('league') && document.getElementById('stats-type')) {
+        document.getElementById('league').addEventListener('change', renderPlayerTables);
+        document.getElementById('stats-type').addEventListener('change', renderPlayerTables);
+        document.getElementById('division').addEventListener('change', renderPlayerTables);
+        document.getElementById('team').addEventListener('change', renderPlayerTables);
+        document.getElementById('position').addEventListener('change', renderPlayerTables);
+        document.getElementById('year-of-birth').addEventListener('input', renderPlayerTables);
+        document.getElementById('games-played').addEventListener('input', renderPlayerTables);
+        document.getElementById('minutes-played').addEventListener('input', renderPlayerTables);
+
         renderPlayerTables();
     }
 });

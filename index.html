@@ -6,34 +6,30 @@
     <title>Basketball Stats - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home-page">
+<body>
     <header>
         <h1>Basketball Stats</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="players.html">Players</a></li>
-                <li><a href="team-stats.html">Team Stats</a></li>
+                <!-- Add more navigation links as needed -->
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="weekly-leaders">
+        <section>
             <h2>Weekly Top Performers</h2>
-            <div class="table-container" id="weekly-tables">
-                <!-- Tabellen werden hier durch JavaScript hinzugefügt -->
-            </div>
+            <div id="weekly-tables" class="table-container"></div>
         </section>
-        <section id="season-leaders">
-            <h2>Regular Season Top Performers</h2>
-            <div class="table-container" id="season-tables">
-                <!-- Tabellen werden hier durch JavaScript hinzugefügt -->
-            </div>
+
+        <section>
+            <h2>Season Top Performers</h2>
+            <div id="season-tables" class="table-container"></div>
         </section>
     </main>
-    <footer>
-        <p>Basketball Stats &copy; 2024</p>
-    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
