@@ -41,42 +41,29 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const [title, file] of Object.entries(files)) {
             const data = await fetchCSV(file);
             const top3 = data.slice(0, 3);
-
             const table = document.createElement('table');
-            const headerRow = document.createElement('tr');
-            headerRow.innerHTML = Object.keys(top3[0]).map(key => `<th>${key}</th>`).join('');
-            table.appendChild(headerRow);
-
-            top3.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = Object.values(row).map(value => `<td>${value}</td>`).join('');
-                table.appendChild(tr);
-            });
-
-            const section = title.includes('Weekly') ? weeklyContainer : seasonContainer;
-            section.appendChild(table);
+            table.innerHTML = `
+                <thead>
+                    <tr><th colspan="${Object.keys(data[0]).length}">${title}</th></tr>
+                    <tr>${Object.keys(data[0]).map(key => `<th>${key}</th>`).join('')}</tr>
+                </thead>
+                <tbody>${top3.map(row => `<tr>${Object.values(row).map(value => `<td>${value}</td>`).join('')}</tr>`).join('')}</tbody>
+            `;
+            if (title.startsWith('Weekly')) {
+                weeklyContainer.appendChild(table);
+            } else {
+                seasonContainer.appendChild(table);
+            }
         }
     }
 
-    // Function to render player tables on players.html
+    // Function to render tables on players.html
     async function renderPlayerTables() {
-        const league = document.getElementById('league').value.toLowerCase();
-        const statsType = document.getElementById('stats-type').value.toLowerCase();
-        const fileName = `${league}-${statsType}.csv`;
+        const league = document.getElementById('league').value;
+        const statsType = document.getElementById('stats-type').value;
+        const fileName = `${statsType.toLowerCase().replace(/ /g, '-')}-${league.toLowerCase().replace(/ /g, '-')}.csv`;
+
         const data = await fetchCSV(fileName);
-
-        // Populating filter options dynamically
-        const divisions = [...new Set(data.map(row => row.DIV))];
-        const teams = [...new Set(data.map(row => row.TEAM))];
-        const positions = [...new Set(data.map(row => row.POS))];
-        const yearsOfBirth = [...new Set(data.map(row => row.BORN))];
-
-        populateSelect('division', divisions);
-        populateSelect('team', teams);
-        populateSelect('position', positions);
-        populateSelect('year-of-birth', yearsOfBirth);
-
-        // Filtering logic
         const filters = {
             division: document.getElementById('division').value,
             team: document.getElementById('team').value,
@@ -87,59 +74,59 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         const filteredData = data.filter(row => {
-            return (filters.division === 'All' || row.DIV === filters.division) &&
-                   (filters.team === 'All' || row.TEAM === filters.team) &&
-                   (filters.position === 'All' || row.POS === filters.position) &&
-                   (filters.yearOfBirth === '' || row.BORN === filters.yearOfBirth) &&
-                   (filters.gamesPlayed === '' || parseInt(row.GP) >= parseInt(filters.gamesPlayed)) &&
-                   (filters.minutesPlayed === '' || parseInt(row.MIN) >= parseInt(filters.minutesPlayed));
+            return (
+                (filters.division === 'All' || row['Division'] === filters.division) &&
+                (filters.team === 'All' || row['Team'] === filters.team) &&
+                (filters.position === 'All' || row['Position'] === filters.position) &&
+                (!filters.yearOfBirth || row['Year of Birth'] === filters.yearOfBirth) &&
+                (!filters.gamesPlayed || parseInt(row['Games Played']) >= parseInt(filters.gamesPlayed)) &&
+                (!filters.minutesPlayed || parseInt(row['Minutes Played']) >= parseInt(filters.minutesPlayed))
+            );
         });
 
-        renderTable(filteredData);
-    }
-
-    function populateSelect(id, options) {
-        const select = document.getElementById(id);
-        select.innerHTML = `<option value="All">All</option>`;
-        options.forEach(option => {
-            select.innerHTML += `<option value="${option}">${option}</option>`;
-        });
-    }
-
-    function renderTable(data) {
         const tableContainer = document.getElementById('table-container');
         tableContainer.innerHTML = '';
 
-        const table = document.createElement('table');
-        const headerRow = document.createElement('tr');
-        headerRow.innerHTML = Object.keys(data[0]).map(key => `<th>${key}</th>`).join('');
-        table.appendChild(headerRow);
+        if (filteredData.length > 0) {
+            const headers = Object.keys(filteredData[0]);
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
+                </thead>
+                <tbody>${filteredData.map(row => `<tr>${headers.map(header => `<td>${row[header]}</td>`).join('')}</tr>`).join('')}</tbody>
+            `;
+            tableContainer.appendChild(table);
 
-        data.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = Object.values(row).map(value => `<td>${value}</td>`).join('');
-            table.appendChild(tr);
-        });
-
-        tableContainer.appendChild(table);
+            // Add sorting functionality
+            table.querySelectorAll('th').forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+                    const ascending = header.dataset.sortDirection !== 'asc';
+                    header.dataset.sortDirection = ascending ? 'asc' : 'desc';
+                    rows.sort((a, b) => {
+                        const aText = a.children[index].innerText;
+                        const bText = b.children[index].innerText;
+                        return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+                    });
+                    table.querySelector('tbody').append(...rows);
+                });
+            });
+        } else {
+            tableContainer.innerHTML = '<p>No data available for the selected filters.</p>';
+        }
     }
 
     // Initial load for index.html
-    if (document.getElementById('weekly-tables') && document.getElementById('season-tables')) {
+    if (document.getElementById('weekly-tables')) {
         renderIndexTables();
     }
 
-    // Event listeners for players.html
-    if (document.getElementById('league') && document.getElementById('stats-type')) {
-        document.getElementById('league').addEventListener('change', renderPlayerTables);
-        document.getElementById('stats-type').addEventListener('change', renderPlayerTables);
-        document.getElementById('division').addEventListener('change', renderPlayerTables);
-        document.getElementById('team').addEventListener('change', renderPlayerTables);
-        document.getElementById('position').addEventListener('change', renderPlayerTables);
-        document.getElementById('year-of-birth').addEventListener('input', renderPlayerTables);
-        document.getElementById('games-played').addEventListener('input', renderPlayerTables);
-        document.getElementById('minutes-played').addEventListener('input', renderPlayerTables);
-
+    // Load player tables on players.html when filters change
+    if (document.getElementById('player-stats')) {
+        document.querySelectorAll('#filters select, #filters input').forEach(input => {
+            input.addEventListener('change', renderPlayerTables);
+        });
         renderPlayerTables();
     }
 });
