@@ -47,6 +47,7 @@ main {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    cursor: pointer; /* Hinzugefügt für die Sortierbarkeit */
 }
 
 .table-container th {

@@ -39,19 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const table = document.createElement('table');
             const headerRow = document.createElement('tr');
-            headerRow.innerHTML = '<th>Player</th><th>Team</th><th>Value</th>';
+            headerRow.innerHTML = Object.keys(top3[0]).map(key => `<th>${key}</th>`).join('');
             table.appendChild(headerRow);
 
-            top3.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${item.Player}</td><td>${item.Team}</td><td>${item.Value}</td>`;
-                table.appendChild(row);
+            top3.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = Object.values(row).map(value => `<td>${value}</td>`).join('');
+                table.appendChild(tr);
             });
 
-            const section = file.includes('week') ? weeklyContainer : seasonContainer;
-            const heading = document.createElement('h3');
-            heading.textContent = title;
-            section.appendChild(heading);
+            const section = title.includes('Weekly') ? weeklyContainer : seasonContainer;
             section.appendChild(table);
         }
     }
@@ -60,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function renderPlayerTables() {
         const league = document.getElementById('league').value;
         const statsType = document.getElementById('stats-type').value;
-        const file = `data/${league}-${statsType}.csv`;
+        const file = `${league}-${statsType}.csv`;
         const data = await fetchCSV(file);
 
         // Filtering logic
