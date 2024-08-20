@@ -1,13 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Helper function to fetch CSV data and convert it to an array of objects
-    async function fetchCSV(url) {
+document.addEventListener('DOMContentLoaded', function () {
+    // Helper function to fetch CSV data from the correct GitHub URL
+    async function fetchCSV(fileName) {
+        const url = `https://raw.githubusercontent.com/Lurppi/nbblstats/main/${fileName}`;
         const response = await fetch(url);
+        if (!response.ok) {
+            console.error(`Failed to fetch ${fileName}`);
+            return [];
+        }
         const text = await response.text();
-        const rows = text.split('\n').map(row => row.split(';'));
+        const rows = text.trim().split('\n').map(row => row.split(','));
         const headers = rows[0];
         return rows.slice(1).map(row => {
             return headers.reduce((acc, header, i) => {
-                acc[header] = row[i];
+                acc[header.trim()] = row[i].trim();
                 return acc;
             }, {});
         });
@@ -57,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
     async function renderPlayerTables() {
         const league = document.getElementById('league').value;
         const statsType = document.getElementById('stats-type').value;
-        const file = `${league}-${statsType}.csv`;
-        const data = await fetchCSV(file);
+        const fileName = `${league}-${statsType}.csv`;
+        const data = await fetchCSV(fileName);
 
         // Filtering logic
         const filters = {
