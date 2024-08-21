@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Function to render tables on index.html
     async function renderIndexTables() {
         const files = {
             'Weekly Points': 'points-week.csv',
@@ -40,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         for (const [title, file] of Object.entries(files)) {
             const data = await fetchCSV(file);
+            if (data.length === 0) continue;
             const top3 = data.slice(0, 3);
             const table = document.createElement('table');
             table.innerHTML = `
@@ -57,13 +57,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Function to render tables on players.html
     async function renderPlayerTables() {
         const league = document.getElementById('league').value;
         const statsType = document.getElementById('stats-type').value;
         const fileName = `${statsType.toLowerCase().replace(/ /g, '-')}-${league.toLowerCase().replace(/ /g, '-')}.csv`;
 
         const data = await fetchCSV(fileName);
+        if (data.length === 0) {
+            document.getElementById('table-container').innerHTML = '<p>No data available.</p>';
+            return;
+        }
+
         const filters = {
             division: document.getElementById('division').value,
             team: document.getElementById('team').value,
@@ -117,12 +121,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Initial load for index.html
     if (document.getElementById('weekly-tables')) {
         renderIndexTables();
     }
 
-    // Load player tables on players.html when filters change
     if (document.getElementById('player-stats')) {
         document.querySelectorAll('#filters select, #filters input').forEach(input => {
             input.addEventListener('change', renderPlayerTables);

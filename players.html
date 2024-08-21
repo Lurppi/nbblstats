@@ -30,41 +30,43 @@
                 <option value="Totals">Totals</option>
                 <option value="Averages">Averages</option>
                 <option value="Shooting">Shooting</option>
-                <option value="Advanced1">Advanced1</option>
-                <option value="Advanced2">Advanced2</option>
-                <option value="Four Factors">Four Factors</option>
+                <option value="Advanced1">Advanced 1</option>
+                <option value="Advanced2">Advanced 2</option>
+                <option value="Four Factor">Four Factor</option>
             </select>
 
             <label for="division">Division</label>
             <select id="division">
                 <option value="All">All</option>
-                <!-- Dynamically populated options -->
+                <option value="Division 1">Division 1</option>
+                <option value="Division 2">Division 2</option>
+                <!-- More options -->
             </select>
 
             <label for="team">Team</label>
             <select id="team">
                 <option value="All">All</option>
-                <!-- Dynamically populated options -->
+                <!-- Populate dynamically or manually -->
             </select>
 
             <label for="position">Position</label>
             <select id="position">
                 <option value="All">All</option>
-                <!-- Dynamically populated options -->
+                <!-- More options -->
             </select>
 
             <label for="year-of-birth">Year of Birth</label>
-            <input type="text" id="year-of-birth" placeholder="YYYY">
+            <input type="text" id="year-of-birth" placeholder="e.g., 1990">
 
             <label for="games-played">Games Played</label>
-            <input type="number" id="games-played" placeholder="0">
+            <input type="number" id="games-played" placeholder="Minimum games played">
 
             <label for="minutes-played">Minutes Played</label>
-            <input type="number" id="minutes-played" placeholder="0">
+            <input type="number" id="minutes-played" placeholder="Minimum minutes played">
         </section>
 
         <section id="player-stats">
-            <div id="table-container"></div>
+            <div id="table-container" class="table-container"></div>
         </section>
     </main>
 
