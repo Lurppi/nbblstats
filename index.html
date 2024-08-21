@@ -1,34 +1,48 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>NBBL Stats - Top Performer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Basketball Stats</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="players.html">Players</a></li>
-            </ul>
-        </nav>
+        <h1>NBBL Stats</h1>
     </header>
-
     <main>
-        <section>
-            <h2>Weekly Top Performers</h2>
-            <div id="weekly-tables" class="table-container"></div>
-        </section>
-
-        <section>
-            <h2>Season Top Performers</h2>
-            <div id="season-tables" class="table-container"></div>
-        </section>
+        <h2>Weekly and Regular Season Top Performers</h2>
+        <div class="table-container">
+            <div class="table">
+                <h3>Points - Weekly</h3>
+                <table id="points-week"></table>
+            </div>
+            <div class="table">
+                <h3>Rebounds - Weekly</h3>
+                <table id="rebounds-week"></table>
+            </div>
+            <div class="table">
+                <h3>Assists - Weekly</h3>
+                <table id="assists-week"></table>
+            </div>
+            <div class="table">
+                <h3>Points - Regular Season</h3>
+                <table id="points-regular"></table>
+            </div>
+            <div class="table">
+                <h3>Rebounds - Regular Season</h3>
+                <table id="rebounds-regular"></table>
+            </div>
+            <div class="table">
+                <h3>Assists - Regular Season</h3>
+                <table id="assists-regular"></table>
+            </div>
+        </div>
     </main>
-
+    <footer>
+        <p>&copy; 2024 NBBL Stats</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

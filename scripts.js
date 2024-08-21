@@ -1,92 +1,61 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Helper function to fetch CSV data from the correct GitHub URL
-    async function fetchCSV(fileName) {
-        const url = `https://raw.githubusercontent.com/Lurppi/nbblstats/main/${fileName}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            console.error(`Failed to fetch ${fileName}`);
-            return [];
-        }
-        const text = await response.text();
-        const rows = text.trim().split('\n').map(row => row.split(';'));
-        const headers = rows[0];
-        return rows.slice(1).map(row => {
-            return headers.reduce((acc, header, i) => {
-                acc[header.trim()] = row[i].trim();
-                return acc;
-            }, {});
-        });
-    }
+document.addEventListener("DOMContentLoaded", function() {
+    // Base path to load CSV files from GitHub
+    const basePath = "https://raw.githubusercontent.com/Lurppi/nbblstats/main/";
 
-    async function renderPlayerTables() {
-        const league = document.getElementById('league').value;
-        const statsType = document.getElementById('stats-type').value;
-        const fileName = `${statsType.toLowerCase().replace(/ /g, '-')}-${league.toLowerCase().replace(/ /g, '-')}.csv`;
-
-        const data = await fetchCSV(fileName);
-        if (data.length === 0) {
-            document.getElementById('table-container').innerHTML = '<p>No data available.</p>';
-            return;
-        }
-
-        const filters = {
-            division: document.getElementById('division').value,
-            team: document.getElementById('team').value,
-            position: document.getElementById('position').value,
-            yearOfBirth: document.getElementById('year-of-birth').value,
-            gamesPlayed: document.getElementById('games-played').value,
-            minutesPlayed: document.getElementById('minutes-played').value,
-        };
-
-        const filteredData = data.filter(row => {
-            return (
-                (filters.division === 'All' || row['Division'] === filters.division) &&
-                (filters.team === 'All' || row['Team'] === filters.team) &&
-                (filters.position === 'All' || row['Position'] === filters.position) &&
-                (!filters.yearOfBirth || row['Year of Birth'] === filters.yearOfBirth) &&
-                (!filters.gamesPlayed || parseInt(row['Games Played']) >= parseInt(filters.gamesPlayed)) &&
-                (!filters.minutesPlayed || parseInt(row['Minutes Played']) >= parseInt(filters.minutesPlayed))
-            );
-        });
-
-        const tableContainer = document.getElementById('table-container');
-        tableContainer.innerHTML = '';
-
-        if (filteredData.length > 0) {
-            const headers = Object.keys(filteredData[0]);
-            const table = document.createElement('table');
-            table.innerHTML = `
-                <thead>
-                    <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
-                </thead>
-                <tbody>${filteredData.map(row => `<tr>${headers.map(header => `<td>${row[header]}</td>`).join('')}</tr>`).join('')}</tbody>
-            `;
-            tableContainer.appendChild(table);
-
-            // Add sorting functionality
-            table.querySelectorAll('th').forEach((header, index) => {
-                header.addEventListener('click', () => {
-                    const rows = Array.from(table.querySelectorAll('tbody tr'));
-                    const ascending = header.dataset.sortDirection !== 'asc';
-                    header.dataset.sortDirection = ascending ? 'asc' : 'desc';
-                    rows.sort((a, b) => {
-                        const aText = a.children[index].innerText;
-                        const bText = b.children[index].innerText;
-                        return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
-                    });
-                    table.querySelector('tbody').append(...rows);
+    // Function to load CSV data into tables
+    function loadCSVData(tableId, csvFile) {
+        fetch(basePath + csvFile)
+            .then(response => response.text())
+            .then(data => {
+                const rows = data.split('\n');
+                let table = document.getElementById(tableId);
+                let html = '<thead><tr>';
+                
+                const headers = rows[0].split(',');
+                headers.forEach(header => {
+                    html += `<th>${header}</th>`;
                 });
+                html += '</tr></thead><tbody>';
+                
+                for(let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].split(',');
+                    html += '<tr>';
+                    cells.forEach(cell => {
+                        html += `<td>${cell}</td>`;
+                    });
+                    html += '</tr>';
+                }
+                html += '</tbody>';
+                table.innerHTML = html;
             });
-        } else {
-            tableContainer.innerHTML = '<p>No data available for the selected filters.</p>';
-        }
     }
 
-    // Initialize the page by rendering the player tables with default or initial filter values
-    if (document.getElementById('player-stats')) {
-        document.querySelectorAll('#filters select, #filters input').forEach(input => {
-            input.addEventListener('change', renderPlayerTables);
-        });
-        renderPlayerTables(); // Call the function once when the page loads
+    // Load tables on the main page
+    loadCSVData("points-week", "points-week.csv");
+    loadCSVData("rebounds-week", "rebounds-week.csv");
+    loadCSVData("assists-week", "assists-week.csv");
+    loadCSVData("steals-week", "steals-week.csv");
+    loadCSVData("blocks-week", "blocks-week.csv");
+    loadCSVData("per-week", "per-week.csv");
+    loadCSVData("points-regular", "points-regular.csv");
+    loadCSVData("rebounds-regular", "rebounds-regular.csv");
+    loadCSVData("assists-regular", "assists-regular.csv");
+    loadCSVData("steals-regular", "steals-regular.csv");
+    loadCSVData("blocks-regular", "blocks-regular.csv");
+    loadCSVData("per-regular", "per-regular.csv");
+
+    // Function to apply filters and load the appropriate table on players page
+    function applyFilters() {
+        const league = document.getElementById("league").value.toLowerCase().replace(' ', '_');
+        const statsType = document.getElementById("statsType").value.toLowerCase().replace(' ', '_');
+        
+        const fileName = `${league}_${statsType}.csv`;
+        loadCSVData("statsTables", fileName);
     }
+
+    // Event listener for filters on the players page
+    document.getElementById("applyFilters").addEventListener("click", applyFilters);
+
+    // Load the default table (Regular Season Totals) on the players page
+    loadCSVData("statsTables", "regular_season_totals.csv");
 });

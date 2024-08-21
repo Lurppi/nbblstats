@@ -1,75 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basketball Stats - Players</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>NBBL Stats - Player Stats</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Player Statistics</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="players.html">Players</a></li>
-            </ul>
-        </nav>
+        <h1>NBBL Player Stats</h1>
     </header>
-
     <main>
-        <section id="filters">
-            <label for="league">League</label>
+        <div class="filters">
+            <label for="league">League:</label>
             <select id="league">
                 <option value="Regular Season">Regular Season</option>
                 <option value="Playoffs">Playoffs</option>
             </select>
 
-            <label for="stats-type">Stats Type</label>
-            <select id="stats-type">
+            <label for="statsType">Stats Type:</label>
+            <select id="statsType">
                 <option value="Totals">Totals</option>
                 <option value="Averages">Averages</option>
                 <option value="Shooting">Shooting</option>
-                <option value="Advanced1">Advanced 1</option>
-                <option value="Advanced2">Advanced 2</option>
-                <option value="Four Factor">Four Factor</option>
+                <option value="Advanced1">Advanced1</option>
+                <option value="Advanced2">Advanced2</option>
+                <option value="Four Factors">Four Factors</option>
             </select>
 
-            <label for="division">Division</label>
-            <select id="division">
-                <option value="All">All</option>
-                <option value="Division 1">Division 1</option>
-                <option value="Division 2">Division 2</option>
-                <!-- More options -->
-            </select>
+            <label for="division">Division:</label>
+            <input type="text" id="division">
 
-            <label for="team">Team</label>
-            <select id="team">
-                <option value="All">All</option>
-                <!-- Populate dynamically or manually -->
-            </select>
+            <label for="team">Team:</label>
+            <input type="text" id="team">
 
-            <label for="position">Position</label>
-            <select id="position">
-                <option value="All">All</option>
-                <!-- More options -->
-            </select>
+            <label for="position">Position:</label>
+            <input type="text" id="position">
 
-            <label for="year-of-birth">Year of Birth</label>
-            <input type="text" id="year-of-birth" placeholder="e.g., 1990">
+            <label for="yearOfBirth">Year of Birth:</label>
+            <input type="number" id="yearOfBirth">
 
-            <label for="games-played">Games Played</label>
-            <input type="number" id="games-played" placeholder="Minimum games played">
+            <label for="gamesPlayed">Games Played (>=):</label>
+            <input type="number" id="gamesPlayed" min="0">
 
-            <label for="minutes-played">Minutes Played</label>
-            <input type="number" id="minutes-played" placeholder="Minimum minutes played">
-        </section>
+            <label for="minutesPlayed">Minutes Played (>=):</label>
+            <input type="number" id="minutesPlayed" min="0">
 
-        <section id="player-stats">
-            <div id="table-container" class="table-container"></div>
-        </section>
+            <button id="applyFilters">Apply Filters</button>
+        </div>
+
+        <div id="tables">
+            <h2>Player Stats</h2>
+            <div id="statsTables"></div>
+        </div>
     </main>
-
+    <footer>
+        <p>&copy; 2024 NBBL Stats</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
