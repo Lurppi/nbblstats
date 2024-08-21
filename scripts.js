@@ -18,45 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    async function renderIndexTables() {
-        const files = {
-            'Weekly Points': 'points-week.csv',
-            'Weekly Rebounds': 'rebounds-week.csv',
-            'Weekly Assists': 'assists-week.csv',
-            'Weekly Steals': 'steals-week.csv',
-            'Weekly Blocks': 'blocks-week.csv',
-            'Weekly PER': 'per-week.csv',
-            'Season Points': 'points-regular.csv',
-            'Season Rebounds': 'rebounds-regular.csv',
-            'Season Assists': 'assists-regular.csv',
-            'Season Steals': 'steals-regular.csv',
-            'Season Blocks': 'blocks-regular.csv',
-            'Season PER': 'per-regular.csv',
-        };
-
-        const weeklyContainer = document.getElementById('weekly-tables');
-        const seasonContainer = document.getElementById('season-tables');
-
-        for (const [title, file] of Object.entries(files)) {
-            const data = await fetchCSV(file);
-            if (data.length === 0) continue;
-            const top3 = data.slice(0, 3);
-            const table = document.createElement('table');
-            table.innerHTML = `
-                <thead>
-                    <tr><th colspan="${Object.keys(data[0]).length}">${title}</th></tr>
-                    <tr>${Object.keys(data[0]).map(key => `<th>${key}</th>`).join('')}</tr>
-                </thead>
-                <tbody>${top3.map(row => `<tr>${Object.values(row).map(value => `<td>${value}</td>`).join('')}</tr>`).join('')}</tbody>
-            `;
-            if (title.startsWith('Weekly')) {
-                weeklyContainer.appendChild(table);
-            } else {
-                seasonContainer.appendChild(table);
-            }
-        }
-    }
-
     async function renderPlayerTables() {
         const league = document.getElementById('league').value;
         const statsType = document.getElementById('stats-type').value;
@@ -121,14 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    if (document.getElementById('weekly-tables')) {
-        renderIndexTables();
-    }
-
+    // Initialize the page by rendering the player tables with default or initial filter values
     if (document.getElementById('player-stats')) {
         document.querySelectorAll('#filters select, #filters input').forEach(input => {
             input.addEventListener('change', renderPlayerTables);
         });
-        renderPlayerTables();
+        renderPlayerTables(); // Call the function once when the page loads
     }
 });
